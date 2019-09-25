@@ -1,4 +1,4 @@
-package uesr;
+package user.dto;
 
 public class UserDTO {
 	
