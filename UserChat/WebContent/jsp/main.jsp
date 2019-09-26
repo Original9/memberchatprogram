@@ -7,6 +7,16 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<jsp:include page="menu.jsp"></jsp:include>
+	<%
+		String userID = null;
+		if(session.getAttribute("userID") != null){
+			userID = (String) session.getAttribute("userID");
+		}
+	%>
+	
+	
+	
 
 </body>
 </html>

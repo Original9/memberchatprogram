@@ -25,6 +25,7 @@ public class MainController extends HttpServlet {
     	map = new HashMap<String, Command>();
 		map.put("/index.do",new IndexCommand());
 		map.put("/join.do", new joinCommand());
+		
 		System.out.println("maincon@@@@@@@@@@@@@@@@@@@@@@@@@@@");
         
     }
