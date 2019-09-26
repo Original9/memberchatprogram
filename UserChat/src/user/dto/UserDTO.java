@@ -8,7 +8,7 @@ public class UserDTO {
 	int userAge;
 	String userGender;
 	String userEmail;
-	String userProfile;
+	String userGrant;
 	
 	public String getUserID() {
 		return userID;
@@ -46,12 +46,21 @@ public class UserDTO {
 	public void setUserEmail(String userEmail) {
 		this.userEmail = userEmail;
 	}
-	public String getUserProfile() {
-		return userProfile;
+	public String getUserGrant() {
+		return userGrant;
 	}
-	public void setUserProfile(String userProfile) {
-		this.userProfile = userProfile;
+	public void setUserGrant(String userGrant) {
+		this.userGrant = userGrant;
 	}
+	
+	
+	
+//	public String getUserProfile() {
+//		return userProfile;
+//	}
+//	public void setUserProfile(String userProfile) {
+//		this.userProfile = userProfile;
+//	}                                                          ->나중에 시간되면 추가.
 	
 
 }

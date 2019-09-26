@@ -26,6 +26,18 @@ public class MainController extends HttpServlet {
 		map.put("/index.do",new IndexCommand());
 		map.put("/join.do", new joinCommand());
 		map.put("/messageBox.do" , new messageBoxCommand());
+		//은영's
+		map.put("/insertMember.do", new InsertMemberCommand());
+		
+		
+		
+		//승찬's
+		
+		
+		
+		//원조's
+		
+		
 		
         
     }

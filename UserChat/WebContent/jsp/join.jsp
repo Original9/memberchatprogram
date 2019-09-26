@@ -5,11 +5,64 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+	function checkForm() {
+		var form = document.frm;
+
+		if (form.userID.value == "") {
+			alert("아이디를 입력하세요.");
+			form.id.focus();
+			return false;
+		}
+
+		if (form.userID.disabled != true) {
+			alert("중복체크를 해주세요.");
+			form.id.focus();
+			return false;
+		}
+
+		if (form.userPassword1.value == "") {
+			alert("비밀번호를 입력하세요.");
+			form.pw.focus();
+			return false;
+		}
+
+		if (form.name.value == "") {
+			alert("이름을 입력하세요.");
+			form.name.focus();
+			return false;
+		}
+		
+		if (form.userPassword2.value == "") {
+			alert("비밀번호 확인을 입력해 주세요.");
+			form.name.focus();
+			return false;
+		}
+		
+		//비밀번호1,2 일치하는지 확인하는 메서드 만들기.
+
+		form.submit();
+	}
+
+	function idCheck() {
+		var chkId = document.frm.userID;
+		if (chkId.value == "") {
+			alert("아이디를 입력하세요.");
+			chkId.focus();
+			return false;
+		}
+
+		window
+				.open("idCheck.do?id=" + chkId.value, "",
+						"width=600, height=400");
+
+	}
+</script>
 </head>
 <body>
 	<jsp:include page="menu.jsp"></jsp:include>
 	<div class="container">
-		<form method="post" action="./userRegister">
+		<form method="post" action="insertMember.do" id="frm" name="frm">
 			<table class="table table-bordered table-hover" style="text-align: center; border: 1px solid #dddddd">
 				<thead>
 					<tr>
@@ -20,7 +73,7 @@
 					<tr>
 						<td style="width: 110px;"><h5>아이디</h5></td>
 						<td><input class="form-control" type="text" id="userID" name="userID" maxlength="20" placeholder="아이디를 입력하세요."></td>
-						<td style="width: 110px"><button class="btn btn-primary" onclick="registerCheckFunction(); type="button">중복체크</button></td>
+						<td style="width: 110px"><button class="btn btn-primary" onclick="idCheck()" type="button">중복체크</button></td>
 					</tr>
 					<tr>
 						<td style="width: 110px;"><h5>비밀번호</h5></td>
@@ -59,6 +112,12 @@
 					</tr>
 				</tbody>
 			</table>
+			<p>
+				<div align="center">
+					<input type="button" class="btn btn-primary" onclick="checkForm()" value="회원가입">&nbsp;&nbsp;&nbsp;
+					<input type="reset" class="btn btn-primary" onclick="location.href='join.do'" value="취소">
+				</div>
+			</p>
 		</form>
 	</div>
 </body>
