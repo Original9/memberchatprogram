@@ -19,7 +19,7 @@ public class UserDAO {
 	ResultSet rs = null;
 
 	public int insertMember(UserDTO dto) {
-		String sql = "insert into c_user values(?,?,?,?,?,?,'U')";
+		String sql = "insert into c_user values('?','?','?',?,'?','?','U')";
 		int r = 0;
 
 		try {

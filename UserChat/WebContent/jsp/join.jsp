@@ -40,7 +40,7 @@
 		}
 		
 		//비밀번호1,2 일치하는지 확인하는 메서드 만들기.
-
+		
 		form.submit();
 	}
 
@@ -53,9 +53,20 @@
 		}
 
 		window
-				.open("idCheck.do?id=" + chkId.value, "",
+				.open("idCheck.do?userID=" + chkId.value, "",
 						"width=600, height=400");
 
+	}
+	
+	function passwordCheckFunction(){
+		var pw1 = document.frm.userPassword1;
+		var pw2 = document.frm.userPassword2;
+		if (pw1.value != pw2.value) {
+			alert("비밀번호가 일치하지 않습니다.");
+			pw1.focus();
+			return false;
+		}
+		
 	}
 </script>
 </head>
