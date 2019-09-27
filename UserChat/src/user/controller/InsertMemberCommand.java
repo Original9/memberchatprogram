@@ -15,7 +15,7 @@ import user.dto.UserDTO;
 public class InsertMemberCommand implements Command {
 
 	@Override
-	public void excute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public String excute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		UserDTO dto = new UserDTO();
 		String path = null;
 		
@@ -45,8 +45,7 @@ public class InsertMemberCommand implements Command {
 			path="index.jsp";
 		}
 		
-		RequestDispatcher dispatcher=request.getRequestDispatcher(path);
-		dispatcher.forward(request, response);
+		return path;
 	}
 	
 	public static String ConvertGender(String rq) {

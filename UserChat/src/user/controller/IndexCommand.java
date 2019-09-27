@@ -12,10 +12,8 @@ import user.command.Command;
 public class IndexCommand implements Command {
 
 	@Override
-	public void excute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/main.jsp"); // 컨트롤 파일을 바로 호출 할수있다. 
-		dispatcher.forward(request, response);	
-		
+	public String excute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		return "jsp/main.jsp"; // 컨트롤 파일을 바로 호출 할수있다. 
 	}
 
 }
