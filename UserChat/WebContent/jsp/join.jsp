@@ -15,7 +15,7 @@
 			return false;
 		}
 
-		if (form.userID.disabled != true) {
+		if (form.userID.readonly != true) {
 			alert("중복체크를 해주세요.");
 			form.id.focus();
 			return false;
@@ -63,6 +63,8 @@
 		var pw2 = document.frm.userPassword2;
 		if (pw1.value != pw2.value) {
 			alert("비밀번호가 일치하지 않습니다.");
+			document.frm.userPassword1.value="";
+			document.frm.userPassword2.value="";
 			pw1.focus();
 			return false;
 		}
@@ -88,11 +90,11 @@
 					</tr>
 					<tr>
 						<td style="width: 110px;"><h5>비밀번호</h5></td>
-						<td colspan="2"><input onkeyup="passwordCheckFunction();" class="form-control" type="password" id="userPassword1" name="userPassword1" maxlength="20" placeholder="비밀번호를 입력하세요."></td>						
+						<td colspan="2"><input class="form-control" type="password" id="userPassword1" name="userPassword1" maxlength="20" placeholder="비밀번호를 입력하세요."></td>						
 					</tr>
 					<tr>
 						<td style="width: 110px;"><h5>비밀번호 확인</h5></td>
-						<td colspan="2"><input onkeyup="passwordCheckFunction();" class="form-control" type="password" id="userPassword2" name="userPassword2" maxlength="20" placeholder="비밀번호 확인을 입력하세요."></td>						
+						<td colspan="2"><input onblur="passwordCheckFunction();" class="form-control" type="password" id="userPassword2" name="userPassword2" maxlength="20" placeholder="비밀번호 확인을 입력하세요."></td>						
 					</tr>
 					<tr>
 						<td style="width: 110px;"><h5>이름</h5></td>
@@ -119,7 +121,7 @@
 					</tr>
 					<tr>
 						<td style="width: 110px;"><h5>이메일</h5></td>
-						<td colspan="2"><input class="form-control" type="email" id="userEmail" name="userEamil" maxlength="20" placeholder="이메일을 입력하세요."></td>						
+						<td colspan="2"><input class="form-control" type="email" id="userEmail" name="userEmail" maxlength="20" placeholder="이메일을 입력하세요."></td>						
 					</tr>
 				</tbody>
 			</table>

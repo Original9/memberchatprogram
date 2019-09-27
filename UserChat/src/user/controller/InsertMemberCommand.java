@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import javafx.scene.control.Alert;
 import user.command.Command;
 import user.dao.UserDAO;
 import user.dto.UserDTO;
@@ -19,18 +20,29 @@ public class InsertMemberCommand implements Command {
 		String path = null;
 		
 		dto.setUserID(request.getParameter("userID"));
-		dto.setUserPasswrod(request.getParameter("userPassword1"));
+		dto.setUserPassword(request.getParameter("userPassword1"));
 		dto.setUserName(request.getParameter("userName"));
 		dto.setUserAge(Integer.parseInt(request.getParameter("userAge")));
 		dto.setUserGender(ConvertGender(request.getParameter("userGender")));
 		dto.setUserEmail(request.getParameter("userEmail"));
-		
+		System.out.println(dto.getUserID());
+		System.out.println(dto.getUserPassword());
+		System.out.println(dto.getUserName());
+		System.out.println(dto.getUserAge());
+		System.out.println(dto.getUserGender());
+		System.out.println(dto.getUserEmail());
 		int r = UserDAO.getInstance().insertMember(dto);
 		
 		if(r != 0) {
 			System.out.println("회원가입 성공");
+			//로그인 창으로?
+			
+			//메인으로?
+			path="index.jsp";
+			
 		}else {
 			System.out.println("회원가입 실패");
+			path="index.jsp";
 		}
 		
 		RequestDispatcher dispatcher=request.getRequestDispatcher(path);

@@ -17,16 +17,42 @@ public class UserDAO {
 	Connection conn = null;
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
+	
+	public UserDTO loginCheck(UserDTO dto) {
+		String sql="select * from c_user where userid=? and userpassword=?";
+		
+		try {
+			conn = JDBCutil.connect();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dto.getUserID());
+			pstmt.setString(2, dto.getUserPassword());
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				dto=new UserDTO();
+				dto.setUserID(rs.getString("userid"));
+				dto.setUserGrant(rs.getString("ugrant"));
+				dto.setUserName(rs.getString("username"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCutil.disconnect(pstmt, conn);
+		}
+		
+		return dto;
+	}
+	
 
 	public int insertMember(UserDTO dto) {
-		String sql = "insert into c_user values('?','?','?',?,'?','?','U')";
+		String sql = "insert into c_user values(?,?,?,?,?,?,'U')";
 		int r = 0;
 
 		try {
 			conn = JDBCutil.connect();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getUserID());
-			pstmt.setString(2, dto.getUserPasswrod());
+			pstmt.setString(2, dto.getUserPassword());
 			pstmt.setString(3, dto.getUserName());
 			pstmt.setInt(4, dto.getUserAge());
 			pstmt.setString(5, dto.getUserGender());
@@ -34,7 +60,6 @@ public class UserDAO {
 
 			r=pstmt.executeUpdate();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			JDBCutil.disconnect(pstmt, conn);
@@ -57,7 +82,6 @@ public class UserDAO {
 				chk=false;
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			JDBCutil.disconnect(pstmt, conn);

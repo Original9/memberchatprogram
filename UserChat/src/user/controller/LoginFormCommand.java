@@ -8,26 +8,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import user.command.Command;
-import user.dao.UserDAO;
 
-public class IdCheckCommand implements Command {
+public class LoginFormCommand implements Command {
 
 	@Override
 	public void excute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id = request.getParameter("userID");
-//		System.out.println(request.getParameter("userID"));
-		boolean chk = UserDAO.getInstance().isIdCheck(id);
-		String path = null;
-		
-		if(chk) {
-			path="jsp/idOK.jsp";
-			
-		}else {
-			path="jsp/idNo.jsp";
-		}
-		
-		RequestDispatcher dispatcher=request.getRequestDispatcher(path);
+		RequestDispatcher dispatcher=request.getRequestDispatcher("jsp/loginForm.jsp");
 		dispatcher.forward(request, response);
+
 	}
 
 }
