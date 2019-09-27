@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 	function closeWindow() {
-		opener.document.frm.userID.disabled = true;
+		opener.document.frm.userID.readonly = true;
 		opener.document.frm.userPassword1.focus();
 		window.close();
 	}

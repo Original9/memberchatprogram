@@ -3,7 +3,7 @@ package user.dto;
 public class UserDTO {
 	
 	String userID;
-	String userPasswrod;
+	String userPassword;
 	String userName;
 	int userAge;
 	String userGender;
@@ -16,11 +16,11 @@ public class UserDTO {
 	public void setUserID(String userID) {
 		this.userID = userID;
 	}
-	public String getUserPasswrod() {
-		return userPasswrod;
+	public String getUserPassword() {
+		return userPassword;
 	}
-	public void setUserPasswrod(String userPasswrod) {
-		this.userPasswrod = userPasswrod;
+	public void setUserPassword(String userPassword) {
+		this.userPassword = userPassword;
 	}
 	public String getUserName() {
 		return userName;
