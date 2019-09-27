@@ -15,7 +15,7 @@ import user.dto.UserDTO;
 public class LoginCheckCommand implements Command {
 
 	@Override
-	public void excute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public String excute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		UserDTO dto = new UserDTO();
 		UserDAO dao = UserDAO.getInstance();
 		
@@ -39,8 +39,8 @@ public class LoginCheckCommand implements Command {
 			path="jsp/main.jsp";
 		}
 		
-		RequestDispatcher dispatcher=request.getRequestDispatcher(path);
-		dispatcher.forward(request, response);
+		return path;
+		
 	}
 
 }

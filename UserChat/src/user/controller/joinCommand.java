@@ -12,10 +12,9 @@ import user.command.Command;
 public class joinCommand implements Command {
 
 	@Override
-	public void excute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public String excute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/join.jsp");
-		dispatcher.forward(request, response);
+		return "jsp/join.jsp";
 	}
 
 }

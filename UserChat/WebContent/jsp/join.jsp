@@ -75,6 +75,8 @@
 <body>
 	<jsp:include page="menu.jsp"></jsp:include>
 	<div class="container">
+	<div class="row">
+	<div class="col-md-10">
 		<form method="post" action="insertMember.do" id="frm" name="frm">
 			<table class="table table-bordered table-hover" style="text-align: center; border: 1px solid #dddddd">
 				<thead>
@@ -89,7 +91,7 @@
 						<td style="width: 110px"><button class="btn btn-primary" onclick="idCheck()" type="button">중복체크</button></td>
 					</tr>
 					<tr>
-						<td style="width: 110px;"><h5>비밀번호</h5></td>
+						<td style="width: 130px;"><h5>비밀번호</h5></td>
 						<td colspan="2"><input class="form-control" type="password" id="userPassword1" name="userPassword1" maxlength="20" placeholder="비밀번호를 입력하세요."></td>						
 					</tr>
 					<tr>
@@ -132,6 +134,8 @@
 				</div>
 			</p>
 		</form>
+		</div>
+		</div>
 	</div>
 </body>
 </html>

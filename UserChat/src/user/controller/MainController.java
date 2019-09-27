@@ -3,6 +3,7 @@ package user.controller;
 import java.io.IOException;
 import java.util.HashMap;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,6 +32,7 @@ public class MainController extends HttpServlet {
 		map.put("/idCheck.do", new IdCheckCommand());
 		map.put("/login.do", new LoginFormCommand());
 		map.put("/loginCheck.do", new LoginCheckCommand());
+		map.put("/logout.do", new LogoutCommand());
 		
 		
 		
@@ -56,7 +58,21 @@ public class MainController extends HttpServlet {
 //		System.out.println("path:" + path);
 		
 		Command comm = map.get(path);
-		comm.excute(request, response);
+		String page = comm.excute(request, response);
+		
+		if(page!=null) {
+			if(page.startsWith("redirect:")) {
+				response.sendRedirect(page.substring(9));
+				
+			}else if(page.startsWith("ajax:")) {
+				response.setContentType("text/html; charset=UTF-8");
+				response.getWriter().append(page.substring(5));
+			}else {
+				RequestDispatcher dispatcher=request.getRequestDispatcher(page);
+				dispatcher.forward(request, response);
+			}
+				
+		}
 	}
 
 }
