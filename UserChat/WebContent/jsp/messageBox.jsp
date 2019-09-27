@@ -5,6 +5,7 @@
 <head>	
 	<%
 		String userID = null;
+		session.setAttribute("userID", "jey");
 		if(session.getAttribute("userID") != null){
 			userID = (String) session.getAttribute("userID");
 		}
