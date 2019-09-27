@@ -11,18 +11,20 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * Servlet implementation class ChatSubmitServlet
- */
+ */			  
 @WebServlet("/ChatSubmitServlet")
 public class ChatSubmitServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
    
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//System.out.println("HERE IS CHATSUBMITSERVLET PAGE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
 		String fromID= request.getParameter("fromID");
 		String toID = request.getParameter("toID");
 		String chatContent = request.getParameter("chatContent");
+		//System.out.println("fromID:" + fromID + "  toID: " + toID + "  chatContent: " + chatContent);
 		if(fromID == null || fromID.equals("") || toID == null || toID.equals("")
 				|| chatContent == null || chatContent.equals("")) {
 			response.getWriter().write("0");
