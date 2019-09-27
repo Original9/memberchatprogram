@@ -31,7 +31,7 @@ public class LoginCheckCommand implements Command {
 			System.out.println(dto.getUserGrant());
 			session.setAttribute("userID", dto.getUserID());
 			session.setAttribute("grant", dto.getUserGrant());
-			session.setAttribute("name", dto.getUserName());
+			session.setAttribute("name", dto.getUserName()); 
 			System.out.println("로그인성공");
 			path="jsp/main.jsp";
 		}else {
