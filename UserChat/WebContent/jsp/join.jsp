@@ -71,6 +71,45 @@
 		
 	}
 </script>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            $.ajax({
+                url: "/idCheck.do",
+                dataType:"",
+                success: function (result) {
+                    // var datas = JSON.stringify(result) // json type
+                    //console.log(datas)
+                    //consolo.log(result)
+                    var data = result;
+                    $(data)
+                    
+                }
+
+            });
+        })
+        function a() {
+            if ($(this).is(":checked")) {
+                $(this).parent().parent().parent().css("background-color", "lightgreen")
+            } else {
+                $(this).parent().parent().parent().css("background-color", "")
+            }
+        }
+        function b() {
+            if ($(this).is(":checked")) { //=if($(this).is(":checked")==true)
+                $(this).parent().parent().css("background-color", "yellow")
+            } else {
+                $(this).parent().parent().css("background-color", "")
+            }
+            // console.log($(this).parent().parent().attr("id"));
+        }
+    </script>
+
+
 </head>
 <body>
 	<jsp:include page="menu.jsp"></jsp:include>

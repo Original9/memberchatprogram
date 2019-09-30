@@ -20,7 +20,7 @@ public class IdCheckCommand implements Command {
 		String path = null;
 		
 		if(chk) {
-			path=id+"는 사용가능합니다.";
+			path="사용가능한 아이디 입니다.";
 			
 		}else {
 			path="사용 불가능한 아이디 입니다.";
