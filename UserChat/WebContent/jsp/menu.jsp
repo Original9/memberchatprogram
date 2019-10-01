@@ -34,9 +34,9 @@
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
 					<ul class="nav navbar-nav">						
 						<li class="active"><a href="index.jsp">메인</a></li>
-						<li><a href="find.jsp">친구 찾기</a></li>
+						<li><a href="memberSearch.do">친구 찾기</a></li>
 			            <li><a href="messageBox.do">메세지함<span id="unread" class="label label-info"></span></a>
-              			<li><a href="boardView.jsp">자유 게시판</a></li>
+              			<li><a href="boardView.jsp">자유 게시판</a></li> 
 					</ul>
 					<%
 						if(userID == null){
@@ -62,8 +62,12 @@
 								data-toggle="dropdown" role="button" aria-haspopup="true"
 								aria-expanded="false">회원관리<span class="caret"></span>
 							</a>
+							<ul class="dropdown-menu">
+								<li><a href = "#">회원정보수정</a></li>
+								<li><a href = "logout.do">로그아웃</a></li>							
+							</ul>
 						</li>
-					</ul>	
+					</ul>
 					<%
 						}
 					%>

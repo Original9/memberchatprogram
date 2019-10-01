@@ -9,6 +9,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import user.controller.BoardDeleteCommand;
+import user.controller.BoardListCommand;
+import user.controller.BoardUpdateCommand;
+import user.controller.BorderReadCommand;
+import user.controller.BorderWriteCommand;
+import user.controller.BorderWriteForm;
+import user.controller.FileDownloadAction;
+import user.controller.boardUpdateForm;
 import user.command.Command;
 
 /**
@@ -35,8 +43,17 @@ public class MainController extends HttpServlet {
 		
 		
 		//승찬's
-		
-		
+//		map.put("/boardView.do", new BoardListCommand());
+//		map.put("/boardWrite.do", new BoardWriteCommand());
+//		map.put("/BoardWriteFormCommand.do", new BoardWriteFormCommand());
+		map.put("/boardList.do", new BoardListCommand());
+		map.put("/borderWriteForm.do", new BorderWriteForm());
+		map.put("/borderWrite.do", new BorderWriteCommand());
+		map.put("/boardRead.do", new BorderReadCommand());		
+		map.put("/boardUpdate.do", new BoardUpdateCommand());
+		map.put("/boardUpdateForm.do", new boardUpdateForm());
+		map.put("/boardDelete.do", new BoardDeleteCommand());
+	    map.put("/FileDownloadAction.do", new FileDownloadAction());
 		
 		//원조's
 		
