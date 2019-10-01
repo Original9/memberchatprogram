@@ -70,7 +70,7 @@ public class UserDAO {
 	
 	public boolean isIdCheck(String id) {
 		String sql="select * from c_user where userid=?";
-		boolean chk = true;
+		boolean chk = false;
 		
 		try {
 			conn = JDBCutil.connect();
@@ -79,7 +79,7 @@ public class UserDAO {
 			rs=pstmt.executeQuery();
 			
 			if(rs.next()) {
-				chk=false;
+				chk=true;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -42,7 +42,7 @@ public class MainController extends HttpServlet {
 		
 		
 		//원조's
-		
+		map.put("/memberSearch.do", new memberSearchCommand());
 		
 		
         

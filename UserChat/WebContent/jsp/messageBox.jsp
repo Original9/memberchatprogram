@@ -10,7 +10,7 @@
 		if(session.getAttribute("userID") != null){
 			userID = (String) session.getAttribute("userID");
 		}
-		String toID = "123"; // 보내는 상대를 임의로 정해둔다.
+		String toID = null; // 보내는 상대를 임의로 정해둔다.
 		if(request.getParameter("toID") != null){
 			toID = (String) request.getParameter("toID");
 		}

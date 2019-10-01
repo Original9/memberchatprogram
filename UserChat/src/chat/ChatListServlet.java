@@ -22,7 +22,6 @@ public class ChatListServlet extends HttpServlet {
      */
     public ChatListServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
