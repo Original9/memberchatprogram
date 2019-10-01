@@ -10,6 +10,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import user.dao.JDBCutil;
+
 
 public class ChatDAO {
 	
@@ -24,7 +26,7 @@ public class ChatDAO {
 		 String SQL = "SELECT * FROM CHAT WHERE((fromID = ? AND toID =?) OR (fromID =? AND toID=?)) and chatID > ? ORDER BY chatTime ";
 		 //// DB 연결하는거 추가해야한다. 
 		 try {
-			 // conn 이 지금 null 값임
+			conn = JDBCutil.connect();
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, fromID);
 			pstmt.setString(2, toID);
@@ -55,9 +57,7 @@ public class ChatDAO {
 			e.printStackTrace();
 		} finally {
 			try {
-				if( rs != null) rs.close();
-				if(pstmt != null) pstmt.close();
-				if(conn != null) conn.close();
+				JDBCutil.disconnect(pstmt, conn);
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
@@ -72,10 +72,10 @@ public class ChatDAO {
 		 Connection conn = null;
 		 PreparedStatement pstmt = null;
 		 ResultSet rs = null;
-		 String SQL = "SELECT * FROM CHAT WHERE((fromID = ? AND toID =?) OR (fromID =? AND toID=?)) and chatID > (SELECT MAX(chatID) - ?) FROM CHAT ORDER BY chatTime ";
+		 String SQL = "SELECT * FROM CHAT WHERE((fromID = ? AND toID =?) OR (fromID =? AND toID=?)) and chatID > (SELECT MAX(chatID) - ? FROM CHAT) ORDER BY chatTime ";
 		 //// DB 연결하는거 추가해야한다. 
 		 try {
-			 // conn 이 지금 null 값임
+			conn = JDBCutil.connect();
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, fromID);
 			pstmt.setString(2, toID);
@@ -106,9 +106,7 @@ public class ChatDAO {
 			e.printStackTrace();
 		} finally {
 			try {
-				if( rs != null) rs.close();
-				if(pstmt != null) pstmt.close();
-				if(conn != null) conn.close();
+				JDBCutil.disconnect(pstmt, conn);
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
@@ -120,11 +118,11 @@ public class ChatDAO {
 		 Connection conn = null;
 		 PreparedStatement pstmt = null;
 		 ResultSet rs = null;
-		 String SQL = "INSERT INTO CHAT VALUES(auto_increment.nextval,?,?,sysdate)";
+		 String SQL = "INSERT INTO CHAT VALUES(auto_increment.nextval,?,?,?,sysdate)";
 		 //// DB 연결하는거 추가해야한다. 
 		 try {
-			 // conn 이 지금 null 값임
-			
+			 
+			conn = JDBCutil.connect();
 			pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, fromID);
 			pstmt.setString(2, toID);
@@ -138,9 +136,7 @@ public class ChatDAO {
 			e.printStackTrace();
 		} finally {
 			try {
-				if( rs != null) rs.close();
-				if(pstmt != null) pstmt.close();
-				if(conn != null) conn.close();
+				JDBCutil.disconnect(pstmt, conn);
 			}catch(Exception e) {
 				e.printStackTrace();
 			}

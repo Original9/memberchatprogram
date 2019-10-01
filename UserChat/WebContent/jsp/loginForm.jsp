@@ -38,15 +38,15 @@
 					</tr>				
 					</thead>
 					<tr>
-						<td style="width: 60px;">id</th>
+						<td style="width: 60px;">id</td>
 						<td style="width: 100px;"><input class="form-control" type="text" id="id" name="id" size="20"></td>
 					</tr>
 					<tr>
-						<td style="width: 60px;">password</th>
+						<td style="width: 60px;">password</td>
 						<td style="width: 100px;"><input class="form-control" type="password" id="pw" name="pw" size="20"></td>
 					</tr>
 				</table>
-				<p>
+				
 				<div align="center">
 					<input class="btn btn-primary" type="button" onclick="checkForm()" value="로그인">&nbsp;&nbsp;&nbsp;
 					<input class="btn btn-primary" type="reset" onclick="location.href='login.do'" value="취소">

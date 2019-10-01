@@ -13,21 +13,22 @@ import user.dao.UserDAO;
 public class IdCheckCommand implements Command {
 
 	@Override
-	public void excute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public String excute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("userID");
 //		System.out.println(request.getParameter("userID"));
 		boolean chk = UserDAO.getInstance().isIdCheck(id);
 		String path = null;
 		
 		if(chk) {
-			path="jsp/idOK.jsp";
+			path="{\"result\":true, \"message\":\"사용가능한 아이디 입니다.\"}";
 			
 		}else {
-			path="jsp/idNo.jsp";
+			path="{\"result\":false, \"message\":\"사용 불가능한 아이디 입니다.\"}";
 		}
 		
-		RequestDispatcher dispatcher=request.getRequestDispatcher(path);
-		dispatcher.forward(request, response);
+		return "ajax:"+path;
 	}
+	
+	
 
 }
