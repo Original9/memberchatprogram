@@ -114,7 +114,7 @@
 					<div id="checkMessage" class="modal-body">
 					</div>
 					<div id="modal-fotter">
-						<button type="button" class="btn btn-primary-default" data-dismiss="modal"  >확인</button>
+						<button type="button" class="btn btn-primary-default" data-dismiss="modal"  >확인</button>						
 					</div>
 				</div>
 			</div>
