@@ -33,6 +33,7 @@ public class MainController extends HttpServlet {
 		map.put("/login.do", new LoginFormCommand());
 		map.put("/loginCheck.do", new LoginCheckCommand());
 		map.put("/logout.do", new LogoutCommand());
+		map.put("/changeInfo.do", new ChangeInfoCommand());
 		
 		
 		
@@ -67,6 +68,11 @@ public class MainController extends HttpServlet {
 			}else if(page.startsWith("ajax:")) {
 				response.setContentType("text/html; charset=UTF-8");
 				response.getWriter().append(page.substring(5));
+				
+			}else if(page.startsWith("script:")) {
+				response.setContentType("text/html; charset=UTF-8");
+				response.getWriter().append(page.substring(7));
+				
 			}else {
 				RequestDispatcher dispatcher=request.getRequestDispatcher(page);
 				dispatcher.forward(request, response);

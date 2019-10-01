@@ -88,4 +88,33 @@ public class UserDAO {
 		}
 		return chk;
 	}
+	
+	public UserDTO readToChangeInfo(String id) {
+		String sql="select * from c_user where userid=?";
+		UserDTO dto = new UserDTO();
+		
+		try {
+			conn = JDBCutil.connect();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()) {
+				
+				dto.setUserID(rs.getString("userid"));
+				dto.setUserPassword(rs.getString("userpassword"));
+				dto.setUserName(rs.getString("username"));
+				dto.setUserAge(rs.getInt("userage"));
+				dto.setUserGender(rs.getString("usergender"));
+				dto.setUserEmail(rs.getString("userEmail"));
+//				dto.setUserGrant(rs.getString("ugrant"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCutil.disconnect(pstmt, conn);
+		}
+		
+		return dto;
+	}
 }

@@ -7,6 +7,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
 
 import user.command.Command;
 import user.dao.UserDAO;
@@ -27,19 +29,29 @@ public class LoginCheckCommand implements Command {
 		
 		dto=dao.loginCheck(dto);
 		
+		String sc=null;
+		
 		if(dto.getUserGrant()!=null) {
 			System.out.println(dto.getUserGrant());
 			session.setAttribute("userID", dto.getUserID());
 			session.setAttribute("grant", dto.getUserGrant());
 			session.setAttribute("name", dto.getUserName()); 
 			System.out.println("로그인성공");
-			path="jsp/main.jsp";
+			//JOptionPane.showMessageDialog(null, "로그인 성공.");
+			sc="<script>"
+					+ "alert('로그인 성공');"
+					+ "location='index.do';"
+					+ "</script>";;
 		}else {
 			System.out.println("로그인실패");
-			path="jsp/main.jsp";
+			//JOptionPane.showMessageDialog(null, "로그인 실패!");
+			sc="<script>"
+					+ "alert('아이디와 비밀번호를 확인해 주세요!');"
+					+ "location='login.do';"
+					+ "</script>";;
 		}
 		
-		return path;
+		return "script:"+sc;
 		
 	}
 
