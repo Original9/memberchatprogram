@@ -121,7 +121,7 @@
 								<td style="width: 110px;"><h5>아이디</h5></td>
 								<td style="border-right:0px"><input class="form-control" type="text" id="userID"
 									name="userID" maxlength="20" placeholder="아이디를 입력하세요."><p align="right" id=checkResult style="color:red"></p></td>
-								<td align="left" style="border-left:0px;"><button class="btn btn-primary"
+								<td style="width: 110px;border-left:0px;"><button class="btn btn-primary"
 										id="btnIdCheck" type="button">중복체크</button>
 									</td>
 							</tr>
@@ -171,7 +171,7 @@
 								<td style="border-right:0px"><input class="form-control" type="email"
 									id="userEmail" name="userEmail" maxlength="20"
 									placeholder="이메일을 입력하세요."></td>
-								<td align="left" style="border-left:0px;"><button class="btn btn-primary"
+								<td style="width: 110px; border-left:0px;"><button class="btn btn-primary"
 									id="btnEmailCheck" type="button">이메일 인증</button>
 								</td>
 							</tr>
