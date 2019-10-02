@@ -190,5 +190,40 @@ height:40px;
 
 .text-red {
     color: #e74c3c;
-}                
+}
+
+/*파일 업로드 디자인 */
+.btn-file{
+	position: relative;
+	overflow: hidden;
+}
+.btn-file input[type=file]{
+	position: absolute;
+	top: 0;
+	right: 0;
+	min-width: 100px;
+	min-height: 100%;
+	fon-size: 100px;
+	text-align: right;
+	filter: alpha(opacity=0);
+	opacity: 0;
+	outline: none;
+	background: white;
+	cursor: inherit;
+	display: block;
+}
+ 
+	
+	
+	
+	
+}
+
+
+
+
+
+
+
+                
                                     

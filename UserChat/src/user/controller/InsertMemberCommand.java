@@ -7,6 +7,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.beanutils.BeanUtils;
+
 import javafx.scene.control.Alert;
 import user.command.Command;
 import user.dao.UserDAO;
@@ -19,18 +21,29 @@ public class InsertMemberCommand implements Command {
 		UserDTO dto = new UserDTO();
 		String path = null;
 		
-		dto.setUserID(request.getParameter("userID"));
-		dto.setUserPassword(request.getParameter("userPassword1"));
-		dto.setUserName(request.getParameter("userName"));
-		dto.setUserAge(Integer.parseInt(request.getParameter("userAge")));
-		dto.setUserGender(ConvertGender(request.getParameter("userGender")));
-		dto.setUserEmail(request.getParameter("userEmail"));
-		System.out.println(dto.getUserID());
+		/*
+		 * dto.setUserID(request.getParameter("userID"));
+		 * dto.setUserPassword(request.getParameter("userPassword1"));
+		 * dto.setUserName(request.getParameter("userName"));
+		 * dto.setUserAge(Integer.parseInt(request.getParameter("userAge")));
+		 * dto.setUserGender(ConvertGender(request.getParameter("userGender")));
+		 * dto.setUserEmail(request.getParameter("userEmail"));
+		 */
+		
+		try {
+			BeanUtils.copyProperties(dto, request.getParameterMap());
+			System.out.println(dto);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		/*System.out.println(dto.getUserID());
 		System.out.println(dto.getUserPassword());
 		System.out.println(dto.getUserName());
 		System.out.println(dto.getUserAge());
 		System.out.println(dto.getUserGender());
-		System.out.println(dto.getUserEmail());
+		System.out.println(dto.getUserEmail());*/
 		int r = UserDAO.getInstance().insertMember(dto);
 		
 		if(r != 0) {

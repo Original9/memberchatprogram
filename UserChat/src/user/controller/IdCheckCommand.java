@@ -20,10 +20,10 @@ public class IdCheckCommand implements Command {
 		String path = null;
 		
 		if(chk) {
-			path="사용가능한 아이디 입니다.";
+			path="{\"result\":false, \"message\":\"사용 불가능한 아이디 입니다.\"}";
 			
 		}else {
-			path="사용 불가능한 아이디 입니다.";
+			path="{\"result\":true, \"message\":\"사용 가능한 아이디 입니다.\"}";
 		}
 		
 		return "ajax:"+path;
