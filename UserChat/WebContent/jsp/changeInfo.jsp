@@ -12,7 +12,7 @@
 	<div class="container">
 	<div class="row">
 	<div class="col-md-10">
-		<form method="post" action="insertMember.do" id="frm" name="frm">
+		<form method="post" action="changeInfo.do" id="frm" name="frm">
 			<table class="table table-bordered table-hover" style="text-align: center; border: 1px solid #dddddd">
 				<thead>
 					<tr>
@@ -22,32 +22,31 @@
 				<tbody>
 					<tr>
 						<td style="width: 110px;"><h5>아이디</h5></td>
-						<td><input class="form-control" type="text" id="userID" name="userID" maxlength="20" placeholder="아이디를 입력하세요."></td>
-						<td style="width: 110px"><button class="btn btn-primary" onclick="idCheck()" type="button">중복체크</button></td>
+						<td><input class="form-control" type="text" id="userID" name="userID" maxlength="20" readonly="readonly" value="${list.userID }"></td>
+						
 					</tr>
 					<tr>
 						<td style="width: 130px;"><h5>비밀번호</h5></td>
-						<td colspan="2"><input class="form-control" type="password" id="userPassword1" name="userPassword1" maxlength="20" placeholder="비밀번호를 입력하세요."></td>						
-					</tr>
-					<tr>
-						<td style="width: 110px;"><h5>비밀번호 확인</h5></td>
-						<td colspan="2"><input onblur="passwordCheckFunction();" class="form-control" type="password" id="userPassword2" name="userPassword2" maxlength="20" placeholder="비밀번호 확인을 입력하세요."></td>						
+						<td colspan="2"><input class="form-control" type="password" id="userPassword1" name="userPassword1" maxlength="20" value="●●●●●●" readOnly="true"></td>						
+						<td style="width: 110px"><button class="btn btn-primary"
+										id="btnChangePw" type="button">비밀번호변경</button>
+									</td>
 					</tr>
 					<tr>
 						<td style="width: 110px;"><h5>이름</h5></td>
-						<td colspan="2"><input class="form-control" type="text" id="userName" name="userName" maxlength="20" placeholder="이름을 입력하세요."></td>						
+						<td colspan="2"><input class="form-control" type="text" id="userName" name="userName" maxlength="20" value="${list.userName }"></td>						
 					</tr>
 					<tr>
 						<td style="width: 110px;"><h5>나이</h5></td>
-						<td colspan="2"><input class="form-control" type="number" id="userAge" name="userAge" maxlength="20" placeholder="나이를 입력하세요."></td>						
+						<td colspan="2"><input class="form-control" type="number" id="userAge" name="userAge" maxlength="20" value="${list.userAge }"></td>						
 					</tr>
 					<tr>
 						<td style="width: 110px;"><h5>성별</h5></td>
 						<td colspan="2">
-							<div class="form-group" style="text-align: center; margin: 0 auto;">
+							<div class="form-group" style="text-align: center; margin: 0 auto;"> <!-- db에서 가져와서 체크하는 메서드 스크립트로 만들기. -->
 								<div class="btn-group" data-toggle="buttons">
 									<label class="btn btn-primary active">
-										<input type="radio" name="userGender" autocomplete="off" value="남자" checked>남자
+										<input type="radio" name="userGender" autocomplete="off" value="남자">남자
 									</label>
 									<label class="btn btn-primary ">
 										<input type="radio" name="userGender" autocomplete="off" value="여자" >여자
@@ -58,14 +57,14 @@
 					</tr>
 					<tr>
 						<td style="width: 110px;"><h5>이메일</h5></td>
-						<td colspan="2"><input class="form-control" type="email" id="userEmail" name="userEmail" maxlength="20" placeholder="이메일을 입력하세요."></td>						
+						<td colspan="2"><input class="form-control" type="email" id="userEmail" name="userEmail" maxlength="20" value="${list.userEmail }"></td>						
 					</tr>
 				</tbody>
 			</table>
 			<p />
 				<div align="center">
-					<input type="button" class="btn btn-primary" onclick="checkForm()" value="회원가입">&nbsp;&nbsp;&nbsp;
-					<input type="reset" class="btn btn-primary" onclick="location.href='join.do'" value="취소">
+					<input type="button" class="btn btn-primary" onclick="checkForm()" value="변경">&nbsp;&nbsp;&nbsp;
+					<input type="reset" class="btn btn-primary" onclick="location.href='changeInfoForm.do'" value="취소">
 				</div>
 		</form>
 		</div>
