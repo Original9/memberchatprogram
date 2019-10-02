@@ -11,6 +11,9 @@
 	function checkForm() {
 		var form = document.frm;
 
+		/*---------------------------
+		입력 안한 항목 체크
+		------------------------------*/
 		if (form.userID.value == "") {
 			alert("아이디를 입력하세요.");
 			form.id.focus();
@@ -23,7 +26,7 @@
 			return false;
 		}
 
-		if (form.userPassword1.value == "") {
+		if (form.userPassword.value == "") {
 			alert("비밀번호를 입력하세요.");
 			form.pw.focus();
 			return false;
@@ -41,20 +44,21 @@
 			return false;
 		}
 
-		//비밀번호1,2 일치하는지 확인하는 메서드 만들기.
 
 		form.submit();
 	}
+	
+	
 
 	/*---------------------------
 	비밀번호 일치여부 체크
 	------------------------------*/
 	function passwordCheckFunction() {
-		var pw1 = document.frm.userPassword1;
+		var pw1 = document.frm.userPassword;
 		var pw2 = document.frm.userPassword2;
 		if (pw1.value != pw2.value) {
 			alert("비밀번호가 일치하지 않습니다.");
-			document.frm.userPassword1.value = "";
+			document.frm.userPassword.value = "";
 			document.frm.userPassword2.value = "";
 			pw1.focus();
 			return false;
@@ -62,6 +66,9 @@
 
 	}
 
+	/*---------------------------
+	아이디 중복 체크
+	------------------------------*/
 	$(function() {
 		$("#btnIdCheck").click(function() {
 
@@ -77,6 +84,7 @@
 			}).done(function(result) {
 				if(result.result == true){
 					document.frm.userID.readOnly=true;
+					document.getElementById("checkResult").style.color="blue";
 				}
 				$("#checkResult").html(result.message);
 			}).fail(function(xhr, status) {
@@ -107,15 +115,15 @@
 							<tr>
 								<td style="width: 110px;"><h5>아이디</h5></td>
 								<td><input class="form-control" type="text" id="userID"
-									name="userID" maxlength="20" placeholder="아이디를 입력하세요."></td>
+									name="userID" maxlength="20" placeholder="아이디를 입력하세요."><p align="right" id=checkResult style="color:red"></p></td>
 								<td style="width: 110px"><button class="btn btn-primary"
-										id="btnIdCheck" type="button">중복체크</button>&nbsp;&nbsp;
-									<p id=checkResult></p></td>
+										id="btnIdCheck" type="button">중복체크</button>
+									</td>
 							</tr>
 							<tr>
 								<td style="width: 130px;"><h5>비밀번호</h5></td>
 								<td colspan="2"><input class="form-control" type="password"
-									id="userPassword1" name="userPassword1" maxlength="20"
+									id="userPassword" name="userPassword" maxlength="20"
 									placeholder="비밀번호를 입력하세요."></td>
 							</tr>
 							<tr>
