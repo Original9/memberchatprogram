@@ -29,7 +29,7 @@
 	
 		<div class="container">
 		
-		<div>
+		<div class="col-md-8">
 			<form id="frm" name="frm" action="loginCheck.do" method="post">
 				<table class="table table-bordered table-hover" style="text-align: center; border:1px solid #dddddd">
 					<thead>

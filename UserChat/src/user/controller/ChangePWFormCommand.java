@@ -14,7 +14,7 @@ public class ChangePWFormCommand implements Command {
 	public String excute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		return null;
+		return "jsp/changePW.jsp";
 	}
 
 }

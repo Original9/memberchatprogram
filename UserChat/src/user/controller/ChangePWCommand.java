@@ -8,13 +8,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import user.command.Command;
 
-public class AdminDeleteUserFormCommand implements Command {
+public class ChangePWCommand implements Command {
 
 	@Override
 	public String excute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		return "jsp/adminDeleteUser.jsp";
+		
+		return null;
 	}
 
 }

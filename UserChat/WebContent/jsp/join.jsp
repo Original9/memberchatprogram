@@ -7,6 +7,11 @@
 <title>Insert title here</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	
+<style type="text/css">
+  .line{border-right:0px;}
+</style>
+
 <script type="text/javascript">
 	function checkForm() {
 		var form = document.frm;
@@ -114,9 +119,9 @@
 						<tbody>
 							<tr>
 								<td style="width: 110px;"><h5>아이디</h5></td>
-								<td><input class="form-control" type="text" id="userID"
+								<td style="border-right:0px"><input class="form-control" type="text" id="userID"
 									name="userID" maxlength="20" placeholder="아이디를 입력하세요."><p align="right" id=checkResult style="color:red"></p></td>
-								<td style="width: 110px"><button class="btn btn-primary"
+								<td align="left" style="border-left:0px;"><button class="btn btn-primary"
 										id="btnIdCheck" type="button">중복체크</button>
 									</td>
 							</tr>
@@ -152,10 +157,10 @@
 										style="text-align: center; margin: 0 auto;">
 										<div class="btn-group" data-toggle="buttons">
 											<label class="btn btn-primary active"> <input
-												type="radio" name="userGender" autocomplete="off" value="남자"
+												type="radio" name="userGender" autocomplete="off" value="M"
 												checked>남자
 											</label> <label class="btn btn-primary "> <input type="radio"
-												name="userGender" autocomplete="off" value="여자">여자
+												name="userGender" autocomplete="off" value="F">여자
 											</label>
 										</div>
 									</div>
@@ -163,9 +168,12 @@
 							</tr>
 							<tr>
 								<td style="width: 110px;"><h5>이메일</h5></td>
-								<td colspan="2"><input class="form-control" type="email"
+								<td style="border-right:0px"><input class="form-control" type="email"
 									id="userEmail" name="userEmail" maxlength="20"
 									placeholder="이메일을 입력하세요."></td>
+								<td align="left" style="border-left:0px;"><button class="btn btn-primary"
+									id="btnEmailCheck" type="button">이메일 인증</button>
+								</td>
 							</tr>
 						</tbody>
 					</table>

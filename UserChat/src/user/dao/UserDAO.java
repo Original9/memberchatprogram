@@ -45,7 +45,7 @@ public class UserDAO {
 	
 
 	public int insertMember(UserDTO dto) {
-		String sql = "insert into c_user values(?,?,?,?,?,?,'U')";
+		String sql = "insert into c_user values(?,?,?,?,?,?,'U','','')";
 		int r = 0;
 
 		try {
@@ -116,5 +116,36 @@ public class UserDAO {
 		}
 		
 		return dto;
+	}
+	
+	
+	public int changeUserInfo(UserDTO dto, String id) {
+		int n = 0;
+		String sql = "update c_user set username=?, userage=?, useremail=? where userid=?";
+		
+		try {
+			conn = JDBCutil.connect();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dto.getUserName());
+			pstmt.setInt(2, dto.getUserAge());
+			pstmt.setString(3, dto.getUserEmail());
+			pstmt.setString(4, id);
+
+			n=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCutil.disconnect(pstmt, conn);
+		}
+		
+		return n;
+	}
+	
+	public int changePW(UserDTO dto, String id) { //비밀번호변경 구현 덜함.
+		int n = 0;
+		String sql = "update c_user set userpassword=? where userid=?";
+		
+		
+		return n;
 	}
 }
