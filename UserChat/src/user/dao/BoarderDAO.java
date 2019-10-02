@@ -111,13 +111,22 @@ public class BoarderDAO {
 	
 	public int update(BoarderDTO dto) { //글수정
 		int n = 0;
-		String sql = "update c_board set btitle=?, bcontent=? where BOARDID = ?";
+		String sql = "update c_board set btitle=?, bcontent=?, boardfile=? where BOARDID = ?";
+		
+		if(dto.getBfileName() == null) {
+			 sql = "update c_board set btitle=?, bcontent=? where BOARDID = ?";			
+		}
 		
 		try {
+			int cnt = 1;
+			conn = JDBCutil.connect();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, dto.getbTitle());
-			pstmt.setString(2, dto.getbContent());
-			pstmt.setInt(3, dto.getbNum());
+			pstmt.setString(cnt++, dto.getbTitle());
+			pstmt.setString(cnt++, dto.getbContent());
+			if(dto.getBfileName() != null) {
+				pstmt.setString(cnt++, dto.getBfileName());
+			}
+			pstmt.setInt(cnt++, dto.getbNum());
 			n = pstmt.executeUpdate();
 					
 		} catch (SQLException e) {

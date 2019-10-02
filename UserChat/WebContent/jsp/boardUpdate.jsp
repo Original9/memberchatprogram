@@ -1,24 +1,54 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
+	<%@ page import="user.dao.UserDAO" %>
+    <%@ page import="user.dto.UserDTO" %>
+    <%@ page import="user.dao.BoarderDAO" %>
+    <%@ page import="user.dto.BoarderDTO" %>
+    <%@ page import="java.io.PrintWriter" %>
+
 <!DOCTYPE html>
 <html>
 <head>
+<% 
+		String userID = null;
+		//userID = "jey"; // 로그인 임시로 접속가능하도록 세션값을 박아둔다
+		//session.setAttribute("userID", "jey");
+		if(session.getAttribute("userID") != null){
+			userID = (String) session.getAttribute("userID");
+		}
+// 		BoarderDAO dao = new BoarderDAO();
+// 		BoarderDTO dto = new BoarderDTO();
+// 		if (!userID.equals(dto.getbId())){
+// 	 		out.print("<script>");
+// 	 		out.print("alert('로그인을 먼저 해 주세요.')");
+// 	 		out.print("</script>");
+// 	 		out.print("<script>");
+// 	 		out.print("document.location.href='./boardList.do'");
+// 	 		out.print("</script>");
+// 			return;
+// 		}
+		
+		
+		
+		
+
+%>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+<jsp:include page="menu.jsp"></jsp:include>
 </head>
 <body>
 <c:choose>
-<c:when test="${id == list.bId }">
+<c:when test="${userID == list.bId }">
 	<div align="center">
-		<jsp:include page="menu.jsp"></jsp:include>
+		
 		<div>
 			<h1>글수정</h1>
 		</div>
 		<br />
 		<div>
-			<form id="frm" name="frm" action="boardUpdate.do" method="post">
+			<form id="frm" name="frm" action="boardUpdate.do" method="post" enctype="multipart/form-data">
 				<!-- .do걸어야됨 -->
 				<input type="hidden" id="bnum" name="bnum" value="${list.bNum }">
 				<div>
@@ -37,6 +67,21 @@
 						<tr>
 							<th width="100">내용</th>
 							<td colspan="3"><textarea rows="30" id="content" name="content" style="width:99%" >${list.bContent }</textarea>
+						</td></tr>
+						<tr>
+							<th width="100">첨부파일</th>
+							<td colspan="3"><input type="file" id="filename" name="filename" size="100"></td>
+							<%
+							if("filename" == null){%>
+							<td><input type="button" value="삭제"></td>
+							
+							
+							<% } %>
+
+							<td><input type="button" value="삭제"></td>
+						</tr>
+						
+						
 					</table>
 				</div>
 				<br />
@@ -53,9 +98,9 @@
 		<jsp:include page="footer.jsp"></jsp:include>
 </div>
 </c:when>
-<c:otherwise>
-	<jsp:forward page="noAccess.jsp"></jsp:forward>
-</c:otherwise>
+<%-- <c:otherwise> --%>
+<%-- 	<jsp:forward page="noAccess.jsp"></jsp:forward> --%>
+<%-- </c:otherwise> --%>
 </c:choose>
 </body>
 </html>
