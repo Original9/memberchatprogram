@@ -29,10 +29,11 @@
 			data: {userID: userID},
 			success: function(result1){
 				console.log(result1);		
-				$('#checkMessage').html('친구찾기에 성공했습니다.')
-				$('#checkType').attr('class', 'modal-content panel-success' );
+				//$('#checkMessage').html('친구찾기에 성공했습니다.')
+				//$('#checkType').attr('class', 'modal-content panel-success' );
 				getFriend(userID);
 				if(result1 == 0){
+					console.log(result1+"!!!");	
 					$('#checkMessage').html('친구찾기에 성공했습니다.')
 					$('#checkType').attr('class', 'modal-content panel-success' );
 					getFriend(userID);
@@ -53,7 +54,7 @@
 				'</thead>' +
 				'<tbody>' + 
 				'<tr>' +				
-				'<td style="text-align: center;"><h3>'+FindID+'</h3><a href="messageBox.do?toID='+encodeURIComponent(FindID)+'" class="btn btn-primary pull-right">'+'메세지 보내기</a></td>'+		
+				'<td style="text-align: center;"><h3>'+FindID+'</h3><a href="friendInsert.do?toID='+encodeURIComponent(FindID)+'&&userID=<%=(String) session.getAttribute("userID")%>" class="btn btn-primary pull-right">'+'친구추가</a> &nbsp&nbsp <a href="messageBox.do?toID='+encodeURIComponent(FindID)+'" class="btn btn-primary pull-right">'+'메세지 보내기</a></td>'+		
 				'</tr>' +
 				'</tbody>');
 		
@@ -105,16 +106,15 @@
 			<div class="modal-dialog vertical-align-center">
 				<div id="checkType" class="modal-content panel-info">
 					<div class="modal-header panel-heading">
-						<button type="button" class="close" data-dismiss="modal"></button>
-							<span aria-hidden="true">&time</span>
+						<button type="button" class="close" data-dismiss="modal"></button>							
 							<span class="sr-only">Close</span>
 							<h4 class="modal-title">확인메세지
 							</h4>
-					</div>
+					</div> 
 					<div id="checkMessage" class="modal-body">
 					</div>
 					<div id="modal-fotter">
-						<button type="button" class="btn btn-primary-default" data-dismiss="modal"  >확인</button>						
+						<button type="button" class="btn btn-primary-right" data-dismiss="modal"  >확인</button>						
 					</div>
 				</div>
 			</div>

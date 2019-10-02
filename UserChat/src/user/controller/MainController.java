@@ -42,6 +42,8 @@ public class MainController extends HttpServlet {
 		
 		//원조's
 		map.put("/memberSearch.do", new memberSearchCommand());
+		map.put("/friendList.do", new friendListCommand());
+		map.put("/friendInsert.do", new friendInsertCommand());
 		
 		
         

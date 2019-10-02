@@ -17,6 +17,7 @@ public class UserDAO {
 	Connection conn = null;
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
+		
 	
 	public UserDTO loginCheck(UserDTO dto) {
 		String sql="select * from c_user where userid=? and userpassword=?";

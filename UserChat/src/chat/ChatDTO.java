@@ -7,7 +7,15 @@ public class ChatDTO {
 	String toID;
 	String chatContent;
 	String chatTime;
+	int chat_num;
 	
+	
+	public int getChat_num() {
+		return chat_num;
+	}
+	public void setChat_num(int chat_num) {
+		this.chat_num = chat_num;
+	}
 	public int getChatID() {
 		return chatID;
 	}
