@@ -12,9 +12,9 @@ import user.command.Command;
 public class FreeBoardCommand implements Command {
 
 	@Override
-	public void excute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatcher=request.getRequestDispatcher("jsp/boardWrite.jsp");
-		dispatcher.forward(request, response);
+	public String excute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		return ("jsp/boardWrite.jsp");
+		
 	}
 
 }

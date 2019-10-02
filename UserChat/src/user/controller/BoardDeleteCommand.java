@@ -14,14 +14,13 @@ import user.dto.BoarderDTO;
 public class BoardDeleteCommand implements Command {
 
 	@Override
-	public void excute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public String excute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		BoarderDTO dto = new BoarderDTO();
 		BoarderDAO dao = new BoarderDAO();
 		
 		dto.setbNum(Integer.parseInt(request.getParameter("key")));
 		dao.delete(dto);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("boardList.do");
-		dispatcher.forward(request, response);
+		return "boardList.do";
 	}
 
 }

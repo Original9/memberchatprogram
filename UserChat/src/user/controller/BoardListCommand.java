@@ -15,15 +15,14 @@ import user.dto.BoarderDTO;
 public class BoardListCommand implements Command {
 
 	@Override
-	public void excute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public String excute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<BoarderDTO> list = new ArrayList<BoarderDTO>();
 		BoarderDAO dao = new BoarderDAO();
 		
 		list = dao.select();
 		request.setAttribute("list", list); //db에서 넘어온 값을  request객체 속성으로 삽입
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/boardList.jsp");
-		dispatcher.forward(request, response);		
+		return "jsp/boardList.jsp";
 	}
 
 }

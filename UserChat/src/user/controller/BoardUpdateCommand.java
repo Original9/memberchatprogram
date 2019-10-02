@@ -14,7 +14,7 @@ import user.dto.BoarderDTO;
 public class BoardUpdateCommand implements Command {
 
 	@Override
-	public void excute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public String excute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		BoarderDAO dao = new BoarderDAO();
 		BoarderDTO dto = new BoarderDTO();
 		
@@ -28,9 +28,11 @@ public class BoardUpdateCommand implements Command {
 			path = "boardList.do"; //성공시 목록보여줌
 		else  
 			path ="boardUpdateForm.do"; // 실패시 입력폼
+		return path;
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher(path);
-		dispatcher.forward(request, response);
+
+//		RequestDispatcher dispatcher = request.getRequestDispatcher(path);
+//		dispatcher.forward(request, response);
 	}
 
 }

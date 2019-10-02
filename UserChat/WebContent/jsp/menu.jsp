@@ -36,7 +36,7 @@
 						<li class="active"><a href="index.jsp">메인</a></li>
 						<li><a href="memberSearch.do">친구 찾기</a></li>
 			            <li><a href="messageBox.do">메세지함<span id="unread" class="label label-info"></span></a>
-              			<li><a href="boardView.jsp">자유 게시판</a></li> 
+              			<li><a href="boardList.do">자유 게시판</a></li>
 					</ul>
 					<%
 						if(userID == null){

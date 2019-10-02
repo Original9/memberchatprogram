@@ -19,7 +19,7 @@ import user.dto.BoarderDTO;
 public class BorderWriteCommand implements Command {
 
 	@Override
-	public void excute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public String excute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 글추가 루틴 만들기
 		
 		BoarderDTO dto = new BoarderDTO();
@@ -47,9 +47,11 @@ public class BorderWriteCommand implements Command {
 			path = "boardList.do"; //성공시 목록보여줌
 		else  
 			path ="borderWriteForm.do"; // 실패시 입력폼
+		return path;
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher(path);
-		dispatcher.forward(request, response);
+		
+//		RequestDispatcher dispatcher = request.getRequestDispatcher(path);
+//		dispatcher.forward(request, response);
 	}
 
 }

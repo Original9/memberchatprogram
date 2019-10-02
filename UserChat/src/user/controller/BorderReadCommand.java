@@ -14,7 +14,7 @@ import user.dto.BoarderDTO;
 public class BorderReadCommand implements Command {
 
 	@Override
-	public void excute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public String excute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		BoarderDTO dto = new BoarderDTO();
 		BoarderDAO dao = new BoarderDAO();
 		int key =Integer.parseInt(request.getParameter("key"));
@@ -22,8 +22,7 @@ public class BorderReadCommand implements Command {
 		dto = dao.select(key,"read");  //read 는 조회수 증가
 		
 		request.setAttribute("list", dto);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/boardRead.jsp");
-		dispatcher.forward(request, response);
+		return ("jsp/boardRead.jsp");
 	}
 
 }

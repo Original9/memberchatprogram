@@ -51,24 +51,33 @@ public class BoarderDAO {
 	
 	public BoarderDTO select (int key, String str) {
 		BoarderDTO dto = new BoarderDTO();
-		String sql = "select * from c_board where BOARDID= ? "; // * 제외, 컬럼으로 조회
+		String sql = "select * from c_board where BOARDID= ?"; //
 		
 		try {
+			conn = JDBCutil.connect();
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, key);
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
-				dto.setbNum(rs.getInt("bnum"));
-				dto.setbName(rs.getString("bname"));
-				dto.setbContent(rs.getString("bcontent"));
-				dto.setbHit(rs.getInt("bhit"));
-				dto.setbTitle(rs.getString("btitle"));
-				dto.setbWriteDate(rs.getDate("bwritedate"));
-				dto.setbId(rs.getString("bid"));
-				dto.setBfileName(rs.getString("filename"));
-				if(str.equals("read"))
-					readCount(key); //조회수 1씩 올라가게 수정
+				dto.setbId(rs.getString("USERID"));
+				dto.setbNum(rs.getInt("BOARDID"));
+				dto.setbTitle(rs.getString("BTITLE"));
+				dto.setbContent(rs.getString("BCONTENT"));
+				dto.setbWriteDate(rs.getDate("BDATE"));
+				dto.setBfileName(rs.getString("BOARDFILE"));
+				
+				
+//				dto.setbNum(rs.getInt("bnum"));
+//				dto.setbName(rs.getString("bname"));
+//				dto.setbContent(rs.getString("bcontent"));
+//				dto.setbHit(rs.getInt("bhit"));
+//				dto.setbTitle(rs.getString("btitle"));
+//				dto.setbWriteDate(rs.getDate("bwritedate"));
+//				dto.setbId(rs.getString("bid"));
+//				dto.setBfileName(rs.getString("filename"));
+//				if(str.equals("read"))
+//					readCount(key); //조회수 1씩 올라가게 수정
 			}
 			
 		} catch(SQLException e) {
