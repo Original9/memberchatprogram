@@ -15,8 +15,10 @@
 	
 	<%
 		String userID = null;
+		String grant = "";
 		if(session.getAttribute("userID") != null){
 			userID = (String) session.getAttribute("userID");
+			grant = (String) session.getAttribute("grant");
 		}
 	%>
 	<nav class = "navbar navbar-default">
@@ -28,7 +30,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-					<a class = "navbar-brand" href="index.jsp">실시간 회원 채팅서비스</a>				
+					<a class = "navbar-brand" href="index.do">실시간 회원 채팅서비스</a>				
 			</div>	
 			<div>						
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
@@ -54,6 +56,21 @@
 						</li>
 					</ul>
 					<%
+						} else if(grant.equals("U")){
+					%>
+					<ul class="nav navbar-nav navbar-right" >
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle"
+								data-toggle="dropdown" role="button" aria-haspopup="true"
+								aria-expanded="false">사용자관리<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu">
+								<li><a href = "changeInfoForm.do">회원정보수정</a></li>
+								<li><a href = "logout.do">로그아웃</a></li>							
+							</ul>
+						</li>
+					</ul>
+					<%
 						} else {
 					%>
 					<ul class="nav navbar-nav navbar-right" >
@@ -63,11 +80,13 @@
 								aria-expanded="false">회원관리<span class="caret"></span>
 							</a>
 							<ul class="dropdown-menu">
-								<li><a href = "changeInfoForm.do">회원정보수정</a></li>
+								<li><a href = "adminChangeInfoForm.do">회원정보관리</a></li>
+								<li><a href = "adminDeleteUserForm.do">회원계정관리</a></li>
 								<li><a href = "logout.do">로그아웃</a></li>							
 							</ul>
 						</li>
 					</ul>
+					
 					<%
 						}
 					%>

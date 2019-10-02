@@ -49,6 +49,8 @@
 				
 				<div align="center">
 					<input class="btn btn-primary" type="button" onclick="checkForm()" value="로그인">&nbsp;&nbsp;&nbsp;
+					<input class="btn btn-primary" type="button" onclick="location.href='findID.do'" value="아이디 찾기">&nbsp;&nbsp;&nbsp;
+					<input class="btn btn-primary" type="button" onclick="location.href='findPW.do'" value="비밀번호 찾기">&nbsp;&nbsp;&nbsp;
 					<input class="btn btn-primary" type="reset" onclick="location.href='login.do'" value="취소">
 				</div>
 			</form>
