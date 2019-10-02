@@ -24,7 +24,7 @@ public class BorderWriteCommand implements Command {
 		
 		BoarderDTO dto = new BoarderDTO();
 		BoarderDAO dao = new BoarderDAO();
-//첨부파일 업로드 루틴
+        //첨부파일 업로드 루틴
 		String file1 = null;
 		String upfilepath = request.getSession().getServletContext().getRealPath("uploadfile");
 		int filesize = 10 * 1024;
