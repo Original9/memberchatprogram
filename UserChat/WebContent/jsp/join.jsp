@@ -21,31 +21,37 @@
 		------------------------------*/
 		if (form.userID.value == "") {
 			alert("아이디를 입력하세요.");
-			form.id.focus();
+			form.userID.focus();
 			return false;
 		}
 
 		if (form.userID.readOnly != true) {
 			alert("중복체크를 해주세요.");
-			form.id.focus();
+			form.userID.focus();
 			return false;
 		}
 
 		if (form.userPassword.value == "") {
 			alert("비밀번호를 입력하세요.");
-			form.pw.focus();
+			form.userPassword.focus();
 			return false;
 		}
 
 		if (form.name.value == "") {
 			alert("이름을 입력하세요.");
-			form.name.focus();
+			form.userName.focus();
 			return false;
 		}
 
 		if (form.userPassword2.value == "") {
 			alert("비밀번호 확인을 입력해 주세요.");
-			form.name.focus();
+			form.userPassword.focus();
+			return false;
+		}
+		
+		if (form.userEmail.readOnly != true) {
+			alert("이메일 인증을 통해 본인 인증을 해주세요.");
+			form.id.focus();
 			return false;
 		}
 
@@ -99,15 +105,83 @@
 		})
 
 	})
+	
+	/*---------------------------
+	이메일 발송
+	------------------------------*/
+	$(function() {
+		$("#btnEmailCheck").click(function() {
+
+			var param = {
+				userEmail : document.frm.userEmail.value
+			};
+
+			var url = "emailCheck.do";
+
+			$.ajax(url, {
+				data : param,
+				dataType : 'json'
+			}).done(function(result) {
+				if(result.result == true){
+					//document.frm.userEmail.readOnly=true;
+					document.getElementById("EmailCheckResult").style.color="blue";
+					$("#ranNumInputTitle").css("visibility","visible");
+					$("#ranNum").val(result.checkNum);
+					//$("#checkRanNum").css("visibility","visible");
+				}
+				$("#EmailCheckResult").html(result.message);
+			}).fail(function(xhr, status) {
+				$("#EmailCheckResult").html(status);
+			});
+
+		})
+
+	})
+	
+	
+	/*---------------------------
+	인증번호 확인
+	------------------------------*/
+	$(function() {
+		$("#btnRanNumCheck").click(function() {
+
+			var param = {
+				myVal : document.frm.checkRanNum.value, ranNum : document.frm.ranNum.value
+			};
+
+			var url = "ranNumCheck.do";
+
+			$.ajax(url, {
+				data : param,
+				dataType : 'json'
+			}).done(function(result) {
+				if(result.result == true){
+					document.frm.userEmail.readOnly=true;
+					
+					//document.getElementById("EmailCheckResult").style.color="blue";
+					//$("#ranNumInputTitle").css("visibility","visible");
+					//$("#checkRanNum").css("visibility","visible");
+				}
+				$("#EmailCheckResult").html(result.message);
+			}).fail(function(xhr, status) {
+				$("#EmailCheckResult").html(status);
+			});
+
+		})
+
+	})
+	
 </script>
 
 
 </head>
 <body>
 	<jsp:include page="menu.jsp"></jsp:include>
+	<div><br /><br /><br /></div>
 	<div class="container">
+	<div class="col-md-2"></div>
 		<div class="row">
-			<div class="col-md-10">
+			<div class="col-md-8">
 				<form method="post" action="insertMember.do" id="frm" name="frm">
 					<table class="table table-bordered table-hover"
 						style="text-align: center; border: 1px solid #dddddd">
@@ -116,6 +190,7 @@
 								<th colspan="3"><h4>회원 등록 양식</h4></th>
 							</tr>
 						</thead>
+						<input type="hidden" id="ranNum" name="ranNum">
 						<tbody>
 							<tr>
 								<td style="width: 110px;"><h5>아이디</h5></td>
@@ -169,8 +244,9 @@
 							<tr>
 								<td style="width: 110px;"><h5>이메일</h5></td>
 								<td style="border-right:0px"><input class="form-control" type="email"
-									id="userEmail" name="userEmail" maxlength="20"
-									placeholder="이메일을 입력하세요."></td>
+									id="userEmail" name="userEmail" maxlength="40"
+									placeholder="이메일을 입력하세요."> <br> <p style="visibility:hidden" align="left" id="ranNumInputTitle">인증번호 입력 : <input type="text" id="checkRanNum">&nbsp;<button class="btn btn-primary"
+									id="btnRanNumCheck" type="button">확인</button></p><p align="right" id=EmailCheckResult style="color:red"></p></td>
 								<td style="width: 110px; border-left:0px;"><button class="btn btn-primary"
 									id="btnEmailCheck" type="button">이메일 인증</button>
 								</td>
@@ -187,6 +263,7 @@
 				</form>
 			</div>
 		</div>
+	<div class="col-md-2"></div>
 	</div>
 </body>
 </html>

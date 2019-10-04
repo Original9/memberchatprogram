@@ -26,9 +26,9 @@
 </head>
 <body>
 	<jsp:include page="menu.jsp"></jsp:include>
-	
+		<div><br /><br /><br /></div>
 		<div class="container">
-		
+		<div class="col-md-2"></div>
 		<div class="col-md-8">
 			<form id="frm" name="frm" action="loginCheck.do" method="post">
 				<table class="table table-bordered table-hover" style="text-align: center; border:1px solid #dddddd">
@@ -55,6 +55,7 @@
 				</div>
 			</form>
 		</div>
+		<div class="col-md-2"></div>
 	</div>
 	
 </body>

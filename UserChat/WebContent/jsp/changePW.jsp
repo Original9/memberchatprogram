@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 	<link rel="stylesheet" href="css/bootstrap.css">
 	<link rel="stylesheet" href="css/custom.css">
+<script>
+//비번체크 함수
+</script>
 </head>
 <body>
 <div>
@@ -37,7 +40,7 @@
 				</table>
 				
 				<div align="center">
-					<input class="btn btn-primary" type="button" onclick="" value="변경">&nbsp;&nbsp;&nbsp;
+					<input class="btn btn-primary" type="button" onclick="pwEqualCheck()" value="변경">&nbsp;&nbsp;&nbsp;
 					<input class="btn btn-primary" type="reset" onclick="location.href='changePWForm.do'" value="취소">
 				</div>
 			</form>

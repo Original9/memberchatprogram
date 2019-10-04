@@ -19,7 +19,7 @@ public class ChangeInfoFormCommand implements Command {
 		UserDTO dto = new UserDTO();
 		String id = (String)request.getSession().getAttribute("userID");
 		
-		dto=UserDAO.getInstance().readToChangeInfo(id);//dao 에  changeInfo 만들어야함.
+		dto=UserDAO.getInstance().readToChangeInfo(id);
 		System.out.println(dto.getUserEmail());
 		
 		request.setAttribute("list", dto);

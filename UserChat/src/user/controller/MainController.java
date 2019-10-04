@@ -49,6 +49,8 @@ public class MainController extends HttpServlet {
 		map.put("/adminChangeInfoForm.do", new AdminChangeInfoFormCommand());
 		map.put("/adminDeleteUserForm.do", new AdminDeleteUserFormCommand());
 		map.put("/changePW.do", new ChangePWCommand());
+		map.put("/emailCheck.do", new EmailCheckCommand());
+		map.put("/ranNumCheck.do", new RanNumCheckCommand());
 		
 		
 		
