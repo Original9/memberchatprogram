@@ -8,7 +8,21 @@
 	<link rel="stylesheet" href="css/bootstrap.css">
 	<link rel="stylesheet" href="css/custom.css">
 <script>
-//비번체크 함수
+
+	function pwEqualCheck() {
+		var pw1 = document.frm.changePW1;
+		var pw2 = document.frm.changePW2;
+		if (pw1.value != pw2.value) {
+			alert("비밀번호가 일치하지 않습니다.");
+			document.frm.changePW1.value = "";
+			document.frm.changePW2.value = "";
+			pw1.focus();
+			return false;
+		}
+		
+		form.submit();
+	}
+
 </script>
 </head>
 <body>
@@ -27,15 +41,15 @@
 					</thead>
 					<tr>
 						<td style="width: 60px;">현재 비밀번호</td>
-						<td style="width: 100px;"><input class="form-control" type="text" id="id" name="id" size="20"></td>
+						<td style="width: 100px;"><input class="form-control" type="text" id="currentPW" name="currentPW" size="20"></td>
 					</tr>
 					<tr>
 						<td style="width: 60px;">변경할 비밀번호</td>
-						<td style="width: 100px;"><input class="form-control" type="password" id="pw" name="pw" size="20"></td>
+						<td style="width: 100px;"><input class="form-control" type="password" id="changePW1" name="changePW1" size="20"></td>
 					</tr>
 					<tr>
 						<td style="width: 60px;">변경할 비밀번호 확인</td>
-						<td style="width: 100px;"><input class="form-control" type="password" id="pw" name="pw" size="20"></td>
+						<td style="width: 100px;"><input class="form-control" type="password" id="changePW2" name="changePW2" size="20"></td>
 					</tr>
 				</table>
 				

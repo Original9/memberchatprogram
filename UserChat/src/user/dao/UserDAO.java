@@ -141,6 +141,28 @@ public class UserDAO {
 		return n;
 	}
 	
+	public String readPassword(String id) { //비밀번호 변경을 위한 현재 비밀번호 얻기(구현덜함)
+		String sql="select userpassword from c_user where userid=?";
+		String password= null;
+		
+		try {
+			conn = JDBCutil.connect();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()) {
+				password=rs.getString("userpassword");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCutil.disconnect(pstmt, conn);
+		}
+		
+		return password;
+	}
+	
 	public int changePW(UserDTO dto, String id) { //비밀번호변경 구현 덜함.
 		int n = 0;
 		String sql = "update c_user set userpassword=? where userid=?";

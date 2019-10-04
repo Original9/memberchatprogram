@@ -159,7 +159,7 @@ $(function() {
 						<td style="width: 130px;"><h5>비밀번호</h5></td>
 						<td style="border-right:0px"><input class="form-control" type="password" id="userPassword1" name="userPassword1" maxlength="20" value="●●●●●●" readOnly="readOnly"></td>						
 						<td style="width: 110px; border-left:0px"><button class="btn btn-primary" id="btnChangePW"
-										type="button">비밀번호변경</button>
+										type="button">비밀번호변경</button>&nbsp;
 									</td>
 					</tr>
 					<tr>
@@ -176,7 +176,7 @@ $(function() {
 						<p style="visibility:hidden" align="left" id="ranNumInputTitle">인증번호 입력 : <input type="text" id="checkRanNum">&nbsp;<button class="btn btn-primary"
 									id="btnRanNumCheck" type="button">확인</button></p><p align="right" id=EmailCheckResult style="color:red"></p></td>
 								<td style="width: 110px; border-left:0px;"><button class="btn btn-primary"
-									id="btnEmailCheck" type="button">이메일 인증</button>
+									id="btnEmailCheck" type="button">이메일 인증</button>&nbsp;
 						</td>						
 						
 					</tr>

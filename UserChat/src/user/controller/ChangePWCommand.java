@@ -18,8 +18,12 @@ public class ChangePWCommand implements Command {
 	public String excute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String id=request.getParameter("userID");
-		//String password
+		String changePassword=request.getParameter("currentPW1"); //변경할 비밀번호
 		String sc = null;
+		
+		String realPassword=UserDAO.getInstance().readPassword(id); //지금 비밀번호
+		System.out.println(realPassword);
+		
 		UserDTO dto = new UserDTO();
 		
 		try {
