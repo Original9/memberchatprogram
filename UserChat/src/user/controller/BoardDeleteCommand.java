@@ -17,9 +17,12 @@ public class BoardDeleteCommand implements Command {
 	public String excute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		BoarderDTO dto = new BoarderDTO();
 		BoarderDAO dao = new BoarderDAO();
+
+
 		
 		dto.setbNum(Integer.parseInt(request.getParameter("key")));
 		dao.delete(dto);
+		//return "jsp/boardDelete.jsp";
 		return "boardList.do";
 	}
 

@@ -141,6 +141,7 @@ public class BoarderDAO {
 		String sql = "delete from c_board where BOARDID = ? ";
 		
 				try {
+					conn = JDBCutil.connect();
 					pstmt = conn.prepareStatement(sql);
 					pstmt.setInt(1, dto.getbNum());
 					pstmt.executeUpdate();
@@ -151,6 +152,8 @@ public class BoarderDAO {
 		close();
 		
 	}
+	
+
 	
 	private void readCount(int key) {
 		String sql = "update c_board set hit = hit + 1 where BOARDID= ? ";

@@ -78,14 +78,15 @@
 		<div>
 			<!-- 조건 넣어서 세션값이 있으면 보이고 아니면 안보이게 하면된다. -->
 <%-- 			   <% String id = (String) session.getAttribute("id"); %> --%>
-			<c:if test="${empty sessionScope.userID }">
+			<c:if test="${sessionScope.userID != list.bId }">
 				<button type="button" onclick="location.href='boarderList.do'">
 					글 목록보기</button> &nbsp;&nbsp;      
       </c:if>
-			<c:if test="${not empty sessionScope.userID }">
+<%-- 			<c:if test="${not empty sessionScope.userID }"> --%>
+				<c:if test = "${sessionScope.userID == list.bId}">
 				<button type="button"
 					onclick="location.href='boardUpdateForm.do?key=${list.bNum}'">글수정</button> &nbsp;&nbsp;      
-      <button type="button" onclick="location.href='.do'">글 삭제</button> &nbsp;&nbsp;
+      <button type="button" onclick="location.href='boardDelete.do?key=${list.bNum}'">글 삭제</button> &nbsp;&nbsp;
       <button type="button" onclick="location.href='boarderList.do'">
 					글 목록보기</button> &nbsp;&nbsp;
       </c:if>

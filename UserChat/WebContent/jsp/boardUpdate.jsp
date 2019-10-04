@@ -51,6 +51,7 @@
 			<form id="frm" name="frm" action="boardUpdate.do" method="post" enctype="multipart/form-data">
 				<!-- .do걸어야됨 -->
 				<input type="hidden" id="bnum" name="bnum" value="${list.bNum }">
+				<input type="hidden" id="filedelete" name="filedelete" value="no">
 				<div>
 					<table border="1">
 						<tr>
@@ -71,14 +72,10 @@
 						<tr>
 							<th width="100">첨부파일</th>
 							<td colspan="3"><input type="file" id="filename" name="filename" size="100"></td>
-							<%
-							if("filename" == null){%>
-							<td><input type="button" value="삭제"></td>
+							<c:if test = "${list.bfileName != null }">
+							<td><input type="button" value="삭제" onclick="frm.filedelete.value='yes'"></td>
+							</c:if>
 							
-							
-							<% } %>
-
-							<td><input type="button" value="삭제"></td>
 						</tr>
 						
 						
