@@ -14,7 +14,7 @@ import user.dto.BoarderDTO;
 public class boardUpdateForm implements Command {
 
 	@Override
-	public void excute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public String excute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		BoarderDTO dto = new BoarderDTO();
 		BoarderDAO dao = new BoarderDAO();
 		int key =Integer.parseInt(request.getParameter("key"));
@@ -22,8 +22,7 @@ public class boardUpdateForm implements Command {
 		dto = dao.select(key,"update");	//update 는 조회수를 증가하지 않는다.	
 		request.setAttribute("list", dto);
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("jsp/boardUpdate.jsp");
-		dispatcher.forward(request, response);
+		return "jsp/boardUpdate.jsp";
 	}
 
 }

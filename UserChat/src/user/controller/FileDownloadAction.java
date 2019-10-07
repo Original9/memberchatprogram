@@ -14,7 +14,7 @@ import user.command.Command;
 public class FileDownloadAction implements Command {
 
 	@Override
-	public void excute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public String excute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	    // TODO Auto-generated method stub
 	    // 다운로드할 파일명을 가져온다.
@@ -22,7 +22,7 @@ public class FileDownloadAction implements Command {
 
 	      // 파일이 있는 절대경로를 가져온다.
 	      // 현재 업로드된 파일은 UploadFolder 폴더에 있다.
-	      String folder = request.getServletContext().getRealPath("UploadFolder");
+	      String folder = request.getServletContext().getRealPath("uploadfile");
 	      // 파일의 절대경로를 만든다.
 	      String filePath = folder + "/" + fileName;
 
@@ -59,6 +59,7 @@ public class FileDownloadAction implements Command {
 	      } catch (Exception e) {
 	          System.out.println("Download Exception : " + e.getMessage());
 	      }
+		return filePath;
 	}
 
 }

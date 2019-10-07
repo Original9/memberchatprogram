@@ -14,6 +14,7 @@
 		if(request.getParameter("toID") != null){
 			toID = (String) request.getParameter("toID");
 		}
+		
 	%>
 <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
 	<meta name = "viewport" content="width=device-width" initial-scale=1">
@@ -22,6 +23,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 	<script type="text/javascript">
+		
+		var chat_num_temp = null;  // 방번호를 전역변수 설정해서 넘겨 받았다.  나중에 메시지창열고 2초나 3초뒤에 메세지를 보낼수 있게 하자. 처음에 전역변수는 null 값이다.
+	
 		function autoClosingAlert(selector, delay){
 			var alert = $(selector).alert();
 			alert.show();
@@ -32,7 +36,10 @@
 			var fromID = '<%= userID%>';
 			var toID = '<%= toID%>';
 			var chatContent = $('#chatContent').val();
-			//document.write($('#chatContent').val());
+			var chat_num = chat_num_temp;
+			//console.log(chat_num);
+			 // 방번호를 전역변수 설정해서 넘겨 받았다.  나중에 메시지창열고 2초나 3초뒤에 메세지를 보낼수 있게 하자. 처음에 전역변수는 null 값이다.
+			
 			$.ajax({ // ajax의 비동기적 통신
 					type: "POST",
 					url: "./chatSubmitServlet",
@@ -40,8 +47,11 @@
 						fromID: encodeURIComponent(fromID),
 						toID: encodeURIComponent(toID),
 						chatContent: encodeURIComponent(chatContent),
+						chatNum: encodeURIComponent(chat_num),
+						
 					},
 					success: function(result){
+						
 						if(result == 1){
 							autoClosingAlert('#successMessage', 2000);
 						} else if(result == 0){
@@ -69,12 +79,15 @@
 					if(data=="")return;
 					var parsed = JSON.parse(data);
 					var result = parsed.result;
-					for(var i=0 ; i<result.length; i++){
+					chat_num_temp = result[0][4].value; // 채팅방 번호를 하나 따온다.
+					
+					
+					
+					for(var i=0 ; i<result.length; i++){						
 						if(result[i][0].value == fromID) {
 							result[i][0].value = 'ME';
 						}
 						addChat(result[i][0].value, result[i][2].value, result[i][3].value);	
-						//console.log(result[i][0].value); // 값을 잘받아옴
 					}
 					lastID = Number(parsed.last);// 가장 마지막으로 전달 받은 채팅ID
 					
@@ -97,14 +110,13 @@
 							'</span>' +
 							'</h4>' +
 							'<p>' +
-							chatcontent1 +  // 여기서 chatContent 에러 
+							chatcontent1 +  // 여기서 chatContent 및에 변수랑 이름이 같아서  에러 났었음 
 							'</p>' +
 							'</div>' +
 							'</div>' +
 							'</div>' +
 							'</div>' +
 							'<hr>'); 
-			console.dir(chatContent);
 							
 		$('#chatList').scrollTop($('#chatList')[0].scrollHeight);//스크롤 밑으로 내려주는거
 		}
@@ -117,7 +129,8 @@
 </head>
 <body>	
 	<jsp:include page="menu.jsp"></jsp:include>
-	현재 접속 ID: <%=userID %> 메세지전달 ID: <%=toID%>
+	현재 접속 ID: <%=userID %> 메세지전달 ID: <%=toID%> <div id=chat_num >방번호</div>
+	
 	<div class="container bootstrap snippet">
 		<div class="row">
 			<div class="col-xs-12">
@@ -161,8 +174,8 @@
 	<script type="text/javascript">
 		$('#messagelModal').modal("show");
 		$(document).ready(function(){
-			chatListFunction('ten');
-			getinfinitechat()
+			chatListFunction('noten');
+			getinfinitechat();
 		});
 	</script>
 </body>

@@ -1,16 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<jsp:include page="menu.jsp"></jsp:include>
-<script>
-	
-</script>
-</head>
 <%
 		String userID = null;
 		//userID = "jey"; // 로그인 임시로 접속가능하도록 세션값을 박아둔다
@@ -25,19 +17,45 @@
 			return;
 		}
 %>
+<meta charset="UTF-8">
+<title>InBox</title>
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript">
+	
+	
+	$(document).ready(function(){
+		var id = '<%= userID%>';
+		$.ajax({
+			type: "POST",
+			url:"./chatBox",
+			data: {					 
+				id :  encodeURIComponent(id),
+			},			
+			success: function(data){
+				
+				
+				
+			}
+			
+		})
+	});
+	
+</script>
+</head>
+<jsp:include page="menu.jsp"></jsp:include>
 <body>
 <div class="container">
 		<table class="table table-bordered table-bover" style="text-align: center; border: 1px solid #dddddaa">
 			<thead>
 				<tr>
-					<th colspan="5"><h4>친구 목록</h4></th>
+					<th colspan="5"><h4>메세지 목록</h4></th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
 					<td style="width: 100px"><h5> ID</h5></td>
 					<td style="width: 100px"><h5> NAME</h5></td>
-					<td style="width: 100px"><h5> EMAIL</h5></td>
+					<td style="width: 100px"><h5> 안읽은 메세지</h5></td>
 					<td style="width: 20px"><h5>SEND MESSAGE</h5></td>
 					<td style="width: 20px"><h5>DELETE</h5></td>						
 				</tr>
@@ -46,15 +64,7 @@
 				<td colspan="5"> 추가된 친구가 없습니다. </td>
 				</tr>
 				</c:if>
-				<c:forEach items="${list }" var="dto">
-					<tr>
-						<td style="width: 100px">${dto.userID }</td>
-						<td style="width: 100px">${dto.userName }</td>
-						<td style="width: 100px">${dto.userEmail }</td>					
-						<td style="width: 20px"><button class="btn btn-primary pull-center" onclick="location.href='messageBox.do?toID=${dto.userID }'">메세지 보내기</button></td>
-						<td style="width: 20px"><button class="btn btn-primary pull-center" onclick="location.href='deleteFriend.do?toID=${dto.userID}'">친구 삭제</button></td>
-					</tr>				
-				</c:forEach>				
+							
 				
 				
 			</tbody>			

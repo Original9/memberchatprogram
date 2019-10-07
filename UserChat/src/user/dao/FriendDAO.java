@@ -19,6 +19,8 @@ public class FriendDAO {
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
 	
+	
+	
 	public void insertFriend(String userID, String friendID) {
 		
 		String sql = "insert into c_friends values(?,?)";
@@ -60,6 +62,24 @@ public class FriendDAO {
 		}
 		return list;
 	}
+
+	public void deleteFriend(String userID, String friendID) {
+		String sql = "delete from c_friends where userID = ? and friendID = ?";
+		conn = JDBCutil.connect();
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userID);
+			pstmt.setString(2, friendID);
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	
 
 	
 	

@@ -63,7 +63,7 @@ public class ChatListServlet extends HttpServlet {
 		StringBuffer result = new StringBuffer(""); // 문자열이 계속 변할때에는 append만해주면 되는 StringBuffer이 더 좋다.
 		result.append("{\"result\":[");
 		ChatDAO chatDAO = new ChatDAO();
-		ArrayList<ChatDTO> chatList = chatDAO.getChatListByRecent(fromID, toID, 10);
+		ArrayList<ChatDTO> chatList = chatDAO.getChatListByRecent(fromID, toID, 100); // 10개에서 100개볼수 있게 일단 수정함 
 //		for(ChatDTO dto : chatList) {
 //			System.out.println(dto);
 //		}
@@ -72,10 +72,12 @@ public class ChatListServlet extends HttpServlet {
 			result.append("[{\"value\": \"" +chatList.get(i).getFromID()+"\"},");
 			result.append("{\"value\": \"" +chatList.get(i).getToID()+"\"},");
 			result.append("{\"value\": \"" +chatList.get(i).getChatContent()+"\"},");
-			result.append("{\"value\": \"" +chatList.get(i).getChatTime()+"\"}]");
+			result.append("{\"value\": \"" +chatList.get(i).getChatTime()+"\"},");
+			result.append("{\"value\": \"" +chatList.get(i).getChat_num()+"\"}]");
 			if(i != chatList.size() - 1) result.append(",");			
 		}
-		result.append("], \"last\":\""+chatList.get(chatList.size()-1).getChatID()+"\"}");		
+		result.append("], \"last\":\""+chatList.get(chatList.size()-1).getChatID()+"\"}");
+		chatDAO.readChat(fromID, toID); // 값을 반환하기 전에 읽었다고 값을 변경해준다.
 		return result.toString();
 	}
 	
@@ -89,10 +91,12 @@ public class ChatListServlet extends HttpServlet {
 			result.append("[{\"value\": \"" +chatList.get(i).getFromID()+"\"},");
 			result.append("{\"value\": \"" +chatList.get(i).getToID()+"\"},");
 			result.append("{\"value\": \"" +chatList.get(i).getChatContent()+"\"},");
-			result.append("{\"value\": \"" +chatList.get(i).getChatTime()+"\"}]");
+			result.append("{\"value\": \"" +chatList.get(i).getChatTime()+"\"},");
+			result.append("{\"value\": \"" +chatList.get(i).getChat_num()+"\"}]");
 			if(i != chatList.size() - 1) result.append(",");			
 		}
 		result.append("], \"last\":\""+chatList.get(chatList.size()-1).getChatID()+"\"}");
+		chatDAO.readChat(fromID, toID);
 		return result.toString();
 	}
 

@@ -31,8 +31,8 @@
 				console.log(result1);		
 				//$('#checkMessage').html('친구찾기에 성공했습니다.')
 				//$('#checkType').attr('class', 'modal-content panel-success' );
-				getFriend(userID);
-				if(result1 == 0){
+				//getFriend(userID);
+				if(result1 == "true"){
 					console.log(result1+"!!!");	
 					$('#checkMessage').html('친구찾기에 성공했습니다.')
 					$('#checkType').attr('class', 'modal-content panel-success' );
@@ -60,7 +60,7 @@
 		
 	}
 	function failFriend(){
-		$('#checkMessage').html('');
+		$('#friendResult').html('');
 	}
 	
 
