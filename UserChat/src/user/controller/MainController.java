@@ -66,6 +66,13 @@ public class MainController extends HttpServlet {
 		map.put("/boardUpdateForm.do", new boardUpdateForm());
 		map.put("/boardDelete.do", new BoardDeleteCommand());
 	    map.put("/FileDownloadAction.do", new FileDownloadAction());
+		map.put("/main.do", new MainBoardListCommand());
+//		map.put("/MainBorderWriteCommand.do", new MainBorderWriteCommand());
+//		map.put("/MainBorderWriteForm.do", new MainBorderWriteForm());
+		map.put("/MainBorderWriteForm.do", new MainBorderWriteForm());
+		map.put("/mainborderWrite.do", new MainBorderWriteCommand());
+		
+				
 		
 		//원조's
 		map.put("/memberSearch.do", new memberSearchCommand());
@@ -80,9 +87,9 @@ public class MainController extends HttpServlet {
 		String uri = request.getRequestURI();
 		String context = request.getContextPath();
 		String path = uri.substring(context.length());
-//		System.out.println("URi:" + uri);
-//		System.out.println("cs:" + context);
-//		System.out.println("path:" + path);
+		System.out.println("URi:" + uri);
+		System.out.println("cs:" + context);
+		System.out.println("path:" + path);
 		
 		Command comm = map.get(path);
 		String page = comm.excute(request, response);

@@ -18,7 +18,7 @@ public class MainBoardDAO {
 	public ArrayList<MainBoardDTO> select() { //전체리스트라서 arraylist
 		ArrayList<MainBoardDTO> list = new ArrayList<MainBoardDTO>();
 		MainBoardDTO dto;
-		String sql="select a.USERID userid, a.NOTICEID NOTICEID, a.NTITLE NTITLE , a.NCONTENT NCONTENT, a.NDATE NDATE, a.noticefile BOTICEFILE, a.HIT HIT,\r\n" + 
+		String sql="select a.USERID userid, a.NOTICEID NOTICEID, a.NTITLE NTITLE , a.NCONTENT NCONTENT, a.NDATE NDATE, a.noticefile nOTICEFILE, a.HIT HIT,\r\n" + 
 				"b.username username from notice a, C_user b\r\n" + 
 				"where a.userid = b.userid";
 		//"select USERID, BOARDID, BTITLE, BCONTENT, BDATE, BOARDFILE, HIT from c_board";
@@ -29,12 +29,13 @@ public class MainBoardDAO {
 			rs= pstmt.executeQuery();
 			while(rs.next()) {
 				dto = new MainBoardDTO();
+				System.out.println(dto);
 				dto.setMbId(rs.getString("USERID"));
 				dto.setMbNum(rs.getInt("NOTICEID"));
 				dto.setMbTitle(rs.getString("NTITLE"));
 				dto.setMbContent(rs.getString("NCONTENT"));
 				dto.setMbWriteDate(rs.getDate("NDATE"));
-				dto.setMbfileName(rs.getString("NOTICEFILE"));
+				dto.setMbfileName(rs.getString("nOTICEFILE"));
 				dto.setMbHit(rs.getInt("HIT"));
 				dto.setMbName(rs.getString("username"));
 				list.add(dto);
@@ -87,7 +88,8 @@ public class MainBoardDAO {
 	
 	public int insert(MainBoardDTO dto) { //글추가
 		int n = 0;
-		String sql = "insert into c_board(USERID,BOARDID,BTITLE,BCONTENT,BDATE,BOARDFILE) values(?, BOARD_SEQ.nextval, ?, ?,sysdate, ?)";
+		String sql = "insert into NOTICE(USERID, NOTICEID, NTITLE, NCONTENT, NDATE, HIT, NOTICEFILE)\r\n" + 
+				"values(?, ?, ?, ?, sysdate, ?)";
 		try {
 			conn = JDBCutil.connect();
 			pstmt = conn.prepareStatement(sql);
