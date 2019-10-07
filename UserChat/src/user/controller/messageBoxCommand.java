@@ -1,6 +1,9 @@
 package user.controller;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,6 +16,7 @@ public class messageBoxCommand implements Command {
 
 	@Override
 	public String excute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+				
 		return "jsp/messageBox.jsp";
 	}
 
