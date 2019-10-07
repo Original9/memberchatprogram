@@ -23,6 +23,8 @@ public class LoginCheckCommand implements Command {
 		
 		String path=null;
 		HttpSession session = request.getSession(false);
+		//공지사항 권한 수정
+		session.getAttribute("grant");
 		
 		dto.setUserID(request.getParameter("id"));
 		dto.setUserPassword(request.getParameter("pw"));

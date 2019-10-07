@@ -22,7 +22,7 @@ public class FileDownloadAction implements Command {
 
 	      // 파일이 있는 절대경로를 가져온다.
 	      // 현재 업로드된 파일은 UploadFolder 폴더에 있다.
-	      String folder = request.getServletContext().getRealPath("uploadfile");
+	      String folder = request.getServletContext().getRealPath("Uploadfile");
 	      // 파일의 절대경로를 만든다.
 	      String filePath = folder + "/" + fileName;
 

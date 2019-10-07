@@ -41,9 +41,9 @@
 		</table>
 	</div><br />
 	<div>
-<%-- 	<c:if test="${id != null}"> --%>
+	<c:if test="${userID != null }">
 		<button type="button" onclick="location.href='borderWriteForm.do'">새글쓰기</button>
-<%-- 	</c:if> --%>
+	</c:if>
 	</div>
 
 
