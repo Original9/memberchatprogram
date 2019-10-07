@@ -13,7 +13,7 @@ public class FindIDFormCommand implements Command {
 	@Override
 	public String excute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 

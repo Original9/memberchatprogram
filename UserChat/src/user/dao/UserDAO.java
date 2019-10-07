@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import user.dto.UserDTO;
 
@@ -163,7 +164,7 @@ public class UserDAO {
 		return password;
 	}
 	
-	public int changePW(String changePW, String id) { //비밀번호변경 구현 덜함.
+	public int changePW(String changePW, String id) { //비밀번호변경
 		int n = 0;
 		String sql = "update c_user set userpassword=? where userid=?";
 		
@@ -174,7 +175,7 @@ public class UserDAO {
 			pstmt.setString(2, id);
 
 			n=pstmt.executeUpdate();
-			System.out.println("int n = "+n);
+			//System.out.println("int n = "+n);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -182,5 +183,48 @@ public class UserDAO {
 		}
 		
 		return n;
+	}
+	
+	
+	public ArrayList<UserDTO> readUserList(){
+		ArrayList<UserDTO> list = new ArrayList<UserDTO>();
+		UserDTO dto;
+		
+		String sql="select * from c_user";
+		
+		try {
+			conn = JDBCutil.connect();
+			pstmt = conn.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				dto = new UserDTO();
+				dto.setUserID(rs.getString("userid"));
+				dto.setUserPassword(rs.getString("userpassword"));
+				dto.setUserName(rs.getString("username"));
+				dto.setUserAge(rs.getInt("userage"));
+				dto.setUserGender(rs.getString("usergender"));
+				dto.setUserEmail(rs.getString("userEmail"));
+//				dto.setUserGrant(rs.getString("ugrant"));
+				
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCutil.disconnect(pstmt, conn);
+		}
+		
+		return list;
+		
+	}
+	
+	//아이디 찾기 메소드
+	public String findID(String userEmail) {
+		String id = null;
+		String sql = "select userid from c_user where userEmail=?";
+		
+		
+		return id;
 	}
 }
