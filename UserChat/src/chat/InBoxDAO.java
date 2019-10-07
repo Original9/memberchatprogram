@@ -18,13 +18,13 @@ public class InBoxDAO {
 		ResultSet rs = null;
 		String sql1 = "";
 		
-		try {
-			conn = JDBCutil.connect();
-			pstmt = conn.prepareStatement(sql1);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			conn = JDBCutil.connect();
+//			pstmt = conn.prepareStatement(sql1);
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		
 		return null;
 	}
