@@ -10,6 +10,7 @@
 <script>
 
 	function pwEqualCheck() {
+		var form=document.frm;
 		var pw1 = document.frm.changePW1;
 		var pw2 = document.frm.changePW2;
 		if (pw1.value != pw2.value) {

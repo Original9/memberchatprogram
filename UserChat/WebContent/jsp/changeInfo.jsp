@@ -84,7 +84,7 @@ $(function() {
 			if(result.result == true){
 				//document.frm.userEmail.readOnly=true;
 				document.getElementById("EmailCheckResult").style.color="blue";
-				$("#ranNumInputTitle").css("visibility","visible");
+				$("#ranNumInputTitle").css("display","");
 				$("#ranNum").val(result.checkNum);
 				//$("#checkRanNum").css("visibility","visible");
 			}
@@ -141,14 +141,14 @@ $(function() {
 	<div class="row">
 	<div class="col-md-8">
 		<form method="post" action="changeInfo.do" id="frm" name="frm">
+				<input type="hidden" id="ranNum" name="ranNum">
+				<input type="hidden" id="Email" name="Email">
 			<table class="table table-bordered table-hover" style="text-align: center; border: 1px solid #dddddd">
 				<thead>
 					<tr>
 						<th colspan="3"><h4>회원 정보 수정</h4></th>
 					</tr>				
 				</thead>
-				<input type="hidden" id="ranNum" name="ranNum">
-				<input type="hidden" id="Email" name="Email">
 				<tbody>
 					<tr>
 						<td style="width: 110px;"><h5>아이디</h5></td>
@@ -173,7 +173,7 @@ $(function() {
 					<tr>
 						<td style="width: 110px;"><h5>이메일</h5></td>
 						<td style="border-right:0px"><input class="form-control" type="email" id="userEmail" name="userEmail" maxlength="20" value="${list.userEmail }" readOnly="readOnly"><br>
-						<p style="visibility:hidden" align="left" id="ranNumInputTitle">인증번호 입력 : <input type="text" id="checkRanNum">&nbsp;<button class="btn btn-primary"
+						<p style="display:none" align="left" id="ranNumInputTitle">인증번호 입력 : <input type="text" id="checkRanNum">&nbsp;<button class="btn btn-primary"
 									id="btnRanNumCheck" type="button">확인</button></p><p align="right" id=EmailCheckResult style="color:red"></p></td>
 								<td style="width: 110px; border-left:0px;"><button class="btn btn-primary"
 									id="btnEmailCheck" type="button">이메일 인증</button>&nbsp;

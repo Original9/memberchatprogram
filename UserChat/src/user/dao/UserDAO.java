@@ -45,8 +45,8 @@ public class UserDAO {
 	
 
 	public int insertMember(UserDTO dto) {
-		String sql = "insert into c_user values(?,?,?,?,?,?,'U','','')";
 		int r = 0;
+		String sql = "insert into c_user values(?,?,?,?,?,?,'U','','')";
 
 		try {
 			conn = JDBCutil.connect();
@@ -141,8 +141,8 @@ public class UserDAO {
 		return n;
 	}
 	
-	public String readPassword(String id) { //비밀번호 변경을 위한 현재 비밀번호 얻기(구현덜함)
-		String sql="select userpassword from c_user where userid=?";
+	public String readPassword(String id) { //비밀번호 변경을 위한 현재 비밀번호 얻기
+		String sql="select * from c_user where userid=?";
 		String password= null;
 		
 		try {
@@ -163,10 +163,23 @@ public class UserDAO {
 		return password;
 	}
 	
-	public int changePW(UserDTO dto, String id) { //비밀번호변경 구현 덜함.
+	public int changePW(String changePW, String id) { //비밀번호변경 구현 덜함.
 		int n = 0;
 		String sql = "update c_user set userpassword=? where userid=?";
 		
+		try {
+			conn = JDBCutil.connect();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, changePW);
+			pstmt.setString(2, id);
+
+			n=pstmt.executeUpdate();
+			System.out.println("int n = "+n);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCutil.disconnect(pstmt, conn);
+		}
 		
 		return n;
 	}
