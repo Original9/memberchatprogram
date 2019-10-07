@@ -7,24 +7,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import user.command.Command;
-import user.dao.UserDAO;
-import user.dto.UserDTO;
+import user.dao.MainBoardDAO;
+import user.dto.MainBoardDTO;
 
-public class ChangeInfoFormCommand implements Command {
+public class MainBorderReadCommand implements Command {
 
 	@Override
 	public String excute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		UserDTO dto = new UserDTO();
-		String id = (String)request.getSession().getAttribute("userID");
+		MainBoardDTO dto = new MainBoardDTO();
+		MainBoardDAO dao = new MainBoardDAO();
+		int key =Integer.parseInt(request.getParameter("key"));
 		
-		dto=UserDAO.getInstance().readToChangeInfo(id);
-		System.out.println(dto.getUserEmail());
+		dto = dao.select(key,"read");  //read 는 조회수 증가
 		
 		request.setAttribute("list", dto);
-		
-		return "jsp/changeInfo.jsp";
+		return ("jsp/mainboardRead.jsp");
 	}
 
 }

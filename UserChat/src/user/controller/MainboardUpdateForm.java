@@ -7,24 +7,26 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import user.command.Command;
-import user.dao.UserDAO;
-import user.dto.UserDTO;
+import user.dao.MainBoardDAO;
+import user.dto.MainBoardDTO;
 
-public class ChangeInfoFormCommand implements Command {
+public class MainboardUpdateForm implements Command {
 
 	@Override
 	public String excute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		MainBoardDTO dto = new MainBoardDTO();
+		MainBoardDAO dao = new MainBoardDAO();
+
 		
-		UserDTO dto = new UserDTO();
-		String id = (String)request.getSession().getAttribute("userID");
+		int key =Integer.parseInt(request.getParameter("key"));
 		
-		dto=UserDAO.getInstance().readToChangeInfo(id);
-		System.out.println(dto.getUserEmail());
-		
+		dto = dao.select(key,"update");	//update 는 조회수를 증가하지 않는다.	
 		request.setAttribute("list", dto);
+
+		return "jsp/mainboardUpdate.jsp";
 		
-		return "jsp/changeInfo.jsp";
+		
 	}
 
 }

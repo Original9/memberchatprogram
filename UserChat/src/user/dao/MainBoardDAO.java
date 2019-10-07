@@ -7,23 +7,20 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import user.dto.BoarderDTO;
+import user.dto.MainBoardDTO;
 
-public class BoarderDAO {
+public class MainBoardDAO {
+
 	Connection conn = null;
 	PreparedStatement pstmt;
 	ResultSet rs;
- 
 	
-	public BoarderDAO() {
-		super();
-	}
-	
-	public ArrayList<BoarderDTO> select() { //전체리스트라서 arraylist
-		ArrayList<BoarderDTO> list = new ArrayList<BoarderDTO>();
-		BoarderDTO dto;
-		String sql="select a.USERID userid, a.BOARDID BOARDID, a.BTITLE BTITLE , a.BCONTENT BCONTENT, a.BDATE BDATE, a.BOARDFILE BOARDFILE, a.HIT HIT, \r\n" + 
-				"b.username username from c_board a, C_user b\r\n" + 
-				"where a.userid = b.userid\r\n";
+	public ArrayList<MainBoardDTO> select() { //전체리스트라서 arraylist
+		ArrayList<MainBoardDTO> list = new ArrayList<MainBoardDTO>();
+		MainBoardDTO dto;
+		String sql="select a.USERID userid, a.NOTICEID NOTICEID, a.NTITLE NTITLE , a.NCONTENT NCONTENT, a.NDATE NDATE, a.noticefile BOTICEFILE, a.HIT HIT,\r\n" + 
+				"b.username username from notice a, C_user b\r\n" + 
+				"where a.userid = b.userid";
 		//"select USERID, BOARDID, BTITLE, BCONTENT, BDATE, BOARDFILE, HIT from c_board";
 		
 		try {
@@ -31,15 +28,15 @@ public class BoarderDAO {
 			pstmt = conn.prepareStatement(sql);
 			rs= pstmt.executeQuery();
 			while(rs.next()) {
-				dto = new BoarderDTO();
-				dto.setbId(rs.getString("USERID"));
-				dto.setbNum(rs.getInt("BOARDID"));
-				dto.setbTitle(rs.getString("BTITLE"));
-				dto.setbContent(rs.getString("BCONTENT"));
-				dto.setbWriteDate(rs.getDate("BDATE"));
-				dto.setBfileName(rs.getString("BOARDFILE"));
-				dto.setbHit(rs.getInt("HIT"));
-				dto.setbName(rs.getString("username"));
+				dto = new MainBoardDTO();
+				dto.setMbId(rs.getString("USERID"));
+				dto.setMbNum(rs.getInt("NOTICEID"));
+				dto.setMbTitle(rs.getString("NTITLE"));
+				dto.setMbContent(rs.getString("NCONTENT"));
+				dto.setMbWriteDate(rs.getDate("NDATE"));
+				dto.setMbfileName(rs.getString("NOTICEFILE"));
+				dto.setMbHit(rs.getInt("HIT"));
+				dto.setMbName(rs.getString("username"));
 				list.add(dto);
 			}
 			
@@ -49,8 +46,8 @@ public class BoarderDAO {
 		return list;
 	}
 	
-	public BoarderDTO select (int key, String str) {
-		BoarderDTO dto = new BoarderDTO();
+	public MainBoardDTO select (int key, String str) {
+		MainBoardDTO dto = new MainBoardDTO();
 		String sql = "select * from c_board where BOARDID= ?"; //
 		
 		try {
@@ -60,12 +57,12 @@ public class BoarderDAO {
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
-				dto.setbId(rs.getString("USERID"));
-				dto.setbNum(rs.getInt("BOARDID"));
-				dto.setbTitle(rs.getString("BTITLE"));
-				dto.setbContent(rs.getString("BCONTENT"));
-				dto.setbWriteDate(rs.getDate("BDATE"));
-				dto.setBfileName(rs.getString("BOARDFILE"));
+				dto.setMbId(rs.getString("USERID"));
+				dto.setMbNum(rs.getInt("BOARDID"));
+				dto.setMbTitle(rs.getString("BTITLE"));
+				dto.setMbContent(rs.getString("BCONTENT"));
+				dto.setMbWriteDate(rs.getDate("BDATE"));
+				dto.setMbfileName(rs.getString("BOARDFILE"));
 				
 				
 //				dto.setbNum(rs.getInt("bnum"));
@@ -88,17 +85,17 @@ public class BoarderDAO {
 	}
 	
 	
-	public int insert(BoarderDTO dto) { //글추가
+	public int insert(MainBoardDTO dto) { //글추가
 		int n = 0;
 		String sql = "insert into c_board(USERID,BOARDID,BTITLE,BCONTENT,BDATE,BOARDFILE) values(?, BOARD_SEQ.nextval, ?, ?,sysdate, ?)";
 		try {
 			conn = JDBCutil.connect();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, dto.getbId());
-			pstmt.setString(2, dto.getbTitle());
-			pstmt.setString(3, dto.getbContent());
+			pstmt.setString(1, dto.getMbId());
+			pstmt.setString(2, dto.getMbTitle());
+			pstmt.setString(3, dto.getMbContent());
 			//pstmt.setString(4, dto.getbId());
-			pstmt.setString(4, dto.getBfileName());
+			pstmt.setString(4, dto.getMbfileName());
 			n = pstmt.executeUpdate();
 			
 		} catch(SQLException e) {
@@ -109,11 +106,11 @@ public class BoarderDAO {
 		return n;
 	}
 	
-	public int update(BoarderDTO dto) { //글수정
+	public int update(MainBoardDTO dto) { //글수정
 		int n = 0;
 		String sql = "update c_board set btitle=?, bcontent=?, boardfile=? where BOARDID = ?";
 		
-		if(dto.getBfileName() == null) {
+		if(dto.getMbfileName() == null) {
 			 sql = "update c_board set btitle=?, bcontent=? where BOARDID = ?";			
 		}
 		
@@ -121,12 +118,12 @@ public class BoarderDAO {
 			int cnt = 1;
 			conn = JDBCutil.connect();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(cnt++, dto.getbTitle());
-			pstmt.setString(cnt++, dto.getbContent());
-			if(dto.getBfileName() != null) {
-				pstmt.setString(cnt++, dto.getBfileName());
+			pstmt.setString(cnt++, dto.getMbTitle());
+			pstmt.setString(cnt++, dto.getMbContent());
+			if(dto.getMbfileName() != null) {
+				pstmt.setString(cnt++, dto.getMbfileName());
 			}
-			pstmt.setInt(cnt++, dto.getbNum());
+			pstmt.setInt(cnt++, dto.getMbNum());
 			n = pstmt.executeUpdate();
 					
 		} catch (SQLException e) {
@@ -181,5 +178,5 @@ public class BoarderDAO {
 			e.printStackTrace();
 		}
 	}
-
+	
 }

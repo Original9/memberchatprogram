@@ -9,6 +9,8 @@ public class UserDTO {
 	String userGender;
 	String userEmail;
 	String userGrant;
+	String userProfile;
+	String userIntro;
 	
 	public String getUserID() {
 		return userID;
@@ -52,6 +54,21 @@ public class UserDTO {
 	public void setUserGrant(String userGrant) {
 		this.userGrant = userGrant;
 	}
+			
+	public String getUserProfile() {
+		return userProfile;
+	}
+	public void setUserProfile(String userProfile) {
+		this.userProfile = userProfile;
+	}
+	public String getUserIntro() {
+		return userIntro;
+	}
+	public void setUserIntro(String userIntro) {
+		this.userIntro = userIntro;
+	}
+	
+	
 	@Override
 	public String toString() {
 		return "UserDTO [userID=" + userID + ", userPassword=" + userPassword + ", userName=" + userName + ", userAge="
@@ -59,14 +76,6 @@ public class UserDTO {
 				+ "]";
 	}
 	
-	
-	
-//	public String getUserProfile() {
-//		return userProfile;
-//	}
-//	public void setUserProfile(String userProfile) {
-//		this.userProfile = userProfile;
-//	}                                                          ->나중에 시간되면 추가.
 	
 
 }

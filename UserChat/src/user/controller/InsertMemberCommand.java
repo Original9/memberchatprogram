@@ -61,14 +61,13 @@ public class InsertMemberCommand implements Command {
 		return path;
 	}
 	
-	public static String ConvertGender(String rq) {
-		if(rq=="남자")
-			rq="M";
-		else
-			rq="F";
-		
-		return rq;
-		
-	}
+	/*
+	 * public static String ConvertGender(String rq) { if(rq=="남자") rq="M"; else
+	 * rq="F";
+	 * 
+	 * return rq;
+	 * 
+	 * }
+	 */
 
 }

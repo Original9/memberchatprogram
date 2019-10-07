@@ -5,14 +5,144 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+
+//email 수정을 위해 해당 영역 클릭  후  focus out 되었을 때 전역변수로 userEmail을 미리 저장하여 이메일을 수정했는지 확인, 수정하지 않았으면 이메일 인증 필요없게 하는 방법..알아내기..
+
+window.onload = function(){
+	let changePWBtn = document.getElementById("btnChangePW");
+	changePWBtn.onclick=changePW;
+	
+	let userEmail = document.getElementById("userEmail");
+	document.frm.Email.value = document.frm.userEmail.value;
+	userEmail.onclick=clickToChangeEmail;
+	userEmail.onblur=emailChangeCancel;
+}
+		
+function changePW() {
+	
+	//새 창의 크기
+	let cw=500;
+	let ch=400;
+	
+	//스크린의 크기
+	let sw=screen.availWidth;
+	let sh=screen.availHeight;
+	
+	//열 창의 포지션
+	let px=(sw-cw)/2;
+	let py=(sh-ch)/2;
+	
+	window.open("changePWForm.do","popup","left="+px+",top="+py+",width="+cw+",height="+ch+"\"");
+}
+
+function clickToChangeEmail(){
+	
+	document.frm.userEmail.readOnly=false;
+}
+
+function emailChangeCancel(){
+	if(document.frm.Email.value==document.frm.userEmail.value){
+		document.frm.userEmail.readOnly=true;
+	}
+}
+
+function changeInfo(){
+	if (form.userEmail.readOnly != true) {
+		alert("이메일 인증을 통해 본인 인증을 해주세요.");
+		form.id.focus();
+		return false;
+	}
+	document.frm.submit();
+}
+
+
+
+/*---------------------------
+이메일 발송
+------------------------------*/
+$(function() {
+	$("#btnEmailCheck").click(function() {
+		
+		if(document.frm.userEmail.readOnly == true){
+			alert("이미 인증된 이메일 입니다");
+		}else{
+
+		var param = {
+			userEmail : document.frm.userEmail.value
+		};
+
+		var url = "emailCheck.do";
+
+		$.ajax(url, {
+			data : param,
+			dataType : 'json'
+		}).done(function(result) {
+			if(result.result == true){
+				//document.frm.userEmail.readOnly=true;
+				document.getElementById("EmailCheckResult").style.color="blue";
+				$("#ranNumInputTitle").css("display","");
+				$("#ranNum").val(result.checkNum);
+				//$("#checkRanNum").css("visibility","visible");
+			}
+			$("#EmailCheckResult").html(result.message);
+		}).fail(function(xhr, status) {
+			$("#EmailCheckResult").html(status);
+		});
+		}
+	})
+
+})
+
+
+/*---------------------------
+인증번호 확인
+------------------------------*/
+$(function() {
+	$("#btnRanNumCheck").click(function() {
+		
+		var param = {
+			myVal : document.frm.checkRanNum.value, ranNum : document.frm.ranNum.value
+		};
+
+		var url = "ranNumCheck.do";
+
+		$.ajax(url, {
+			data : param,
+			dataType : 'json'
+		}).done(function(result) {
+			if(result.result == true){
+				document.frm.userEmail.readOnly=true;
+				
+				//document.getElementById("EmailCheckResult").style.color="blue";
+				//$("#ranNumInputTitle").css("visibility","visible");
+				//$("#checkRanNum").css("visibility","visible");
+			}
+			$("#EmailCheckResult").html(result.message);
+		}).fail(function(xhr, status) {
+			$("#EmailCheckResult").html(status);
+		});
+	})
+
+})
+
+</script>
+
 </head>
 <body>
 <body>
 	<jsp:include page="menu.jsp"></jsp:include>
+	<div><br /><br /><br /></div>
 	<div class="container">
+	<div class="col-md-2"></div>
 	<div class="row">
-	<div class="col-md-10">
+	<div class="col-md-8">
 		<form method="post" action="changeInfo.do" id="frm" name="frm">
+				<input type="hidden" id="ranNum" name="ranNum">
+				<input type="hidden" id="Email" name="Email">
 			<table class="table table-bordered table-hover" style="text-align: center; border: 1px solid #dddddd">
 				<thead>
 					<tr>
@@ -22,14 +152,14 @@
 				<tbody>
 					<tr>
 						<td style="width: 110px;"><h5>아이디</h5></td>
-						<td><input class="form-control" type="text" id="userID" name="userID" maxlength="20" readonly="readonly" value="${list.userID }"></td>
+						<td colspan="2"><input class="form-control" type="text" id="userID" name="userID" maxlength="20" value="${list.userID }" readOnly="readOnly"></td>
 						
 					</tr>
 					<tr>
 						<td style="width: 130px;"><h5>비밀번호</h5></td>
-						<td colspan="2"><input class="form-control" type="password" id="userPassword1" name="userPassword1" maxlength="20" value="●●●●●●" readOnly="true"></td>						
-						<td style="width: 110px"><button class="btn btn-primary"
-										id="btnChangePw" type="button">비밀번호변경</button>
+						<td style="border-right:0px"><input class="form-control" type="password" id="userPassword1" name="userPassword1" maxlength="20" value="●●●●●●" readOnly="readOnly"></td>						
+						<td style="width: 110px; border-left:0px"><button class="btn btn-primary" id="btnChangePW"
+										type="button">비밀번호변경</button>&nbsp;
 									</td>
 					</tr>
 					<tr>
@@ -41,34 +171,26 @@
 						<td colspan="2"><input class="form-control" type="number" id="userAge" name="userAge" maxlength="20" value="${list.userAge }"></td>						
 					</tr>
 					<tr>
-						<td style="width: 110px;"><h5>성별</h5></td>
-						<td colspan="2">
-							<div class="form-group" style="text-align: center; margin: 0 auto;"> <!-- db에서 가져와서 체크하는 메서드 스크립트로 만들기. -->
-								<div class="btn-group" data-toggle="buttons">
-									<label class="btn btn-primary active">
-										<input type="radio" name="userGender" autocomplete="off" value="남자">남자
-									</label>
-									<label class="btn btn-primary ">
-										<input type="radio" name="userGender" autocomplete="off" value="여자" >여자
-									</label>
-								</div>
-							</div> 
-						</td>							
-					</tr>
-					<tr>
 						<td style="width: 110px;"><h5>이메일</h5></td>
-						<td colspan="2"><input class="form-control" type="email" id="userEmail" name="userEmail" maxlength="20" value="${list.userEmail }"></td>						
+						<td style="border-right:0px"><input class="form-control" type="email" id="userEmail" name="userEmail" maxlength="20" value="${list.userEmail }" readOnly="readOnly"><br>
+						<p style="display:none" align="left" id="ranNumInputTitle">인증번호 입력 : <input type="text" id="checkRanNum">&nbsp;<button class="btn btn-primary"
+									id="btnRanNumCheck" type="button">확인</button></p><p align="right" id=EmailCheckResult style="color:red"></p></td>
+								<td style="width: 110px; border-left:0px;"><button class="btn btn-primary"
+									id="btnEmailCheck" type="button">이메일 인증</button>&nbsp;
+						</td>						
+						
 					</tr>
 				</tbody>
 			</table>
-			<p />
+			<p>&nbsp;&nbsp; *아이디는 수정할 수 없습니다.</p>
 				<div align="center">
-					<input type="button" class="btn btn-primary" onclick="checkForm()" value="변경">&nbsp;&nbsp;&nbsp;
+					<input type="button" class="btn btn-primary" onclick="changeInfo()" value="변경">&nbsp;&nbsp;&nbsp;
 					<input type="reset" class="btn btn-primary" onclick="location.href='changeInfoForm.do'" value="취소">
 				</div>
 		</form>
 		</div>
 		</div>
+	<div class="col-md-2"></div>
 	</div>
 </body>
 </html>

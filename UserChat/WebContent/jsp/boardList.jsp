@@ -32,7 +32,7 @@
 				<tr onclick="location.href='boardRead.do?key=${dto.bNum }'">
 					<td align="center">${dto.bNum } </td>
 					<td align="center">${dto.bTitle } </td>
-					<td align="center">${dto.bName } </td>
+					<td align="center">${dto.bId } </td>
 					<td align="center">${dto.bWriteDate } </td>
 					<td align="center">${dto.bfileName } </td>
 					<td align="center">${dto.bHit } </td>
@@ -41,9 +41,9 @@
 		</table>
 	</div><br />
 	<div>
-<%-- 	<c:if test="${id != null}"> --%>
+	<c:if test="${userID != null }">
 		<button type="button" onclick="location.href='borderWriteForm.do'">새글쓰기</button>
-<%-- 	</c:if> --%>
+	</c:if>
 	</div>
 
 
