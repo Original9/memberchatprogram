@@ -62,7 +62,7 @@ public class MainBoardUpdateCommand implements Command {
 		if(n != 0) 
 			path = "boardList.do"; //성공시 목록보여줌
 		else  
-			path ="boardUpdateForm.do?key="+dto.getbNum(); // 실패시 입력폼
+			path ="boardUpdateForm.do?key="+dto.getMbNum(); // 실패시 입력폼
 		return path;
 
 
