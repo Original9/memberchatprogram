@@ -83,7 +83,7 @@
 						</li>
 					</ul>
 					<%
-						} else if(grant=="U") {
+						} else if(grant.equals("U")) {
 					%>
 					<ul class="nav navbar-nav navbar-right" >
 						<li class="dropdown">

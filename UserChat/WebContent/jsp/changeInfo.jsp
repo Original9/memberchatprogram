@@ -10,7 +10,7 @@
 
 <script type="text/javascript">
 
-//email 수정을 위해 해당 영역 클릭  후  focus out 되었을 때 전역변수로 userEmail을 미리 저장하여 이메일을 수정했는지 확인, 수정하지 않았으면 이메일 인증 필요없게 하는 방법..알아내기..
+//email 수정을 위해 해당 영역 클릭  후  focus out 되었을 때 전역변수로 userEmail을 미리 저장하여 이메일을 수정했는지 확인, 수정하지 않았으면 이메일 인증 필요없게 ..
 
 window.onload = function(){
 	let changePWBtn = document.getElementById("btnChangePW");
@@ -21,7 +21,8 @@ window.onload = function(){
 	userEmail.onclick=clickToChangeEmail;
 	userEmail.onblur=emailChangeCancel;
 }
-		
+
+//비밀번호 변경 창 여는 function
 function changePW() {
 	
 	//새 창의 크기
@@ -39,11 +40,14 @@ function changePW() {
 	window.open("changePWForm.do","popup","left="+px+",top="+py+",width="+cw+",height="+ch+"\"");
 }
 
+
+//이메일 변경하려고 클릭했을 시 readOnly가 풀림.
 function clickToChangeEmail(){
 	
 	document.frm.userEmail.readOnly=false;
 }
 
+//이메일 변경하려고 클릭했는데 변경 안했거나 이전 이메일과 똑같을 때.
 function emailChangeCancel(){
 	if(document.frm.Email.value==document.frm.userEmail.value){
 		document.frm.userEmail.readOnly=true;
