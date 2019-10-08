@@ -220,11 +220,70 @@ public class UserDAO {
 		
 	}
 	
+	//아이디 찾기 시 입력한 이름이 유효한 회원인지 확인.
+	public boolean checkNameForFindID(String writtenName) {
+		boolean chk = false;
+		String sql="select * from c_user where username=?";
+		
+		try {
+			conn = JDBCutil.connect();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, writtenName);
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()) {
+				chk=true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCutil.disconnect(pstmt, conn);
+		}
+		return chk;
+	}
+	
+	public boolean checkEmailForFindID(String name, String writtenEmail) {
+		boolean chk = false;
+		String sql="select * from c_user where username=? and useremail=?";
+		
+		try {
+			conn = JDBCutil.connect();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, name);
+			pstmt.setString(2, writtenEmail);
+			
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()) {
+				chk=true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCutil.disconnect(pstmt, conn);
+		}
+		return chk;
+	}
+	
 	//아이디 찾기 메소드
 	public String findID(String userEmail) {
 		String id = null;
 		String sql = "select userid from c_user where userEmail=?";
 		
+		try {
+			conn = JDBCutil.connect();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userEmail);
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()) {
+				id=rs.getString("userid");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCutil.disconnect(pstmt, conn);
+		}
 		
 		return id;
 	}

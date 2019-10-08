@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
+
 	function checkForm() {
 		var form = document.frm;
 		if (form.id.value == "") {
@@ -21,6 +22,24 @@
 		}
 
 		form.submit();
+	}
+	
+	//아이디찾기 창 여는 function
+	function findID() {
+		
+		//새 창의 크기
+		let cw=500;
+		let ch=400;
+		
+		//스크린의 크기
+		let sw=screen.availWidth;
+		let sh=screen.availHeight;
+		
+		//열 창의 포지션
+		let px=(sw-cw)/2;
+		let py=(sh-ch)/2;
+		
+		window.open("findIDForm.do","popup","left="+px+",top="+py+",width="+cw+",height="+ch+"\"");
 	}
 </script>
 </head>
@@ -49,8 +68,8 @@
 				
 				<div align="center">
 					<input class="btn btn-primary" type="button" onclick="checkForm()" value="로그인">&nbsp;&nbsp;&nbsp;
-					<input class="btn btn-primary" type="button" onclick="location.href='findID.do'" value="아이디 찾기">&nbsp;&nbsp;&nbsp;
-					<input class="btn btn-primary" type="button" onclick="location.href='findPW.do'" value="비밀번호 찾기">&nbsp;&nbsp;&nbsp;
+					<input class="btn btn-primary" type="button" onclick="findID()" value="아이디 찾기">&nbsp;&nbsp;&nbsp;
+					<input class="btn btn-primary" type="button" onclick="location.href='findPWForm.do'" value="비밀번호 찾기">&nbsp;&nbsp;&nbsp;
 					<input class="btn btn-primary" type="reset" onclick="location.href='login.do'" value="취소">
 				</div>
 			</form>

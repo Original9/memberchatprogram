@@ -24,6 +24,8 @@
 			form.userID.focus();
 			return false;
 		}
+		
+		//정규표현식에 맞는지 체크하는 항목 추가.(아이디,비밀번호,이메일-이메일은 필요없을라나? ㄴㄴ . 때문에 필요할듯.-)
 
 		if (form.userID.readOnly != true) {
 			alert("중복체크를 해주세요.");
@@ -125,7 +127,7 @@
 				if(result.result == true){
 					//document.frm.userEmail.readOnly=true;
 					document.getElementById("EmailCheckResult").style.color="blue";
-					$("#ranNumInputTitle").css("visibility","visible");
+					$("#ranNumInputTitle").css("display","");
 					$("#ranNum").val(result.checkNum);
 					//$("#checkRanNum").css("visibility","visible");
 				}
@@ -194,7 +196,7 @@
 						<tbody>
 							<tr>
 								<td style="width: 110px;"><h5>아이디</h5></td>
-								<td style="border-right:0px"><input class="form-control" type="text" id="userID"
+								<td style="border-right:0px"><input class="form-control" type="text" pattern="^[a-z0-9_-]{3,16}$" id="userID"
 									name="userID" maxlength="20" placeholder="아이디를 입력하세요."><p align="right" id=checkResult style="color:red"></p></td>
 								<td style="width: 110px;border-left:0px;"><button class="btn btn-primary"
 										id="btnIdCheck" type="button">중복체크</button>
@@ -245,7 +247,7 @@
 								<td style="width: 110px;"><h5>이메일</h5></td>
 								<td style="border-right:0px"><input class="form-control" type="email"
 									id="userEmail" name="userEmail" maxlength="40"
-									placeholder="이메일을 입력하세요."> <br> <p style="visibility:hidden" align="left" id="ranNumInputTitle">인증번호 입력 : <input type="text" id="checkRanNum">&nbsp;<button class="btn btn-primary"
+									placeholder="이메일을 입력하세요."> <br> <p style="display:none" align="left" id="ranNumInputTitle">인증번호 입력 : <input type="text" id="checkRanNum">&nbsp;<button class="btn btn-primary"
 									id="btnRanNumCheck" type="button">확인</button></p><p align="right" id=EmailCheckResult style="color:red"></p></td>
 								<td style="width: 110px; border-left:0px;"><button class="btn btn-primary"
 									id="btnEmailCheck" type="button">이메일 인증</button>
