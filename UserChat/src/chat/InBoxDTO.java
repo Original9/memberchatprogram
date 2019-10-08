@@ -3,7 +3,7 @@ package chat;
 public class InBoxDTO {
 	private String fromID;
 	private String name;
-	private int unreadMeaasgeCount;
+	private int unreadMeassgeCount;
 	
 	public String getFromID() {
 		return fromID;
@@ -17,11 +17,16 @@ public class InBoxDTO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getUnreadMeaasgeCount() {
-		return unreadMeaasgeCount;
+	
+	public int getUnreadMeassgeCount() {
+		return unreadMeassgeCount;
 	}
-	public void setUnreadMeaasgeCount(int unreadMeaasgeCount) {
-		this.unreadMeaasgeCount = unreadMeaasgeCount;
+	public void setUnreadMeassgeCount(int unreadMeassgeCount) {
+		this.unreadMeassgeCount = unreadMeassgeCount;
+	}
+	@Override
+	public String toString() {
+		return "InBoxDTO [fromID=" + fromID + ", name=" + name + ", unreadMeaasgeCount=" + unreadMeassgeCount + "]";
 	}
 	
 	

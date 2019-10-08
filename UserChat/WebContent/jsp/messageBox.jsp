@@ -81,8 +81,6 @@
 					var result = parsed.result;
 					chat_num_temp = result[0][4].value; // 채팅방 번호를 하나 따온다.
 					
-					
-					
 					for(var i=0 ; i<result.length; i++){						
 						if(result[i][0].value == fromID) {
 							result[i][0].value = 'ME';

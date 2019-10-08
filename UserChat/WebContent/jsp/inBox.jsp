@@ -21,31 +21,53 @@
 <title>InBox</title>
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript">
-	
-	
+	var $tr,$td;
 	$(document).ready(function(){
 		var id = '<%= userID%>';
 		$.ajax({
 			type: "POST",
 			url:"./chatBox",
+			datatype:"JSON",
 			data: {					 
 				id :  encodeURIComponent(id),
 			},			
 			success: function(data){
+				console.log(data);
+				if(data=="0")return;
+				var parsed = JSON.parse(data); // 왜 안먹죠? 이유가 머죠?
+				var result = parsed.result;
 				
-				
+				for(var i=0; i<result.length; i++){				
+					addChat(result[i][0].fromid, result[i][1].name, result[i][2].unreadMeassageCount);
+				}
 				
 			}
 			
 		})
 	});
+	function addChat(fromid, username,unreadMeassageCount){
+		 
+		$tr = $('<tr>').append(
+				$('<td>').text(fromid),
+				$('<td>').text(username),
+				$('<td>').text(unreadMeassageCount),
+				$('<td>').html("<button id ='goMessageBox'>SEND MESSAGE</button>"),
+				$('<td>').html("<button>DELETE</button>")
+				);
+		$('#messageList').append($tr);
+	}
+	
+	$('#goMessageBox').on('click', function(){
+		console.log("adada")
+	});
+	
 	
 </script>
 </head>
 <jsp:include page="menu.jsp"></jsp:include>
 <body>
 <div class="container">
-		<table class="table table-bordered table-bover" style="text-align: center; border: 1px solid #dddddaa">
+		<table id ="messageList"  class="table table-bordered table-bover" style="text-align: center; border: 1px solid #dddddaa">
 			<thead>
 				<tr>
 					<th colspan="5"><h4>메세지 목록</h4></th>
@@ -55,22 +77,16 @@
 				<tr>
 					<td style="width: 100px"><h5> ID</h5></td>
 					<td style="width: 100px"><h5> NAME</h5></td>
-					<td style="width: 100px"><h5> 안읽은 메세지</h5></td>
+					<td style="width: 100px"><h5> UNREADMESSAGES</h5></td>
 					<td style="width: 20px"><h5>SEND MESSAGE</h5></td>
 					<td style="width: 20px"><h5>DELETE</h5></td>						
-				</tr>
-				<c:if test="${list.isEmpty()}">
-				<tr>
-				<td colspan="5"> 추가된 친구가 없습니다. </td>
-				</tr>
-				</c:if>
-							
-				
+				</tr>		
+					
 				
 			</tbody>			
-		</table>	
-	</div>
-
+		</table>
+			
+</div>
 <%
 		String messageContent = null;
 		if(session.getAttribute("messageContent") != null){
