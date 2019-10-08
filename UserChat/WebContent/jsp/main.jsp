@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
 	<%@ page import="user.dao.UserDAO" %>
     <%@ page import="user.dto.UserDTO" %>
     <%@ page import="user.dao.BoarderDAO" %>
@@ -52,13 +53,12 @@
 	</div><br />
 	<div>
 	<c:if test ="${grant == 'M' }">
-		<button type="button" onclick="location.href='mainborderWrite.do'">새글쓰기</button>
+		<button type="button" onclick="location.href='MainBorderWriteForm.do'">새글쓰기</button>
 	</c:if>
 	</div>
 
 
 </div>
-
 
 <jsp:include page="footer.jsp"></jsp:include>
 	

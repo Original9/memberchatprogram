@@ -21,7 +21,7 @@
 </head>
 <body>
 <div>
-<form id="frm" name="frm" action="mainboardDelete.do?key=${list.bNum}" method="post">
+<form id="frm" name="frm" action="boardDelete.do?key=${list.mbNum}" method="post">
 </form>
 </div>
 </body>

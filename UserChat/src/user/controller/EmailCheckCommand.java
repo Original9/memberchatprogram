@@ -28,7 +28,7 @@ public class EmailCheckCommand implements Command {
 		
 		double randomVal1=Math.random();
 		double randomVal2=Math.random();
-		int ranNum = (int)(randomVal1 * 1000000) + (int)(randomVal2 * 100);
+		int ranNum = (int)(randomVal1 * 1000000) + (int)(randomVal2 * 1000);
 
 		String user = "javaMProject@gmail.com"; // 네이버일 경우 네이버 계정, gmail경우 gmail 계정
 		String password = "uqxcotgyqipejktc"; // 패스워드

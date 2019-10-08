@@ -12,25 +12,25 @@ public class BoarderDAO {
 	Connection conn = null;
 	PreparedStatement pstmt;
 	ResultSet rs;
- 
-	
+
 	public BoarderDAO() {
 		super();
 	}
-	
-	public ArrayList<BoarderDTO> select() { //전체리스트라서 arraylist
+
+	public ArrayList<BoarderDTO> select() { // 전체리스트라서 arraylist
 		ArrayList<BoarderDTO> list = new ArrayList<BoarderDTO>();
 		BoarderDTO dto;
-		String sql="select a.USERID userid, a.BOARDID BOARDID, a.BTITLE BTITLE , a.BCONTENT BCONTENT, a.BDATE BDATE, a.BOARDFILE BOARDFILE, a.HIT HIT, \r\n" + 
+		String sql = "select a.USERID userid, a.BOARDID BOARDID, a.BTITLE BTITLE , a.BCONTENT BCONTENT, a.BDATE BDATE, a.BOARDFILE BOARDFILE, a.HIT HIT,\r\n" + 
 				"b.username username from c_board a, C_user b\r\n" + 
-				"where a.userid = b.userid\r\n";
-		//"select USERID, BOARDID, BTITLE, BCONTENT, BDATE, BOARDFILE, HIT from c_board";
-		
+				"where a.userid = b.userid order by BOARDID asc";
+		// "select USERID, BOARDID, BTITLE, BCONTENT, BDATE, BOARDFILE, HIT from
+		// c_board";
+
 		try {
 			conn = JDBCutil.connect();
 			pstmt = conn.prepareStatement(sql);
-			rs= pstmt.executeQuery();
-			while(rs.next()) {
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
 				dto = new BoarderDTO();
 				dto.setbId(rs.getString("USERID"));
 				dto.setbNum(rs.getInt("BOARDID"));
@@ -42,32 +42,60 @@ public class BoarderDAO {
 				dto.setbName(rs.getString("username"));
 				list.add(dto);
 			}
-			
-		} catch(SQLException e) {
+
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return list;
 	}
-	
-	public BoarderDTO select (int key, String str) {
+
+	public ArrayList<BoarderDTO> searchSelect() { // 전체리스트라서 arraylist
+		ArrayList<BoarderDTO> list = new ArrayList<BoarderDTO>();
+		BoarderDTO dto;
+		String sql = "select BCONTENT, USERID, BTITLE from c_board where BTITLE like '?%'";
+		return list;
+	}
+
+	public BoarderDTO selectOption(int option, String keyword) {
+		String sql = sqlString(option);
+		// int option => 1=> 제목, 2=> 제목+내용,
+
+		return null;
+	}
+
+	public String sqlString(int option) {
+		switch (option) {
+		case 1:
+			return "select *from c_board where BTITLE like '%a%'";
+			
+		case 2:
+
+			break;
+		default:
+			return "";
+		}
+		return null;
+	}
+
+	public BoarderDTO select(int key, String str) {
 		BoarderDTO dto = new BoarderDTO();
 		String sql = "select * from c_board where BOARDID= ?"; //
-		
+
 		try {
 			conn = JDBCutil.connect();
-			pstmt=conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, key);
 			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
+
+			if (rs.next()) {
 				dto.setbId(rs.getString("USERID"));
 				dto.setbNum(rs.getInt("BOARDID"));
 				dto.setbTitle(rs.getString("BTITLE"));
 				dto.setbContent(rs.getString("BCONTENT"));
 				dto.setbWriteDate(rs.getDate("BDATE"));
 				dto.setBfileName(rs.getString("BOARDFILE"));
-				
-				
+				dto.setbHit(rs.getInt("HIT"));
+
 //				dto.setbNum(rs.getInt("bnum"));
 //				dto.setbName(rs.getString("bname"));
 //				dto.setbContent(rs.getString("bcontent"));
@@ -77,18 +105,17 @@ public class BoarderDAO {
 //				dto.setbId(rs.getString("bid"));
 //				dto.setBfileName(rs.getString("filename"));
 //				if(str.equals("read"))
-//					readCount(key); //조회수 1씩 올라가게 수정
+//					updateCount(key); //조회수 1씩 올라가게 수정
 			}
-			
-		} catch(SQLException e) {
+
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		close();
 		return dto;
 	}
-	
-	
-	public int insert(BoarderDTO dto) { //글추가
+
+	public int insert(BoarderDTO dto) { // 글추가
 		int n = 0;
 		String sql = "insert into c_board(USERID,BOARDID,BTITLE,BCONTENT,BDATE,BOARDFILE) values(?, BOARD_SEQ.nextval, ?, ?,sysdate, ?)";
 		try {
@@ -97,87 +124,86 @@ public class BoarderDAO {
 			pstmt.setString(1, dto.getbId());
 			pstmt.setString(2, dto.getbTitle());
 			pstmt.setString(3, dto.getbContent());
-			//pstmt.setString(4, dto.getbId());
+			// pstmt.setString(4, dto.getbId());
 			pstmt.setString(4, dto.getBfileName());
 			n = pstmt.executeUpdate();
-			
-		} catch(SQLException e) {
+
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		close();
 		return n;
 	}
-	
-	public int update(BoarderDTO dto) { //글수정
+
+	public int update(BoarderDTO dto) { // 글수정
 		int n = 0;
 		String sql = "update c_board set btitle=?, bcontent=?, boardfile=? where BOARDID = ?";
-		
-		if(dto.getBfileName() == null) {
-			 sql = "update c_board set btitle=?, bcontent=? where BOARDID = ?";			
+
+		if (dto.getBfileName() == null) {
+			sql = "update c_board set btitle=?, bcontent=? where BOARDID = ?";
 		}
-		
+
 		try {
 			int cnt = 1;
 			conn = JDBCutil.connect();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(cnt++, dto.getbTitle());
 			pstmt.setString(cnt++, dto.getbContent());
-			if(dto.getBfileName() != null) {
+			if (dto.getBfileName() != null) {
 				pstmt.setString(cnt++, dto.getBfileName());
 			}
 			pstmt.setInt(cnt++, dto.getbNum());
 			n = pstmt.executeUpdate();
-					
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		close();
 		return n;
 	}
-	
-	
-	public void delete(BoarderDTO dto) { //글삭제
-		String sql = "delete from c_board where BOARDID = ? ";
-		
-				try {
-					conn = JDBCutil.connect();
-					pstmt = conn.prepareStatement(sql);
-					pstmt.setInt(1, dto.getbNum());
-					pstmt.executeUpdate();
-		
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-		close();
-		
-	}
-	
 
-	
-	private void readCount(int key) {
-		String sql = "update c_board set hit = hit + 1 where BOARDID= ? ";
-		
+	public void delete(BoarderDTO dto) { // 글삭제
+		String sql = "delete from c_board where BOARDID = ? ";
+
 		try {
-			pstmt=conn.prepareStatement(sql);
+			conn = JDBCutil.connect();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, dto.getbNum());
+			pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		close();
+
+	}
+
+	public void updateCount(int key) {
+		String sql = "update c_board set hit = nvl(hit,0) + 1 where BOARDID= ?";
+
+		try {
+			conn = JDBCutil.connect();
+			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, key);
 			pstmt.execute();
-			
-		} catch(SQLException e) {
+
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		close();
 	}
-	
-	
-	
+
 	private void close() {
-		try  {
-			if(rs != null) rs.close();
-			if(pstmt != null) pstmt.close();
-			if(conn != null) conn.close();
-			
-		}catch(SQLException e) {
+		try {
+			if (rs != null)
+				rs.close();
+			if (pstmt != null)
+				pstmt.close();
+			if (conn != null)
+				conn.close();
+
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
