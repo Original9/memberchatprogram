@@ -63,7 +63,7 @@ $(function() {
 						<td style="width: 100px;">이메일 입력</td>
 						<td align="left" style="width: 100px;"><input type="text" style="width: 100%;" id="email" name="email" size="20">
 						<br>
-						<p style="display:none" id=""></p></td>
+						<p style="display:none" id="idFindResult"></p></td>
 					</tr>
 				</table>
 				
