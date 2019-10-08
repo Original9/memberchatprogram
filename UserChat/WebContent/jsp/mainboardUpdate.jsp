@@ -34,13 +34,20 @@
 		
 
 %>
+
+<script>
+function resetAll(){
+	document.selection.clear();
+}
+
+</script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <jsp:include page="menu.jsp"></jsp:include>
 </head>
 <body>
 <c:choose>
-<c:when test="${userID == list.bId }">
+<c:when test="${grant == 'M' }">
 	<div align="center">
 		
 		<div>
@@ -48,9 +55,9 @@
 		</div>
 		<br />
 		<div>
-			<form id="frm" name="frm" action="boardUpdate.do" method="post" enctype="multipart/form-data">
+			<form id="frm" name="frm" action="mainboardUpdate.do" method="post" enctype="multipart/form-data">
 				<!-- .do걸어야됨 -->
-				<input type="hidden" id="bnum" name="bnum" value="${list.bNum }">
+				<input type="hidden" id="bnum" name="bnum" value="${list.mbNum }">
 				<input type="hidden" id="filedelete" name="filedelete" value="no">
 				<div>
 					<table border="1">
@@ -58,21 +65,21 @@
 							<th width="100">작성자</th>
 							<td width="200"><input type="text" id="writer" name="writer" value="${name }" readonly="readonly"></td>
 							<th width="100">작성일자</th>
-							<td width="200">${list.bWriteDate }</td>
+							<td width="200">${list.mbWriteDate }</td>
 						</tr>
 						<tr>
 							<th width="100">제목</th>
 							<td colspan="3"><input type="text" id="title" name="title"
-								size="100" value="${list.bTitle }"></td>
+								size="100" value="${list.mbTitle }"></td>
 						</tr>
 						<tr>
 							<th width="100">내용</th>
-							<td colspan="3"><textarea rows="30" id="content" name="content" style="width:99%" >${list.bContent }</textarea>
+							<td colspan="3"><textarea rows="30" id="content" name="content" style="width:99%" >${list.mbContent }</textarea>
 						</td></tr>
 						<tr>
 							<th width="100">첨부파일</th>
 							<td colspan="3"><input type="file" id="filename" name="filename" size="100"></td>
-							<c:if test = "${list.bfileName != null }">
+							<c:if test = "${list.mbfileName != null }">
 							<td><input type="button" value="삭제" onclick="frm.filedelete.value='yes'"></td>
 							</c:if>
 							
@@ -84,8 +91,8 @@
 				<br />
 				<div>
 					<input type="submit" value="수정"> &nbsp;&nbsp; 
-					<input type="reset" value="초기화"> &nbsp;&nbsp; 
-					<input type="button" value="목록보기" onclick="location.href='boardList.do'">
+					<input type="reset" value="초기화" onclick="resetAll()"> &nbsp;&nbsp; 
+					<input type="button" value="목록보기" onclick="location.href='main.do'">
 				</div>
 			</form>
 			</div>

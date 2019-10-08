@@ -50,26 +50,26 @@
 			<table border="1">
 				<tr>
 					<th width="100">작성자</th>
-					<td width="100" align="center">${list.bId }</td>
+					<td width="100" align="center">${list.mbId }</td>
 					<th width="100">작성일</th>
-					<td width="100" align="center">${list.bWriteDate }</td>
+					<td width="100" align="center">${list.mbWriteDate }</td>
 					<th width="100">조회수</th>
-					<td width="100" align="center">${list.bHit }</td>
+					<td width="100" align="center">${list.mbHit }</td>
 				</tr>
 				<tr>
 					<th width="100">제목</th>
-					<td colspan="5" align="center">${list.bTitle }</td>
+					<td colspan="5" align="center">${list.mbTitle }</td>
 				</tr>
 				<tr>
 					<th width="100" height="300">내용</th>
-					<td colspan="5" align="center">${list.bContent }</td>
+					<td colspan="5" align="center">${list.mbContent }</td>
 				</tr>
 				<tr>
 					<th width="100">첨부파일</th>
 					<td colspan="5" align="center"><a
-						href='FileDownloadAction.do?file_name=${list.bfileName}'>${list.bfileName}</a>
+						href='FileDownloadAction.do?file_name=${list.mbfileName}'>${list.mbfileName}</a>
 					<button input type="button"
-							onclick="location.href='FileDownloadAction.do?file_name=${list.bfileName}'">파일다운</button>
+							onclick="location.href='FileDownloadAction.do?file_name=${list.mbfileName}'">파일다운</button>
 					</td>
 				</tr>
 			</table>
@@ -78,17 +78,18 @@
 		<div>
 			<!-- 조건 넣어서 세션값이 있으면 보이고 아니면 안보이게 하면된다. -->
 <%-- 			   <% String id = (String) session.getAttribute("id"); %> --%>
-			<c:if test="${sessionScope.userID != list.bId }">
-				<button type="button" onclick="location.href='boardList.do'">
+<%-- 			<c:if test="${sessionScope.userID != list.mbId }"> --%>
+				<button type="button" onclick="location.href='main.do'">
 					글 목록보기</button> &nbsp;&nbsp;      
-      </c:if>
+<%--       </c:if> --%>
 <%-- 			<c:if test="${not empty sessionScope.userID }"> --%>
-				<c:if test = "${sessionScope.userID == list.bId}">
+<%-- 				<c:if test = "${sessionScope.userID == list.mbId}"> --%>
+				<c:if test = "${grant == 'M'}">
 				<button type="button"
-					onclick="location.href='boardUpdateForm.do?key=${list.bNum}'">글수정</button> &nbsp;&nbsp;      
-      <button type="button" onclick="location.href='boardDelete.do?key=${list.bNum}'">글 삭제</button> &nbsp;&nbsp;
-      <button type="button" onclick="location.href='boardList.do'">
-					글 목록보기</button> &nbsp;&nbsp;
+					onclick="location.href='MainboardUpdateForm.do?key=${list.mbNum}'">글수정</button> &nbsp;&nbsp;      
+      <button type="button" onclick="location.href='mainboardDelete.do?key=${list.mbNum}'">글 삭제</button> &nbsp;&nbsp;
+<!--       <button type="button" onclick="location.href='main.do'"> -->
+<!-- 					글 목록보기</button> &nbsp;&nbsp; -->
       </c:if>
 		</div>
 		<br />

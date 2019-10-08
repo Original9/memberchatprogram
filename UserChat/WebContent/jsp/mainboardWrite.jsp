@@ -22,7 +22,7 @@
 		</div>
 		<br />
 		<div>
-			<form id="frm" name="frm" action="mainborderWrite.do" method="post" enctype="multipart/form-data">
+			<form id="frm" name="frm" action="mainboardWrite.do" method="post" enctype="multipart/form-data">
 				<!-- .do걸어야됨 -->
 				<input type="hidden" id="uid" name="uid" value="${userID }">
 				<div>

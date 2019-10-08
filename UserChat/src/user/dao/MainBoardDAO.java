@@ -18,7 +18,7 @@ public class MainBoardDAO {
 	public ArrayList<MainBoardDTO> select() { //전체리스트라서 arraylist
 		ArrayList<MainBoardDTO> list = new ArrayList<MainBoardDTO>();
 		MainBoardDTO dto;
-		String sql="select a.USERID userid, a.NOTICEID NOTICEID, a.NTITLE NTITLE , a.NCONTENT NCONTENT, a.NDATE NDATE, a.noticefile BOTICEFILE, a.HIT HIT,\r\n" + 
+		String sql="select a.USERID userid, a.NOTICEID NOTICEID, a.NTITLE NTITLE , a.NCONTENT NCONTENT, a.NDATE NDATE, a.noticefile nOTICEFILE, a.HIT HIT,\r\n" + 
 				"b.username username from notice a, C_user b\r\n" + 
 				"where a.userid = b.userid";
 		//"select USERID, BOARDID, BTITLE, BCONTENT, BDATE, BOARDFILE, HIT from c_board";
@@ -29,12 +29,13 @@ public class MainBoardDAO {
 			rs= pstmt.executeQuery();
 			while(rs.next()) {
 				dto = new MainBoardDTO();
+				System.out.println(dto);
 				dto.setMbId(rs.getString("USERID"));
 				dto.setMbNum(rs.getInt("NOTICEID"));
 				dto.setMbTitle(rs.getString("NTITLE"));
 				dto.setMbContent(rs.getString("NCONTENT"));
 				dto.setMbWriteDate(rs.getDate("NDATE"));
-				dto.setMbfileName(rs.getString("NOTICEFILE"));
+				dto.setMbfileName(rs.getString("nOTICEFILE"));
 				dto.setMbHit(rs.getInt("HIT"));
 				dto.setMbName(rs.getString("username"));
 				list.add(dto);
@@ -48,7 +49,7 @@ public class MainBoardDAO {
 	
 	public MainBoardDTO select (int key, String str) {
 		MainBoardDTO dto = new MainBoardDTO();
-		String sql = "select * from c_board where BOARDID= ?"; //
+		String sql = "select * from NOTICE where NOTICEID= ?"; //
 		
 		try {
 			conn = JDBCutil.connect();
@@ -58,11 +59,11 @@ public class MainBoardDAO {
 			
 			if(rs.next()) {
 				dto.setMbId(rs.getString("USERID"));
-				dto.setMbNum(rs.getInt("BOARDID"));
-				dto.setMbTitle(rs.getString("BTITLE"));
-				dto.setMbContent(rs.getString("BCONTENT"));
-				dto.setMbWriteDate(rs.getDate("BDATE"));
-				dto.setMbfileName(rs.getString("BOARDFILE"));
+				dto.setMbNum(rs.getInt("NOTICEID"));
+				dto.setMbTitle(rs.getString("NTITLE"));
+				dto.setMbContent(rs.getString("NCONTENT"));
+				dto.setMbWriteDate(rs.getDate("NDATE"));
+				dto.setMbfileName(rs.getString("NOTICEFILE"));
 				
 				
 //				dto.setbNum(rs.getInt("bnum"));
@@ -73,8 +74,8 @@ public class MainBoardDAO {
 //				dto.setbWriteDate(rs.getDate("bwritedate"));
 //				dto.setbId(rs.getString("bid"));
 //				dto.setBfileName(rs.getString("filename"));
-//				if(str.equals("read"))
-//					readCount(key); //조회수 1씩 올라가게 수정
+				if(str.equals("read"))
+					readCount(key); //조회수 1씩 올라가게 수정
 			}
 			
 		} catch(SQLException e) {
@@ -87,7 +88,9 @@ public class MainBoardDAO {
 	
 	public int insert(MainBoardDTO dto) { //글추가
 		int n = 0;
-		String sql = "insert into c_board(USERID,BOARDID,BTITLE,BCONTENT,BDATE,BOARDFILE) values(?, BOARD_SEQ.nextval, ?, ?,sysdate, ?)";
+		String sql = "insert into NOTICE(USERID, NOTICEID, NTITLE, NCONTENT, NDATE, NOTICEFILE)\r\n" + 
+				"values(?, MAINBOARD_SEQ.nextval, ?, ?, sysdate, ?)";
+		
 		try {
 			conn = JDBCutil.connect();
 			pstmt = conn.prepareStatement(sql);
@@ -108,10 +111,10 @@ public class MainBoardDAO {
 	
 	public int update(MainBoardDTO dto) { //글수정
 		int n = 0;
-		String sql = "update c_board set btitle=?, bcontent=?, boardfile=? where BOARDID = ?";
+		String sql = "update NOTICE set NTITLE=?, NCONTENT=?, NOTICEFILE=? where NOTICEID = ?";
 		
 		if(dto.getMbfileName() == null) {
-			 sql = "update c_board set btitle=?, bcontent=? where BOARDID = ?";			
+			 sql = "update NOTICE set NTITLE=?, NCONTENT=? where NOTICEID = ?";			
 		}
 		
 		try {
@@ -134,13 +137,13 @@ public class MainBoardDAO {
 	}
 	
 	
-	public void delete(BoarderDTO dto) { //글삭제
-		String sql = "delete from c_board where BOARDID = ? ";
+	public void delete(MainBoardDTO dto) { //글삭제
+		String sql = "delete from NOTICE where NOTICEID = ? ";
 		
 				try {
 					conn = JDBCutil.connect();
 					pstmt = conn.prepareStatement(sql);
-					pstmt.setInt(1, dto.getbNum());
+					pstmt.setInt(1, dto.getMbNum());
 					pstmt.executeUpdate();
 		
 				} catch (SQLException e) {
@@ -153,7 +156,7 @@ public class MainBoardDAO {
 
 	
 	private void readCount(int key) {
-		String sql = "update c_board set hit = hit + 1 where BOARDID= ? ";
+		String sql = "update NOTICE set hit = nvl(hit,0) + 1 where NOTICEID= ?";
 		
 		try {
 			pstmt=conn.prepareStatement(sql);

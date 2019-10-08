@@ -10,7 +10,7 @@
 <body>
 <jsp:include page="menu.jsp"></jsp:include>
 <div align="center">
-	<div><h1>글 목록 보기</h1></div>
+	<div><h1>자유 게시판</h1></div>
 	<div>
 		<table border="1">
 			<tr>
@@ -20,6 +20,8 @@
 				<th width="100">작성일</th>
 				<th width="100">첨부파일</th>
 				<th width="80">조회수</th>
+				<input type="text" id="search" name="search">
+				<input type="button" id="searchbtn" name="searchbtn" value="검색">
 			</tr>
 			
 			<!-- db의 글목록을 가져와서 뿌려주는 곳~ -->

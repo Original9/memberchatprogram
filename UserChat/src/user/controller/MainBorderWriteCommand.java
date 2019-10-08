@@ -24,6 +24,8 @@ public class MainBorderWriteCommand implements Command {
 		String file1 = null;
 		String upfilepath = request.getSession().getServletContext().getRealPath("uploadfile");
 		int filesize = 10 * 1024;
+		
+		
 		MultipartRequest mul = new MultipartRequest(request, upfilepath, filesize, "utf-8", new DefaultFileRenamePolicy());
 		
 		
@@ -41,7 +43,7 @@ public class MainBorderWriteCommand implements Command {
 		if(n != 0) 
 			path = "main.do"; //성공시 목록보여줌
 		else  
-			path ="mainboardWrite.do"; // 실패시 입력폼
+			path ="MainBorderWriteForm.do"; // 실패시 입력폼
 		return path;
 		
 		
