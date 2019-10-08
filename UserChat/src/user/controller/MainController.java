@@ -70,7 +70,11 @@ public class MainController extends HttpServlet {
 //		map.put("/MainBorderWriteCommand.do", new MainBorderWriteCommand());
 //		map.put("/MainBorderWriteForm.do", new MainBorderWriteForm());
 		map.put("/MainBorderWriteForm.do", new MainBorderWriteForm());
-		map.put("/mainborderWrite.do", new MainBorderWriteCommand());
+		map.put("/mainboardWrite.do", new MainBorderWriteCommand());
+		map.put("/mainboardRead.do", new MainBorderReadCommand());
+		map.put("/MainboardUpdateForm.do", new MainboardUpdateForm());
+		map.put("/mainboardUpdate.do", new MainBoardUpdateCommand());
+		map.put("/mainboardDelete.do", new MainBoardDeleteCommand());
 		
 				
 		

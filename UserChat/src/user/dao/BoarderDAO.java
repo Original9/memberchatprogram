@@ -76,8 +76,8 @@ public class BoarderDAO {
 //				dto.setbWriteDate(rs.getDate("bwritedate"));
 //				dto.setbId(rs.getString("bid"));
 //				dto.setBfileName(rs.getString("filename"));
-//				if(str.equals("read"))
-//					readCount(key); //조회수 1씩 올라가게 수정
+				if(str.equals("read"))
+					readCount(key); //조회수 1씩 올라가게 수정
 			}
 			
 		} catch(SQLException e) {
@@ -156,7 +156,7 @@ public class BoarderDAO {
 
 	
 	private void readCount(int key) {
-		String sql = "update c_board set hit = hit + 1 where BOARDID= ? ";
+		String sql = "update c_board set hit = nvl(hit,0) + 1 where BOARDID= ?";
 		
 		try {
 			pstmt=conn.prepareStatement(sql);
