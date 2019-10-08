@@ -14,7 +14,7 @@ public class FindIDFormCommand implements Command {
 	public String excute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		return "jsp/findIDForm.jsp";
+		return "jsp/findID.jsp";
 	}
 
 }
