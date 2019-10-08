@@ -6,6 +6,7 @@ import java.util.Properties;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
+import javax.mail.SendFailedException;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.AddressException;
@@ -64,19 +65,23 @@ public class EmailCheckCommand implements Command {
 			Transport.send(message); //// 전송
 			System.out.println("message sent successfully...");
 		} catch (AddressException e) {
-			// TODO Auto-generated catch block
+			path = "{\"result\":false, \"message\":\"메일 주소를 공백 없이 입력해 주세요.\"}";
+			e.printStackTrace();
+		} catch (SendFailedException e) {
+			path = "{\"result\":false, \"message\":\"'@' 를 포함한 메일 주소 형식으로 입력해 주세요.\"}";
 			e.printStackTrace();
 		} catch (MessagingException e) {
-			// TODO Auto-generated catch block
+			path = "{\"result\":false, \"message\":\"인증할 수 없습니다..\"}";
 			e.printStackTrace();
 		}
 
-		if (true) { //이메일이 발송되었는지 확인하는 조건 알아보기.
+		if (path==null) { //이메일이 발송되었는지 확인하는 조건 알아보기.
 			path = "{\"result\":true, \"message\":\"메일이 전송되었습니다.\", \"checkNum\":"+ranNum+"}";
 
-		} else {
-			path = "{\"result\":false, \"message\":\"인증할 수 없습니다..\"}";
 		}
+		/*
+		 * else { path = "{\"result\":false, \"message\":\"인증할 수 없습니다..\"}"; }
+		 */
 
 		return "ajax:" + path;
 	}
