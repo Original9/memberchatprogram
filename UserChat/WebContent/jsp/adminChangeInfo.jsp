@@ -18,9 +18,7 @@
 
 
 <!-- datatables에서 가져온 부분. -->
-<!-- <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.3.1.js"></script>
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap.min.js"></script> -->
+<!-- <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.3.1.js"></script> -->
 
 
 <!-- 블로그에서 추가한 부분 -->
@@ -33,7 +31,7 @@
 <script type="text/javascript" src="<c:url value='/etc/DataTables-1.10.5/media/js/jquery.dataTables.min.js' />" ></script>
 <script type="text/javascript" src="//cdn.datatables.net/plug-ins/f2c75b7247b/integration/bootstrap/3/dataTables.bootstrap.js" ></script>
  --%>
-<link href="<c:url value='/etc/bootstrap-3.3.2-dist/css/bootstrap.min.css' />" rel="stylesheet" type="text/css">
+<%-- <link href="<c:url value='/etc/bootstrap-3.3.2-dist/css/bootstrap.min.css' />" rel="stylesheet" type="text/css">
 <link href="<c:url value='/etc/bootstrap-3.3.2-dist/css/bootstrap-theme.css' />" rel="stylesheet" type="text/css">
 <link href="//cdn.datatables.net/plug-ins/f2c75b7247b/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet" type="text/css">
 
@@ -43,15 +41,9 @@
 
 <script type="text/javascript" src="<c:url value='/js/jquery-1.11.2.min.js' />" ></script>
 <script type="text/javascript" src="<c:url value='/etc/DataTables-1.10.5/media/js/jquery.dataTables.min.js' />" ></script>
-<script type="text/javascript" src="//cdn.datatables.net/plug-ins/f2c75b7247b/integration/bootstrap/3/dataTables.bootstrap.js" ></script>
+<script type="text/javascript" src="//cdn.datatables.net/plug-ins/f2c75b7247b/integration/bootstrap/3/dataTables.bootstrap.js" ></script> --%>
 
 
-<script type="text/javascript">
-
-$(document).ready(function(){
-	$('#userList').DataTable();
-});
-</script>
 
 
 
@@ -111,5 +103,13 @@ $(document).ready(function(){
 	</table>
 	</div>
 
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function(){
+	$('#userList').DataTable();
+});
+</script>
 </body>
 </html>
