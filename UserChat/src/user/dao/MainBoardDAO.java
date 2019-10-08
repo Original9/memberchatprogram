@@ -43,7 +43,10 @@ public class MainBoardDAO {
 			
 		} catch(SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JDBCutil.disconnect(pstmt, conn);
 		}
+		
 		return list;
 	}
 	
@@ -80,8 +83,9 @@ public class MainBoardDAO {
 			
 		} catch(SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JDBCutil.disconnect(pstmt, conn);
 		}
-		close();
 		return dto;
 	}
 	
@@ -103,9 +107,10 @@ public class MainBoardDAO {
 			
 		} catch(SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JDBCutil.disconnect(pstmt, conn);
 		}
 		
-		close();
 		return n;
 	}
 	
@@ -131,8 +136,9 @@ public class MainBoardDAO {
 					
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JDBCutil.disconnect(pstmt, conn);
 		}
-		close();
 		return n;
 	}
 	
@@ -148,8 +154,9 @@ public class MainBoardDAO {
 		
 				} catch (SQLException e) {
 					e.printStackTrace();
+				} finally {
+					JDBCutil.disconnect(pstmt, conn);
 				}
-		close();
 		
 	}
 	
@@ -165,8 +172,9 @@ public class MainBoardDAO {
 			
 		} catch(SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JDBCutil.disconnect(pstmt, conn);
 		}
-		close();
 	}
 	
 	

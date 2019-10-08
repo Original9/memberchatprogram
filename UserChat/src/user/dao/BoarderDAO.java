@@ -45,6 +45,8 @@ public class BoarderDAO {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JDBCutil.disconnect(pstmt, conn);
 		}
 		return list;
 	}
@@ -56,26 +58,26 @@ public class BoarderDAO {
 		return list;
 	}
 
-	public BoarderDTO selectOption(int option, String keyword) {
-		String sql = sqlString(option);
-		// int option => 1=> 제목, 2=> 제목+내용,
-
-		return null;
-	}
-
-	public String sqlString(int option) {
-		switch (option) {
-		case 1:
-			return "select *from c_board where BTITLE like '%a%'";
-			
-		case 2:
-
-			break;
-		default:
-			return "";
-		}
-		return null;
-	}
+//	public BoarderDTO selectOption(int option, String keyword) {
+//		String sql = sqlString(option);
+//		// int option => 1=> 제목, 2=> 제목+내용,
+//
+//		return null;
+//	}
+//
+//	public String sqlString(int option) {
+//		switch (option) {
+//		case 1:
+//			return "select *from c_board where BTITLE like '%a%'";
+//			
+//		case 2:
+//
+//			break;
+//		default:
+//			return "";
+//		}
+//		return null;
+//	}
 
 	public BoarderDTO select(int key, String str) {
 		BoarderDTO dto = new BoarderDTO();
@@ -110,8 +112,9 @@ public class BoarderDAO {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JDBCutil.disconnect(pstmt, conn);
 		}
-		close();
 		return dto;
 	}
 
@@ -130,9 +133,10 @@ public class BoarderDAO {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JDBCutil.disconnect(pstmt, conn);
 		}
 
-		close();
 		return n;
 	}
 
@@ -158,8 +162,9 @@ public class BoarderDAO {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JDBCutil.disconnect(pstmt, conn);
 		}
-		close();
 		return n;
 	}
 
@@ -174,8 +179,9 @@ public class BoarderDAO {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JDBCutil.disconnect(pstmt, conn);
 		}
-		close();
 
 	}
 
@@ -190,8 +196,9 @@ public class BoarderDAO {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JDBCutil.disconnect(pstmt, conn);
 		}
-		close();
 	}
 
 	private void close() {
