@@ -4,8 +4,10 @@
 <html>
 	<%
 		String userID = null;
+		String grant = null;
 		if(session.getAttribute("userID") != null){
 			userID = (String) session.getAttribute("userID");
+			grant = (String) session.getAttribute("grant");
 		}
 	%>
 <head>
@@ -81,7 +83,7 @@
 						</li>
 					</ul>
 					<%
-						} else {
+						} else if(grant=="U") {
 					%>
 					<ul class="nav navbar-nav navbar-right" >
 						<li class="dropdown">
@@ -91,6 +93,22 @@
 							</a>
 							<ul class="dropdown-menu">
 								<li><a href = "changeInfoForm.do">회원정보수정</a></li>
+								<li><a href = "logout.do">로그아웃</a></li>							
+							</ul>
+						</li>
+					</ul>
+					<%
+						} else {
+					%>
+					<ul class="nav navbar-nav navbar-right" >
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle"
+								data-toggle="dropdown" role="button" aria-haspopup="true"
+								aria-expanded="false">회원관리<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu">
+								<li><a href = "adminChangeInfoForm.do">회원정보관리</a></li>
+								<li><a href = "adminDeleteUserForm.do">회원계정관리</a></li>
 								<li><a href = "logout.do">로그아웃</a></li>							
 							</ul>
 						</li>

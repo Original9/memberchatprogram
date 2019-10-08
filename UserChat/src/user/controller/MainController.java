@@ -54,6 +54,7 @@ public class MainController extends HttpServlet {
 		
 		
 		
+		
 		//승찬's
 //		map.put("/boardView.do", new BoardListCommand());
 //		map.put("/boardWrite.do", new BoardWriteCommand());
