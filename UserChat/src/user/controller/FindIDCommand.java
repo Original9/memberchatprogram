@@ -25,10 +25,10 @@ public class FindIDCommand implements Command {
 	public String excute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String name = request.getParameter("userName");
+		System.out.println("name "+name);
 		String email = request.getParameter("userEmail");
-		String sc = null;
 		String path = null;
-		String id = null;
+		String id = "aa";
 
 		UserDAO dao = new UserDAO();
 		boolean chkValidName = false;
@@ -36,25 +36,30 @@ public class FindIDCommand implements Command {
 
 		chkValidName = dao.checkNameForFindID(name);
 		chkValidEmail = dao.checkEmailForFindID(name, email);
-
-		if (chkValidName == false) {
-			sc = "<script>" + "alert('등록된 회원이 아닙니다!');" + "location='findIDForm.do';" + "</script>";
-			;
-			return "script:" + sc;
-
-		} else {
-			
-			if(chkValidEmail == false) {
-				sc = "<script>" + "alert('이메일 주소를 정확히 입력해 주세요!');" + "location='findIDForm.do';" + "</script>";
-				;
-				return "script:" + sc;
-			}else {
-				id = dao.findID(email);
-				path = "{\"result\":true, \"message\":\"id는 \"+id+\"입니다.\"}";
-				return "ajax:" + path;
-			}
-
-
+		
+		if(chkValidName == false) {
+			path = "{\"resultStatus\":1, \"message\":\"존재하지 않는 회원입니다!\"}";
+		}else if(chkValidEmail == false) {
+			path = "{\"resultStatus\":2, \"message\":\"이메일을 정확히 입력해 주세요!\"}";
+		}else {
+			path = "{\"resultStatus\":3, \"message\":\"id는 "+id+ "입니다.\"}";
 		}
+		/*
+		 * if (chkValidName == false) { sc = "<script>" + "alert('등록된 회원이 아닙니다!');" +
+		 * "location='findIDForm.do';" + "</script>"; ; return "script:" + sc;
+		 * 
+		 * } else {
+		 * 
+		 * if(chkValidEmail == false) { sc = "<script>" +
+		 * "alert('이메일 주소를 정확히 입력해 주세요!');" + "location='findIDForm.do';" + "</script>";
+		 * ; return "script:" + sc; }else { id = dao.findID(email); path =
+		 * "{\"result\":true, \"message\":\"id는 \"+id+\"입니다.\"}"; return "ajax:" + path;
+		 * }
+		 * 
+		 * 
+		 * }
+		 */
+		
+		return "ajax:" + path;
 	}
 }
