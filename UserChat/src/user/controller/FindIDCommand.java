@@ -28,22 +28,24 @@ public class FindIDCommand implements Command {
 		System.out.println("name "+name);
 		String email = request.getParameter("userEmail");
 		String path = null;
-		String id = "aa";
+		String id = null;
 
-		UserDAO dao = new UserDAO();
-		boolean chkValidName = false;
-		boolean chkValidEmail = false;
-
-		chkValidName = dao.checkNameForFindID(name);
-		chkValidEmail = dao.checkEmailForFindID(name, email);
+//이름과 이메일이 유효한지 체크하는 커맨드를 따로 빼놓았음.
 		
-		if(chkValidName == false) {
+		//boolean chkValidName = false;
+		//boolean chkValidEmail = false;
+
+		//chkValidName = dao.checkNameForFindID(name);
+		//chkValidEmail = dao.checkEmailForFindID(name, email);
+		id=UserDAO.getInstance().findID(name, email);
+		
+		/*if(chkValidName == false) {
 			path = "{\"resultStatus\":1, \"message\":\"존재하지 않는 회원입니다!\"}";
 		}else if(chkValidEmail == false) {
 			path = "{\"resultStatus\":2, \"message\":\"이메일을 정확히 입력해 주세요!\"}";
-		}else {
-			path = "{\"resultStatus\":3, \"message\":\"id는 "+id+ "입니다.\"}";
-		}
+		}else {*/
+			path = "{\"resultStatus\":3, \"message\":\""+id+"\"}";
+		//}
 		/*
 		 * if (chkValidName == false) { sc = "<script>" + "alert('등록된 회원이 아닙니다!');" +
 		 * "location='findIDForm.do';" + "</script>"; ; return "script:" + sc;

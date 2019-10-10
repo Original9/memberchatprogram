@@ -19,7 +19,7 @@ public class UserDAO {
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
 		
-	
+	//로그인
 	public UserDTO loginCheck(UserDTO dto) {
 		String sql="select * from c_user where userid=? and userpassword=?";
 		
@@ -45,7 +45,7 @@ public class UserDAO {
 		return dto;
 	}
 	
-
+	//회원가입
 	public int insertMember(UserDTO dto) {
 		int r = 0;
 		String sql = "insert into c_user values(?,?,?,?,?,?,'U','','')";
@@ -70,6 +70,7 @@ public class UserDAO {
 		return r;
 	}
 	
+	//id중복체크
 	public boolean isIdCheck(String id) {
 		String sql="select * from c_user where userid=?";
 		boolean chk = false;
@@ -91,6 +92,7 @@ public class UserDAO {
 		return chk;
 	}
 	
+	//회원정보 수정을 위한 회원정보 불러오기(사용자)
 	public UserDTO readToChangeInfo(String id) {
 		String sql="select * from c_user where userid=?";
 		UserDTO dto = new UserDTO();
@@ -120,7 +122,7 @@ public class UserDAO {
 		return dto;
 	}
 	
-	
+	//회원정보수정(사용자)
 	public int changeUserInfo(UserDTO dto, String id) {
 		int n = 0;
 		String sql = "update c_user set username=?, userage=?, useremail=? where userid=?";
@@ -186,7 +188,7 @@ public class UserDAO {
 		return n;
 	}
 	
-	
+	//회원정보관리를 위한 회원정보리스트 불러오기(관리자)
 	public ArrayList<UserDTO> readUserList(){
 		ArrayList<UserDTO> list = new ArrayList<UserDTO>();
 		UserDTO dto;
@@ -242,6 +244,7 @@ public class UserDAO {
 		return chk;
 	}
 	
+	//이름 유효한지 체크 후 이메일이 맞는지 확인
 	public boolean checkEmailForFindID(String name, String writtenEmail) {
 		boolean chk = false;
 		String sql="select * from c_user where username=? and useremail=?";
@@ -266,14 +269,16 @@ public class UserDAO {
 	}
 	
 	//아이디 찾기 메소드
-	public String findID(String userEmail) {
+	public String findID(String name, String writtenEmail) {
 		String id = null;
-		String sql = "select userid from c_user where userEmail=?";
+		String sql="select * from c_user where username=? and useremail=?";
 		
 		try {
 			conn = JDBCutil.connect();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, userEmail);
+			pstmt.setString(1, name);
+			pstmt.setString(2, writtenEmail);
+			
 			rs=pstmt.executeQuery();
 			
 			if(rs.next()) {
@@ -287,4 +292,31 @@ public class UserDAO {
 		
 		return id;
 	}
+	
+	//비밀번호 찾기 시 id와 이메일 체크(둘다맞아야만 메일이 간다.)
+	public boolean checkIdAndEmailForFindPW(String writtenId, String writtenEmail) {
+		boolean chk=false;
+		String sql="select * from c_user where userid=? and useremail=?";
+		
+		try {
+			conn = JDBCutil.connect();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, writtenId);
+			pstmt.setString(2, writtenEmail);
+			
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()) {
+				chk=true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCutil.disconnect(pstmt, conn);
+		}
+		
+		return chk;
+			
+	}
+	
 }

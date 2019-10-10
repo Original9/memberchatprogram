@@ -41,8 +41,11 @@ public class MainController extends HttpServlet {
 		map.put("/login.do", new LoginFormCommand());
 		map.put("/loginCheck.do", new LoginCheckCommand());
 		map.put("/findIDForm.do", new FindIDFormCommand());
+		map.put("/validCheckAndSendForFindID.do", new ValidCheckAndSendForFindIDCommand());
+		map.put("/validCheckAndSendForFindPW.do", new ValidCheckAndSendForFindPWCommand());
 		map.put("/findID.do", new FindIDCommand());
 		map.put("/findPWForm.do", new FindPWFormCommand());
+		map.put("/findPW.do", new FindPWCommand());
 		map.put("/logout.do", new LogoutCommand());
 		map.put("/changeInfoForm.do", new ChangeInfoFormCommand());
 		map.put("/changeInfo.do", new ChangeInfoCommand());
