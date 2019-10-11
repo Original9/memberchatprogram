@@ -1,6 +1,7 @@
 package user.controller;
 
 import java.io.IOException;
+import java.net.URLDecoder;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
@@ -17,8 +18,16 @@ public class ValidCheckAndSendForFindIDCommand implements Command {
 	@Override
 	public String excute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String name = request.getParameter("userName");
+		
+		//request.setCharacterEncoding("UTF-8");
+		//response.setContentType("text/html;charset=UTF-8");
+		
+		//String name =  URLDecoder.decode(request.getParameter("userName"),"UTF-8");
+		//String email = URLDecoder.decode(request.getParameter("userEmail"),"UTF-8");
+		
+		String name =  request.getParameter("userName");
 		String email = request.getParameter("userEmail");
+		
 		String Subject = "[ChatProgram]인증번호입니다.";
 		String path = null;
 		
