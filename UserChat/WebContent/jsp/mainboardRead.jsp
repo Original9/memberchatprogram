@@ -11,14 +11,14 @@
 <html>
 <head>
 <%
-	String userID = null;
+// 	String userID = null;
 	//userID = "jey"; // 로그인 임시로 접속가능하도록 세션값을 박아둔다
 	//session.setAttribute("userID", "jey");
-	if (session.getAttribute("userID") != null) {
-		userID = (String) session.getAttribute("userID");
-	}
-	BoarderDAO dao = new BoarderDAO();
-	BoarderDTO dto = new BoarderDTO();
+// 	if (session.getAttribute("userID") != null) {
+// 		userID = (String) session.getAttribute("userID");
+// 	}
+// 	BoarderDAO dao = new BoarderDAO();
+// 	BoarderDTO dto = new BoarderDTO();
 // 	if (!userID.equals(dto.getbId())){
 //  		out.print("<script>");
 //  		out.print("alert('로그인을 먼저 해 주세요.')");
