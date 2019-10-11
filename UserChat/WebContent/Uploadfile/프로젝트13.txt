@@ -1,0 +1,124 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<%-- <%@ page import="UserChat.dto.UserDTO" %> --%>
+<!DOCTYPE html>
+<html>
+<%
+	String userID = null;
+	if(session.getAttribute("userID") != null){
+		userID = (String) session.getAttribute("userID");
+	}
+	
+	if(userID == null){
+		session.setAttribute("messageType", "오류 메세지");
+		session.setAttribute("messageContent", "현재 로그인이 되어 있지 않습니다.");
+		response.sendRedirect("index.jsp");
+		return;
+	}
+
+%>
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+<meta name="viewport" content="width=device-width" initial-scale=1">
+<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/custom.css">
+<title>JSP Ajax 실시간 회원제 서비스</title>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="js/bootstrap.js"></script>
+<script type="text/javascript">
+
+</script>
+</head>
+<body>
+
+</body>
+</html>
+
+
+
+
+
+package user.dto;
+
+public class BoardDTO {
+	String userID;
+	int boardID;
+	String boardTitle;
+	String boardContent;
+	String boardDate;
+	int boardHit;
+	String boardFile;
+	String boardRealFile;
+	int boardGroup;
+	int boardSequence;
+	int boardlevel;
+	public String getUserID() {
+		return userID;
+	}
+	public void setUserID(String userID) {
+		this.userID = userID;
+	}
+	public int getBoardID() {
+		return boardID;
+	}
+	public void setBoardID(int boardID) {
+		this.boardID = boardID;
+	}
+	public String getBoardTitle() {
+		return boardTitle;
+	}
+	public void setBoardTitle(String boardTitle) {
+		this.boardTitle = boardTitle;
+	}
+	public String getBoardContent() {
+		return boardContent;
+	}
+	public void setBoardContent(String boardContent) {
+		this.boardContent = boardContent;
+	}
+	public String getBoardDate() {
+		return boardDate;
+	}
+	public void setBoardDate(String boardDate) {
+		this.boardDate = boardDate;
+	}
+	public int getBoardHit() {
+		return boardHit;
+	}
+	public void setBoardHit(int boardHit) {
+		this.boardHit = boardHit;
+	}
+	public String getBoardFile() {
+		return boardFile;
+	}
+	public void setBoardFile(String boardFile) {
+		this.boardFile = boardFile;
+	}
+	public String getBoardRealFile() {
+		return boardRealFile;
+	}
+	public void setBoardRealFile(String boardRealFile) {
+		this.boardRealFile = boardRealFile;
+	}
+	public int getBoardGroup() {
+		return boardGroup;
+	}
+	public void setBoardGroup(int boardGroup) {
+		this.boardGroup = boardGroup;
+	}
+	public int getBoardSequence() {
+		return boardSequence;
+	}
+	public void setBoardSequence(int boardSequence) {
+		this.boardSequence = boardSequence;
+	}
+	public int getBoardlevel() {
+		return boardlevel;
+	}
+	public void setBoardlevel(int boardlevel) {
+		this.boardlevel = boardlevel;
+	}
+	
+	
+	
+}

@@ -10,6 +10,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script>
+
+function searchpage(p){
+	document.frm.p.value=p;
+	document.frm.submit();
+}
+
+</script>
 </head>
 <body>
 	<jsp:include page="menu.jsp"></jsp:include>
@@ -23,6 +31,18 @@
 <div align="center">
 	<div><h1>공 지 사 항</h1></div>
 	<div>
+				<form id="frm" name="frm" action="main.do">
+				<input type="hidden" name="p" id="p" value="1"> 
+				<select name="searchoption">
+					<option value="select">검색 방법</option>
+					<option value="all">전체</option>
+					<option value="title">제목</option>
+					<option value="writer">작성자</option>
+				</select>
+				<input type="text" id="search" name="search"
+					value="${param.search }"> <input type="submit"
+					id="searchbtn" name="searchbtn" value="검색">
+			</form>
 		<table border="1">
 			<tr>
 				<th width="100">번호</th>
@@ -59,6 +79,17 @@
 
 
 </div>
+	<!-- 페이징 -->
+	<div align="center">
+		<c:forEach begin="1" end="${pageCnt}" varStatus="st">
+			<c:if test="${param.p != st.count}">
+				<a href="#" onclick="searchpage(${st.count})">${st.count}</a>
+			</c:if>
+			<c:if test="${param.p == st.count}">
+			${st.count}
+		</c:if>
+		</c:forEach>
+	</div>
 
 <jsp:include page="footer.jsp"></jsp:include>
 	

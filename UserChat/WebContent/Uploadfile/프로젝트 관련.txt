@@ -1,0 +1,42 @@
+팝업창 띄우는 코딩 - 루트 컨트롤러 - dialog
+
+
+	// 신규 부서 추가 메서드
+	public boolean insertDB(Dept dept) {
+	
+		//String sql_seq = "select dept_seq.nextval from dual";
+		String sql_seq = "SELECT MAX(DEPARTMENT_ID)+10 FROM DEPARTMENTS";
+		
+		String sql = "INSERT INTO DEPARTMENTS (DEPARTMENT_ID, LOCATION_ID, MANAGER_ID, DEPARTMENT_NAME) "+
+		            " VALUES( ?, ?, ?, ?)";
+		
+		BigDecimal seq = null;
+		
+		try {
+			
+			connect();	
+			
+			//시퀀스 조회
+			stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(sql_seq);
+			if(rs.next())
+				seq = rs.getBigDecimal(1);
+			
+			//부서등록
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setBigDecimal(1,seq);
+			pstmt.setString(2,dept.getLocationId());
+			pstmt.setString(3,dept.getManagerId());
+			pstmt.setString(4, dept.getDepartmentName());
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		finally {
+			disconnect();
+		}
+		return true;
+	}
+
+UserGUI 350,100
