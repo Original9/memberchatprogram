@@ -32,34 +32,30 @@
 				id :  encodeURIComponent(id),
 			},			
 			success: function(data){
-				console.log(data);
-				if(data=="0")return;
-				var parsed = JSON.parse(data); // 왜 안먹죠? 이유가 머죠?
+				if(data=="")return; // 데이터가 없으면 success 구문 실행 하지 않게 하기
+				var parsed = JSON.parse(data);  // 됬다 안됫다 하는데 문제있는거 같음. 메세지가 없는 아이디로 접속할시 가져올게 없어서 에러 메세지 다읽어도 가져올수 있도록 하자 
 				var result = parsed.result;
 				
 				for(var i=0; i<result.length; i++){				
-					addChat(result[i][0].fromid, result[i][1].name, result[i][2].unreadMeassageCount);
-				}
+					addChat(result[i][0].fromid, result[i][1].name, result[i][2].unreadMeassageCount,result[i][3].chatNum);
+				} 
 				
 			}
 			
 		})
 	});
-	function addChat(fromid, username,unreadMeassageCount){
-		 
+	function addChat(fromid, username,unreadMeassageCount,chatNum,userid){
+		
 		$tr = $('<tr>').append(
 				$('<td>').text(fromid),
 				$('<td>').text(username),
 				$('<td>').text(unreadMeassageCount),
-				$('<td>').html("<button id ='goMessageBox'>SEND MESSAGE</button>"),
-				$('<td>').html("<button>DELETE</button>")
+				$('<td>').html("<button id ='goMessageBox' onclick=location.href='messageBox.do?toID="+fromid+"' >SEND MESSAGE</button>"),
+				$('<td>').html("<button onclick=location.href='inBoxListDelete.do?chatNum="+chatNum+"&userID=<%=userID%>'>DELETE</button>")
 				);
 		$('#messageList').append($tr);
 	}
 	
-	$('#goMessageBox').on('click', function(){
-		console.log("adada")
-	});
 	
 	
 </script>

@@ -131,7 +131,7 @@ public class ChatDAO {
 		 String SQL2 = null;
 		 if(chatNum.equals("null") )
 		 {
-			 SQL1 = "INSERT INTO CHAT_ROOM VALUES(chat_table_increment.nextval,'2')";
+			 SQL1 = "INSERT INTO CHAT_ROOM VALUES(chat_table_increment.nextval,'2',?)";
 			 SQL2 = "INSERT INTO CHAT VALUES(auto_increment.nextval,?,?,?,sysdate,chat_table_increment.currval,0)";// 이부분 DB에서 동시접속할때의 문제점이 있는지 생각해보기 
 		 }else {
 			 SQL2 = "INSERT INTO CHAT VALUES(auto_increment.nextval,?,?,?,sysdate,?,0)";			 
@@ -142,6 +142,7 @@ public class ChatDAO {
 			{
 				conn = JDBCutil.connect();
 				pstmt1 = conn.prepareStatement(SQL1);
+				pstmt1.setString(1, fromID+","+toID);
 				pstmt2 = conn.prepareStatement(SQL2);
 				pstmt2.setString(1, fromID);
 				pstmt2.setString(2, toID);
@@ -165,13 +166,10 @@ public class ChatDAO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} finally {
-			try {
+		} finally {			
 				JDBCutil.disconnect(pstmt1, conn);
 				JDBCutil.disconnect(pstmt2, conn);
-			}catch(Exception e) {
-				e.printStackTrace();
-			}
+			
 		}
 		return -1; // 오류 발생  
 	}
