@@ -33,7 +33,7 @@
 			},			
 			success: function(data){
 				if(data=="")return; // 데이터가 없으면 success 구문 실행 하지 않게 하기
-				var parsed = JSON.parse(data);  // 됬다 안됫다 하는데 문제있는거 같음. 메세지가 없는 아이디로 접속할시 가져올게 없어서 에러 메세지 다읽어도 가져올수 있도록 하자 
+				var parsed = JSON.parse(data);   
 				var result = parsed.result;
 				
 				for(var i=0; i<result.length; i++){				
