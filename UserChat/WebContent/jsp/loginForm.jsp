@@ -6,6 +6,12 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
+/* 	//엔터키 입력 시 로그인 클릭 효과
+	function pressEnter(f){
+		if(f.keyCode==13){
+			frm.submit();
+		}
+	} */
 	//로그인 시 입력안한 항목 체크
 	function checkForm() {
 		var form = document.frm;
@@ -76,11 +82,11 @@
 					</thead>
 					<tr>
 						<td style="width: 60px;">id</td>
-						<td style="width: 100px;"><input class="form-control" type="text" id="id" name="id" size="20"></td>
+						<td style="width: 100px;"><input class="form-control" type="text" onkeydown="javascript: if (event.keyCode == 13) {checkForm();}" id="id" name="id" size="20"></td>
 					</tr>
 					<tr>
 						<td style="width: 60px;">password</td>
-						<td style="width: 100px;"><input class="form-control" type="password" id="pw" name="pw" size="20"></td>
+						<td style="width: 100px;"><input class="form-control" type="password" onkeydown="javascript: if (event.keyCode == 13) {checkForm();}" id="pw" onkeypress="JavaScript:pressEnter(this.form)" name="pw" size="20"></td>
 					</tr>
 				</table>
 				
