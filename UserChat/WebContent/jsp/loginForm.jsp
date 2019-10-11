@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-
+	//로그인 시 입력안한 항목 체크
 	function checkForm() {
 		var form = document.frm;
 		if (form.id.value == "") {
@@ -40,6 +40,24 @@
 		let py=(sh-ch)/2;
 		
 		window.open("findIDForm.do","popup","left="+px+",top="+py+",width="+cw+",height="+ch+"\"");
+	}
+	
+	//비밀번호찾기 창 여는 function
+	function findID() {
+		
+		//새 창의 크기
+		let cw=500;
+		let ch=400;
+		
+		//스크린의 크기
+		let sw=screen.availWidth;
+		let sh=screen.availHeight;
+		
+		//열 창의 포지션
+		let px=(sw-cw)/2;
+		let py=(sh-ch)/2;
+		
+		window.open("findPWForm.do","popup","left="+px+",top="+py+",width="+cw+",height="+ch+"\"");
 	}
 </script>
 </head>

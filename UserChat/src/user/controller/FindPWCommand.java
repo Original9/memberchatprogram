@@ -8,13 +8,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import user.command.Command;
 
-public class FindPWFormCommand implements Command {
+public class FindPWCommand implements Command {
 
 	@Override
 	public String excute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		return "jsp/findID.jsp";
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
