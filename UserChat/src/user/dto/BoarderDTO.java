@@ -11,7 +11,10 @@ public class BoarderDTO {
 	private Date bWriteDate; //디비랑쓸땐 sql.date, 작성날짜
 	private int bHit; // 조회수
 	private String bId; // 작성자 아이디
-	private String bfileName; // 첨부파일 
+	private String bfileName; // 첨부파일 \
+	private String bsearch;
+	
+	
 
 	public BoarderDTO() {
 	}
@@ -24,6 +27,15 @@ public class BoarderDTO {
 	}
 	
 	
+	
+
+	public String getBsearch() {
+		return bsearch;
+	}
+
+	public void setBsearch(String bsearch) {
+		this.bsearch = bsearch;
+	}
 
 	public String getbId() {
 		return bId;

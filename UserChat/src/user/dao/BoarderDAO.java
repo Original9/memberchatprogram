@@ -13,22 +13,66 @@ public class BoarderDAO {
 	PreparedStatement pstmt;
 	ResultSet rs;
 
-	public BoarderDAO() {
-		super();
-	}
-
-	public ArrayList<BoarderDTO> select() { // 전체리스트라서 arraylist
-		ArrayList<BoarderDTO> list = new ArrayList<BoarderDTO>();
-		BoarderDTO dto;
-		String sql = "select a.USERID userid, a.BOARDID BOARDID, a.BTITLE BTITLE , a.BCONTENT BCONTENT, a.BDATE BDATE, a.BOARDFILE BOARDFILE, a.HIT HIT,\r\n" + 
-				"b.username username from c_board a, C_user b\r\n" + 
-				"where a.userid = b.userid order by BOARDID asc";
-		// "select USERID, BOARDID, BTITLE, BCONTENT, BDATE, BOARDFILE, HIT from
-		// c_board";
+	public int recordTotal(String title) {
+		int count = 0;
+		String where = "";
+		if (title != null) {
+			where += "where btitle like '%' || ? || '%' ";
+		}
+		String sql = "select count(*) from c_board "
+				+ where;//
 
 		try {
 			conn = JDBCutil.connect();
 			pstmt = conn.prepareStatement(sql);
+			if (title != null) {
+				pstmt.setString(1, title);
+			}
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				count = rs.getInt(1);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCutil.disconnect(pstmt, conn);
+		}
+		return count;
+	
+	}
+	
+
+	public BoarderDAO() {
+		super();
+	}
+
+	public ArrayList<BoarderDTO> select(String title, int first, int last) { // 전체리스트라서 arraylist
+		ArrayList<BoarderDTO> list = new ArrayList<BoarderDTO>();
+		BoarderDTO dto;
+		String where = "";
+		if (title != null) {
+			where += "and btitle like '%' || ? || '%' ";
+		}
+		String sql = "select * from ( select a.*, rownum  rnum from ( "
+				+ "select a.USERID userid, a.BOARDID BOARDID, a.BTITLE BTITLE , a.BCONTENT BCONTENT, a.BDATE BDATE, a.BOARDFILE BOARDFILE, a.HIT HIT,"
+				+ "b.username username from c_board a, C_user b  where a.userid = b.userid  " + where
+				+ " order by BOARDID asc" 
+				+ ")a )b where rnum between ? and ?";
+		// "select USERID, BOARDID, BTITLE, BCONTENT, BDATE, BOARDFILE, HIT from
+		// c_board";
+
+		try {
+			int i = 0;
+			conn = JDBCutil.connect();
+			pstmt = conn.prepareStatement(sql);
+
+			if (title != null) {
+				pstmt.setString(++i, title);
+			}
+			pstmt.setInt(++i, first);
+			pstmt.setInt(++i, last);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
 				dto = new BoarderDTO();
@@ -45,37 +89,12 @@ public class BoarderDAO {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JDBCutil.disconnect(pstmt, conn);
 		}
 		return list;
 	}
 
-	public ArrayList<BoarderDTO> searchSelect() { // 전체리스트라서 arraylist
-		ArrayList<BoarderDTO> list = new ArrayList<BoarderDTO>();
-		BoarderDTO dto;
-		String sql = "select BCONTENT, USERID, BTITLE from c_board where BTITLE like '?%'";
-		return list;
-	}
-
-	public BoarderDTO selectOption(int option, String keyword) {
-		String sql = sqlString(option);
-		// int option => 1=> 제목, 2=> 제목+내용,
-
-		return null;
-	}
-
-	public String sqlString(int option) {
-		switch (option) {
-		case 1:
-			return "select *from c_board where BTITLE like '%a%'";
-			
-		case 2:
-
-			break;
-		default:
-			return "";
-		}
-		return null;
-	}
 
 	public BoarderDTO select(int key, String str) {
 		BoarderDTO dto = new BoarderDTO();
@@ -110,8 +129,9 @@ public class BoarderDAO {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JDBCutil.disconnect(pstmt, conn);
 		}
-		close();
 		return dto;
 	}
 
@@ -130,9 +150,10 @@ public class BoarderDAO {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JDBCutil.disconnect(pstmt, conn);
 		}
 
-		close();
 		return n;
 	}
 
@@ -158,8 +179,9 @@ public class BoarderDAO {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JDBCutil.disconnect(pstmt, conn);
 		}
-		close();
 		return n;
 	}
 
@@ -174,10 +196,42 @@ public class BoarderDAO {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JDBCutil.disconnect(pstmt, conn);
 		}
-		close();
 
 	}
+
+//	public ArrayList<BoarderDTO> search(String title) { // 전체리스트라서 arraylist
+//		ArrayList<BoarderDTO> list = new ArrayList<BoarderDTO>();
+//		BoarderDTO dto;
+//		String sql = "select * from c_board where BTITLE like '%?%'";
+//
+//		try {
+//			conn = JDBCutil.connect();
+//			pstmt = conn.prepareStatement(sql);
+//			pstmt.setString(1, title);
+//			rs = pstmt.executeQuery();
+//			while (rs.next()) {
+//				dto = new BoarderDTO();
+//				dto.setbId(rs.getString("USERID"));
+//				dto.setbNum(rs.getInt("BOARDID"));
+//				dto.setbTitle(rs.getString("BTITLE"));
+//				dto.setbContent(rs.getString("BCONTENT"));
+//				dto.setbWriteDate(rs.getDate("BDATE"));
+//				dto.setBfileName(rs.getString("BOARDFILE"));
+//				dto.setbHit(rs.getInt("HIT"));
+//				dto.setbName(rs.getString("username"));
+//				list.add(dto);
+//			}
+//
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			JDBCutil.disconnect(pstmt, conn);
+//		}
+//		return list;
+//	}
 
 	public void updateCount(int key) {
 		String sql = "update c_board set hit = nvl(hit,0) + 1 where BOARDID= ?";
@@ -190,8 +244,9 @@ public class BoarderDAO {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JDBCutil.disconnect(pstmt, conn);
 		}
-		close();
 	}
 
 	private void close() {

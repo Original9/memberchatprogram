@@ -29,7 +29,7 @@ public class BorderReadCommand implements Command {
 		}
 		if(cnt == null) {
 			Cookie c = new Cookie("count"+key, "yes");
-			c.setMaxAge(60*60*24*10);
+			c.setMaxAge(5);
 			response.addCookie(c);
 			dao.updateCount(key);
 		}

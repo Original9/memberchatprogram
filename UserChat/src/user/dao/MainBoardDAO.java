@@ -15,17 +15,66 @@ public class MainBoardDAO {
 	PreparedStatement pstmt;
 	ResultSet rs;
 	
-	public ArrayList<MainBoardDTO> select() { //전체리스트라서 arraylist
-		ArrayList<MainBoardDTO> list = new ArrayList<MainBoardDTO>();
-		MainBoardDTO dto;
-		String sql="select a.USERID userid, a.NOTICEID NOTICEID, a.NTITLE NTITLE , a.NCONTENT NCONTENT, a.NDATE NDATE, a.noticefile nOTICEFILE, a.HIT HIT,\r\n" + 
-				"b.username username from notice a, C_user b\r\n" + 
-				"where a.userid = b.userid";
-		//"select USERID, BOARDID, BTITLE, BCONTENT, BDATE, BOARDFILE, HIT from c_board";
-		
+	public int recordTotal(String NTITLE) {
+		int count = 0;
+		String where = "";
+		if (NTITLE != null) {
+			where += "where NTITLE like '%' || ? || '%' ";
+		}
+		String sql = "select count(*) from notice "
+				+ where;
+
 		try {
 			conn = JDBCutil.connect();
 			pstmt = conn.prepareStatement(sql);
+			if (NTITLE != null) {
+				pstmt.setString(1, NTITLE);
+			}
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				count = rs.getInt(1);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCutil.disconnect(pstmt, conn);
+		}
+		return count;
+	
+	}
+	
+	public ArrayList<MainBoardDTO> select(String NTITLE, int first, int last) { //전체리스트라서 arraylist
+		ArrayList<MainBoardDTO> list = new ArrayList<MainBoardDTO>();
+		MainBoardDTO dto;
+		String where = "";
+		if (NTITLE != null) {
+			where += "and NTITLE like '%' || ? || '%' ";
+		}
+		String sql = "select * from ( select a.*, rownum  rnum from ( "
+					+ "select a.USERID userid, a.NOTICEID NOTICEID, a.NTITLE NTITLE , a.NCONTENT NCONTENT, a.NDATE NDATE, a.noticefile nOTICEFILE, a.HIT HIT,"
+					+ "b.username username from notice a, C_user b where a.userid = b.userid  " + where
+					+ " order by NOTICEID asc"
+					+ ")a )b where rnum between ? and ?";
+					
+				
+				
+//				"select a.USERID userid, a.NOTICEID NOTICEID, a.NTITLE NTITLE , a.NCONTENT NCONTENT, a.NDATE NDATE, a.noticefile nOTICEFILE, a.HIT HIT,\r\n" + 
+//				"b.username username from notice a, C_user b\r\n" + 
+//				"where a.userid = b.userid order by NOTICEID asc";
+		//"select USERID, BOARDID, BTITLE, BCONTENT, BDATE, BOARDFILE, HIT from c_board";
+		
+		try {
+			int i = 0;
+			conn = JDBCutil.connect();
+			pstmt = conn.prepareStatement(sql);
+			
+			if (NTITLE != null) {
+				pstmt.setString(++i, NTITLE);
+			}
+			pstmt.setInt(++i, first);
+			pstmt.setInt(++i, last);
 			rs= pstmt.executeQuery();
 			while(rs.next()) {
 				dto = new MainBoardDTO();
@@ -43,7 +92,10 @@ public class MainBoardDAO {
 			
 		} catch(SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JDBCutil.disconnect(pstmt, conn);
 		}
+		
 		return list;
 	}
 	
@@ -64,6 +116,7 @@ public class MainBoardDAO {
 				dto.setMbContent(rs.getString("NCONTENT"));
 				dto.setMbWriteDate(rs.getDate("NDATE"));
 				dto.setMbfileName(rs.getString("NOTICEFILE"));
+				dto.setMbHit(rs.getInt("HIT"));
 				
 				
 //				dto.setbNum(rs.getInt("bnum"));
@@ -74,14 +127,15 @@ public class MainBoardDAO {
 //				dto.setbWriteDate(rs.getDate("bwritedate"));
 //				dto.setbId(rs.getString("bid"));
 //				dto.setBfileName(rs.getString("filename"));
-				if(str.equals("read"))
-					readCount(key); //조회수 1씩 올라가게 수정
+//				if(str.equals("read"))
+//					readCount(key); //조회수 1씩 올라가게 수정
 			}
 			
 		} catch(SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JDBCutil.disconnect(pstmt, conn);
 		}
-		close();
 		return dto;
 	}
 	
@@ -103,9 +157,10 @@ public class MainBoardDAO {
 			
 		} catch(SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JDBCutil.disconnect(pstmt, conn);
 		}
 		
-		close();
 		return n;
 	}
 	
@@ -131,8 +186,9 @@ public class MainBoardDAO {
 					
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JDBCutil.disconnect(pstmt, conn);
 		}
-		close();
 		return n;
 	}
 	
@@ -148,25 +204,28 @@ public class MainBoardDAO {
 		
 				} catch (SQLException e) {
 					e.printStackTrace();
+				} finally {
+					JDBCutil.disconnect(pstmt, conn);
 				}
-		close();
 		
 	}
 	
 
 	
-	private void readCount(int key) {
+	public void readCount(int key) {
 		String sql = "update NOTICE set hit = nvl(hit,0) + 1 where NOTICEID= ?";
 		
 		try {
+			conn = JDBCutil.connect();
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, key);
 			pstmt.execute();
 			
 		} catch(SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JDBCutil.disconnect(pstmt, conn);
 		}
-		close();
 	}
 	
 	

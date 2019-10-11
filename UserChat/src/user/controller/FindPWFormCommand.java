@@ -13,8 +13,8 @@ public class FindPWFormCommand implements Command {
 	@Override
 	public String excute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		return null;
+
+		return "jsp/findID.jsp";
 	}
 
 }

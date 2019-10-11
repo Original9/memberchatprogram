@@ -1,0 +1,44 @@
+			Suggestions s = new Suggestions();
+			s.setSuggestions_Id(rs.getInt("SUGGESTIONS_ID"));
+			s.setUser_Id(rs.getInt("USER_ID"));
+			s.setSuggestion_Date(rs.getString("SUGGESTION_DATE"));
+			s.setCONTENT(rs.getString("SUGGESTION_VALUE"));
+			s.setSuccess(rs.getString("SUCCESS"));
+
+
+
+
+
+	public ObservableList<Suggestions> select(Connection conn) throws SQLException {
+		ObservableList<Suggestions> suggestions = FXCollections.observableArrayList();
+		String sql = "select * " + "from Suggestions";
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		ResultSet rs = pstmt.executeQuery();
+		while (rs.next()) {
+			Suggestions a = new Suggestions(new SimpleIntegerProperty(rs.getInt("SUGGESTIONS_ID")),
+					new SimpleIntegerProperty(rs.getInt("USER_ID")),
+					new SimpleStringProperty(rs.getString("SUGGESTION_DATE")),
+					new SimpleStringProperty(rs.getString("SUGGESTION_VALUE")),
+					new SimpleStringProperty(rs.getString("SUCCESS")));
+			suggestions.add(a);
+//			suggestions.add(a);
+//			//Suggestions sug = new Suggestions();
+//			suggestions = FXCollections.observableArrayList(
+//					new Suggestions(new SimpleIntegerProperty(rs.getInt("SUGGESTIONS_ID")),
+//							new SimpleIntegerProperty(rs.getInt("USER_ID")),
+//							new SimpleStringProperty(rs.getString("SUGGESTION_DATE")),
+//							new SimpleStringProperty(rs.getString("SUGGESTION_VALUE")),
+//							new SimpleStringProperty(rs.getString("SUCCESS"))));
+
+			// sug.setCONTENT(rs.getString("SUGGESTION_CONTENT"));
+			// sug.setSuggestions_Id(rs.getInt("USER_ID"));
+
+			// suggestions.add(sug);
+
+		}
+		return suggestions;
+
+}
+
+
+ "select * " + "from Suggestions where user_id = ?";

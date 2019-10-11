@@ -148,8 +148,7 @@
 		$("#btnRanNumCheck").click(function() {
 
 			var param = {
-				myVal : document.frm.checkRanNum.value, ranNum : document.frm.ranNum.value
-			};
+				myVal : document.frm.checkRanNum.value };
 
 			var url = "ranNumCheck.do";
 
@@ -164,9 +163,13 @@
 					//$("#ranNumInputTitle").css("visibility","visible");
 					//$("#checkRanNum").css("visibility","visible");
 				}
+				$("#EmailCheckResult").css("color",result.color);
 				$("#EmailCheckResult").html(result.message);
+				
+				//세션의 ranNum 삭제.
 			}).fail(function(xhr, status) {
-				$("#EmailCheckResult").html(status);
+				document.getElementById("EmailCheckResult").style.color="red";
+				$("#EmailCheckResult").html("인증번호를 공백없이 입력해 주세요!");
 			});
 
 		})
@@ -185,6 +188,7 @@
 		<div class="row">
 			<div class="col-md-8">
 				<form method="post" action="insertMember.do" id="frm" name="frm">
+					
 					<table class="table table-bordered table-hover"
 						style="text-align: center; border: 1px solid #dddddd">
 						<thead>
@@ -192,7 +196,6 @@
 								<th colspan="3"><h4>회원 등록 양식</h4></th>
 							</tr>
 						</thead>
-						<input type="hidden" id="ranNum" name="ranNum">
 						<tbody>
 							<tr>
 								<td style="width: 110px;"><h5>아이디</h5></td>

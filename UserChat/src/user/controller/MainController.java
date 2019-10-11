@@ -41,8 +41,11 @@ public class MainController extends HttpServlet {
 		map.put("/login.do", new LoginFormCommand());
 		map.put("/loginCheck.do", new LoginCheckCommand());
 		map.put("/findIDForm.do", new FindIDFormCommand());
-	//	map.put("/findID.do", new FindIDCommand());
+		map.put("/validCheckAndSendForFindID.do", new ValidCheckAndSendForFindIDCommand());
+		map.put("/validCheckAndSendForFindPW.do", new ValidCheckAndSendForFindPWCommand());
+		map.put("/findID.do", new FindIDCommand());
 		map.put("/findPWForm.do", new FindPWFormCommand());
+		map.put("/findPW.do", new FindPWCommand());
 		map.put("/logout.do", new LogoutCommand());
 		map.put("/changeInfoForm.do", new ChangeInfoFormCommand());
 		map.put("/changeInfo.do", new ChangeInfoCommand());
@@ -77,7 +80,7 @@ public class MainController extends HttpServlet {
 		map.put("/MainboardUpdateForm.do", new MainboardUpdateForm());
 		map.put("/mainboardUpdate.do", new MainBoardUpdateCommand());
 		map.put("/mainboardDelete.do", new MainBoardDeleteCommand());
-		
+//		map.put("/search.do", new BoardSearchCommand());
 				
 		
 		//원조's
@@ -86,7 +89,6 @@ public class MainController extends HttpServlet {
 		map.put("/friendInsert.do", new friendInsertCommand());
 		map.put("/inBox.do", new inBoxCommand());
 		map.put("/deleteFriend.do", new deleteFriendCommand());
-		map.put("/inBoxListDelete.do",new inBoxListDeleteCommand());
 		
 		
         
@@ -98,7 +100,9 @@ public class MainController extends HttpServlet {
 		String uri = request.getRequestURI();
 		String context = request.getContextPath();
 		String path = uri.substring(context.length());
-		
+//		System.out.println("URi:" + uri);
+//		System.out.println("cs:" + context);
+//		System.out.println("path:" + path);
 		
 		Command comm = map.get(path);
 		String page = comm.excute(request, response);

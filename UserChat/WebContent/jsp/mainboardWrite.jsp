@@ -36,11 +36,12 @@
 						<tr>
 							<th width="100">제목</th>
 							<td colspan="3"><input type="text" id="title" name="title"
-								size="100"></td>
+								size="100" placeholder="제목을 입력 하세요."></td>
 						</tr>
 						<tr>
 							<th width="100">내용</th>
-							<td colspan="3"><textarea rows="30" id="content" name="content" style="width:99%" ></textarea>
+							<td colspan="3"><textarea rows="30" id="content" name="content" style="width:99%" 
+							placeholder="내용을 입력 하세요.">></textarea>
 						</tr>
 						<tr>
 							<th width="100">첨부파일</th>
