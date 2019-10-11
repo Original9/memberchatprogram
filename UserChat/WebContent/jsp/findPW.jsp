@@ -10,12 +10,32 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
+//버튼클릭이벤트
+
+window.onload = function(){
+	var sendEmailBtn = document.getElementById('btnEmailSend');
+	var cancelBtn = document.getElementById('btnClose');
+	var form = document.frm;
+	
+	sendEmailBtn.onclick = function(){
+		form.submit();
+	};
+	
+	cancelBtn.onclick = function(){
+		self.close();
+	};
+	
+}
+
+
+//function 
 
 /*---------------------------
 아이디,이메일 유효성 체크 및 이메일 발송
 ------------------------------*/
-$(function() {
-	$("#btnEmailCheck").click(function() {
+
+/* $(function() {
+	$("#btnEmailSend").click(function() {
 
 		var param = {
 				userID : document.frm.id.value,
@@ -23,7 +43,7 @@ $(function() {
 		};
 		
 
-		var url = "validCheckAndSend.do";
+		var url = "findPW.do";
 
 		
 		$.ajax(url, {
@@ -31,13 +51,14 @@ $(function() {
 			dataType : 'json'
 		}).done(function(result) {
 			
+			
 		}).fail(function(xhr, status) {
-			$("#idFindResult").html(status);
+			alert(status);
 		});
 		
 		
 
-	})
+	}) */
 
 </script>
 </head>
@@ -59,18 +80,21 @@ $(function() {
 					</thead>
 					<tr>
 						<td valign="middle" style="width: 100px; height: 30px;">아이디</td>
-						<td align="left" style="width: 100px; border-right: 0px;"><input
-							type="text" style="width: 150px;" id="id" name="name" size="20"></td>
-						<td align="center" style="border-left: 0px"><button
-								class="btn btn-primary" id="btnEmailSend" type="button">이메일
-								전송</button></td>
+						<td align="left" style="width: 100px"><input
+							type="text" style="width: 150px" id="id" name="id" size="20"></td>
+						
+					</tr>
+					<tr>
+						<td valign="middle" style="width: 100px; height: 30px;">이메일</td>
+						<td align="left" style="width: 100px"><input
+							type="text" style="width: 350px" id="email" name="email" size="20"></td>
 					</tr>
 					
 				</table>
 
 				<div align="center">
-					<input class="btn btn-primary" type="reset"
-						onclick="location.href='findPWForm.do'" value="취소"> <!-- 취소 시 창 닫히고 로그인페이지로 가게 바꾸기-->
+					<button	class="btn btn-primary" id="btnEmailSend" type="button">이메일 전송</button>
+					<button class="btn btn-primary" id="btnClose" type="button">취소</button>
 				</div>
 			</form>
 		</div>

@@ -166,7 +166,7 @@
 				$("#EmailCheckResult").css("color",result.color);
 				$("#EmailCheckResult").html(result.message);
 				
-				//세션의 ranNum 삭제.
+				//세션의 ranNum 삭제.->커맨드에서 해줌.
 			}).fail(function(xhr, status) {
 				document.getElementById("EmailCheckResult").style.color="red";
 				$("#EmailCheckResult").html("인증번호를 공백없이 입력해 주세요!");

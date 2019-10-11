@@ -208,7 +208,7 @@ public class UserDAO {
 				dto.setUserAge(rs.getInt("userage"));
 				dto.setUserGender(rs.getString("usergender"));
 				dto.setUserEmail(rs.getString("userEmail"));
-//				dto.setUserGrant(rs.getString("ugrant"));
+				dto.setUserGrant(rs.getString("ugrant"));
 				
 				list.add(dto);
 			}
@@ -317,6 +317,28 @@ public class UserDAO {
 		
 		return chk;
 			
+	}
+	
+	public int findPW(String id, String ranString) { //사실 find password가 아닌 임시비밀번호로 변경하는 작업.
+		int n=0;
+		String sql="update c_user set userpassword=? where userid=?";
+		
+		try {
+			conn = JDBCutil.connect();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, ranString);
+			pstmt.setString(2, id);
+
+			n=pstmt.executeUpdate();
+			//System.out.println("int n = "+n);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCutil.disconnect(pstmt, conn);
+		}
+		
+		return n;
+		
 	}
 	
 }

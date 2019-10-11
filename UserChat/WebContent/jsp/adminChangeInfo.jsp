@@ -59,11 +59,19 @@
 
 				<th>아이디</th>
 
+				<th>비밀번호</th>
+
 				<th>이름</th>
 
 				<th>나이</th>
-
+				
+				<th>성별</th>
+				
 				<th>이메일</th>
+				
+				<th>등급</th>
+				
+				<th>-</th>
 
 			</tr>
 
@@ -79,9 +87,13 @@
 			<c:forEach items="${list }" var="dto">
 				<tr onclick="location.href='#.do?key=${dto.userID}'">
 					<td align="center">${dto.userID}</td>
+					<td align="center">${dto.userPassword}</td>
 					<td align="center">${dto.userName}</td>
 					<td align="center">${dto.userAge}</td>
+					<td align="center">${dto.userGender}</td>
 					<td align="center">${dto.userEmail}</td>
+					<td align="center">${dto.userGrant}</td>
+					<td align="center"><button id="updateMemberInfo" class="btn btn-primary">수정</button>&nbsp;&nbsp;&nbsp;&nbsp;<button id="deleteMember" class="btn btn-primary">삭제</button></td>
 				</tr>
 			</c:forEach>
 
