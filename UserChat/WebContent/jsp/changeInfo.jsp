@@ -136,7 +136,7 @@ $(function() {
 </script>
 
 </head>
-<body>
+
 <body>
 	<jsp:include page="menu.jsp"></jsp:include>
 	<div><br /><br /><br /></div>

@@ -43,7 +43,7 @@
 	}
 	
 	//비밀번호찾기 창 여는 function
-	function findID() {
+	function findPW() {
 		
 		//새 창의 크기
 		let cw=500;
@@ -87,7 +87,7 @@
 				<div align="center">
 					<input class="btn btn-primary" type="button" onclick="checkForm()" value="로그인">&nbsp;&nbsp;&nbsp;
 					<input class="btn btn-primary" type="button" onclick="findID()" value="아이디 찾기">&nbsp;&nbsp;&nbsp;
-					<input class="btn btn-primary" type="button" onclick="location.href='findPWForm.do'" value="비밀번호 찾기">&nbsp;&nbsp;&nbsp;
+					<input class="btn btn-primary" type="button" onclick="findPW()" value="비밀번호 찾기">&nbsp;&nbsp;&nbsp;
 					<input class="btn btn-primary" type="reset" onclick="location.href='login.do'" value="취소">
 				</div>
 			</form>

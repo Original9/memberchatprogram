@@ -14,7 +14,7 @@ public class FindPWFormCommand implements Command {
 	public String excute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		return "jsp/findID.jsp";
+		return "jsp/findPW.jsp";
 	}
 
 }

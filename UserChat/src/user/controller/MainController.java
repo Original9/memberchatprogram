@@ -42,7 +42,6 @@ public class MainController extends HttpServlet {
 		map.put("/loginCheck.do", new LoginCheckCommand());
 		map.put("/findIDForm.do", new FindIDFormCommand());
 		map.put("/validCheckAndSendForFindID.do", new ValidCheckAndSendForFindIDCommand());
-		map.put("/validCheckAndSendForFindPW.do", new ValidCheckAndSendForFindPWCommand());
 		map.put("/findID.do", new FindIDCommand());
 		map.put("/findPWForm.do", new FindPWFormCommand());
 		map.put("/findPW.do", new FindPWCommand());
@@ -50,8 +49,9 @@ public class MainController extends HttpServlet {
 		map.put("/changeInfoForm.do", new ChangeInfoFormCommand());
 		map.put("/changeInfo.do", new ChangeInfoCommand());
 		map.put("/changePWForm.do", new ChangePWFormCommand());
-		map.put("/adminChangeInfoForm.do", new AdminChangeInfoFormCommand());
-		map.put("/adminDeleteUserForm.do", new AdminDeleteUserFormCommand());
+		map.put("/adminChangeInfoForm.do", new AdminChangeInfoFormCommand());//delete페이지와 하나로 통합,이름바꾸기
+		//
+		//map.put("/adminDeleteUserForm.do", new AdminDeleteUserFormCommand());
 		map.put("/changePW.do", new ChangePWCommand());
 		map.put("/emailCheck.do", new EmailCheckCommand());
 		map.put("/ranNumCheck.do", new RanNumCheckCommand());
