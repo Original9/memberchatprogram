@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import user.command.AdminChangeInfoFormCommand;
+import user.command.AdminUpdateUserCommand;
 import user.command.BoardDeleteCommand;
 import user.command.BoardListCommand;
 import user.command.BoardUpdateCommand;
@@ -83,8 +84,8 @@ public class MainController extends HttpServlet {
 		map.put("/changeInfo.do", new ChangeInfoCommand());
 		map.put("/changePWForm.do", new ChangePWFormCommand());
 		map.put("/adminChangeInfoForm.do", new AdminChangeInfoFormCommand());//delete페이지와 하나로 통합,이름바꾸기
-		//
-		//map.put("/adminDeleteUserForm.do", new AdminDeleteUserFormCommand());
+		map.put("/adminUpdateUser.do", new AdminUpdateUserCommand());
+		//map.put("/adminDeleteUser.do", new AdminDeleteUserCommand());
 		map.put("/changePW.do", new ChangePWCommand());
 		map.put("/emailCheck.do", new EmailCheckCommand());
 		map.put("/ranNumCheck.do", new RanNumCheckCommand());

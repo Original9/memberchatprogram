@@ -52,9 +52,6 @@
     input.text { margin-bottom:12px; width:95%; padding: .4em; }
     fieldset { padding:0; border:0; margin-top:25px; }
     h1 { font-size: 1.2em; margin: .6em 0; }
-    div#users-contain { width: 350px; margin: 20px 0; }
-    div#users-contain table { margin: 1em 0; border-collapse: collapse; width: 100%; }
-    div#users-contain table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
     .ui-dialog .ui-state-error { padding: .3em; }
     .validateTips { border: 1px solid transparent; padding: 0.3em; }
   </style>
@@ -116,20 +113,21 @@
       var valid = true;
       allFields.removeClass( "ui-state-error" );
  
-      valid = valid && checkLength( name, "username", 3, 16 );
+      /* valid = valid && checkLength( name, "username", 3, 16 );
       valid = valid && checkLength( email, "email", 6, 80 );
       valid = valid && checkLength( password, "password", 5, 16 );
  
       valid = valid && checkRegexp( name, /^[a-z]([0-9a-z_\s])+$/i, "Username may consist of a-z, 0-9, underscores, spaces and must begin with a letter." );
       valid = valid && checkRegexp( email, emailRegex, "eg. ui@jquery.com" );
-      valid = valid && checkRegexp( password, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9" );
+      valid = valid && checkRegexp( password, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9" ); */
  
-      if ( valid ) {
-        $( "#users tbody" ).append( "<tr>" +
+      if ( valid ) { //.do 호출
+    	document.frm.submit();  
+        /* $( "#users tbody" ).append( "<tr>" +
           "<td>" + name.val() + "</td>" +
           "<td>" + email.val() + "</td>" +
           "<td>" + password.val() + "</td>" +
-        "</tr>" );
+        "</tr>" ); */
         dialog.dialog( "close" );
       }
       return valid;
@@ -137,12 +135,12 @@
  
     dialog = $( "#dialog-form" ).dialog({
       autoOpen: false,
-      height: 400,
-      width: 350,
+      height: 800,
+      width: 700,
       modal: true,
       buttons: {
-        "Create an account": addUser,
-        Cancel: function() {
+        "수정": addUser,
+        "취소": function() {
           dialog.dialog( "close" );
         }
       },
@@ -157,8 +155,26 @@
       addUser();
     });
  
-    $( "#create-user" ).button().on( "click", function() {
+    $( "body" ).on( "click", "[id^=update-user]",function() {
       dialog.dialog( "open" );
+      var td = $(this).parent().parent();
+      //console.log($(td).children().eq(0));
+      var tdLen = td[0].cells.length;
+      //console.log(tdLen);
+      //var inputID = document.getElementById('id');
+      //console.log(inputID);
+      //$(inputID).val($(td).children().eq(0).text()); //dialog의 id가 id인 input 태그 안의 값을 table의 클릭된 tr 첫번째 값(userID)로 설정.
+      //document.getElementById('id').innerHTML(id);
+      
+      console.log(td.children().eq(0).text());
+      
+      var updateForm = document.frm;
+      //console.log(updateForm[tdLen-1]);
+      
+      for(i=1;i<tdLen-1;i++){
+    	  updateForm[i].value = td.children().eq(i-1).text();
+      }
+      
     });
   } );
   </script>
@@ -201,15 +217,15 @@
 				</tr>
 			</c:if>
 			<c:forEach items="${list }" var="dto">
-				<tr onclick="location.href='#.do?key=${dto.userID}'">
-					<td align="center">${dto.userID}</td>
-					<td align="center">${dto.userPassword}</td>
-					<td align="center">${dto.userName}</td>
-					<td align="center">${dto.userAge}</td>
-					<td align="center">${dto.userGender}</td>
-					<td align="center">${dto.userEmail}</td>
-					<td align="center">${dto.userGrant}</td>
-					<td align="center"><button id="create-user" class="btn btn-primary">수정</button>&nbsp;&nbsp;&nbsp;&nbsp;<button id="deleteMember" class="btn btn-primary">삭제</button></td>
+				<tr>  <%-- onclick="location.href='#.do?key=${dto.userID}'" 클릭 시 #.do로 키값 넘기는 옵션--%>
+					<td id="userID" align="center">${dto.userID}</td>
+					<td id="userPassword" align="center">${dto.userPassword}</td>
+					<td id="userName" align="center">${dto.userName}</td>
+					<td id="userAge" align="center">${dto.userAge}</td>
+					<td id="userGender" align="center">${dto.userGender}</td>
+					<td id="userEmail" align="center">${dto.userEmail}</td>
+					<td id="userGrant" align="center">${dto.userGrant}</td>
+					<td align="center"><button id="update-user${status.count}" class="btn btn-primary">수정</button>&nbsp;&nbsp;&nbsp;&nbsp;<button id="deleteMember" class="btn btn-primary">삭제</button></td>
 				</tr>
 			</c:forEach>
 
@@ -240,17 +256,25 @@
 });
 </script>
 
-<div id="dialog-form" title="Create new user" >
+<div id="dialog-form" title="회원정보수정" >
   <p class="validateTips">All form fields are required.</p>
  
-  <form>
+  <form name="frm" action="adminUpdateUser.do">
     <fieldset>
-      <label for="name">Name</label>
-      <input type="text" name="name" id="name" value="Jane Smith" class="text ui-widget-content ui-corner-all">
-      <label for="email">Email</label>
-      <input type="text" name="email" id="email" value="jane@smith.com" class="text ui-widget-content ui-corner-all">
+      <label for="id">ID</label>
+      <input type="text" name="userID" id="id" value="" class="text ui-widget-content ui-corner-all" readOnly="readOnly">
       <label for="password">Password</label>
-      <input type="password" name="password" id="password" value="xxxxxxx" class="text ui-widget-content ui-corner-all">
+      <input type="password" name="userPassword" id="password" value="xxxxxxx" class="text ui-widget-content ui-corner-all">
+      <label for="name">Name</label><!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="gender">Gender</label> -->
+      <input type="text" name="userName" id="name" value="Jane Smith" class="text ui-widget-content ui-corner-all">
+      <label for="age">Age</label>
+      <input type="text" name="userAge" id="age" value="100" class="text ui-widget-content ui-corner-all">
+      <label for="gender">Gender</label>
+      <input type="text" name="userGender" id="gender" value="F" class="text ui-widget-content ui-corner-all">
+      <label for="email">Email</label>
+      <input type="text" name="userEmail" id="email" value="jane@smith.com" class="text ui-widget-content ui-corner-all">
+      <label for="grade">Grade</label>
+      <input type="text" name="userGrant" id="grade" value="U" class="text ui-widget-content ui-corner-all">
  
       <!-- Allow form submission with keyboard without duplicating the dialog button -->
       <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
