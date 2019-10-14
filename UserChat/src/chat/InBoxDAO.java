@@ -68,7 +68,6 @@ public class InBoxDAO {
 				dto.setChat_num(rs2.getInt("chat_num"));
 				dto.setChat_participants(rs2.getString("chat_member"));				
 				list2.add(dto);
-				System.out.println(list2); // 현재 참여자는 kwj 밖에 없다. 
 				// list2 에 넣어준다. 메세지함에서 삭제했는지 안했는지 확인하기 위해서 
 			}			
 			
@@ -80,11 +79,9 @@ public class InBoxDAO {
 				dto.setUnreadMeassgeCount(rs1.getInt("Mcount")); // Integer type의 초기값은 0 , null이 들어가 있다면
 				
 				if(is_member_not_deleted(list2, dto, userID)){
-					System.out.println("is_member_not_deleted안하고 추가한다.");
 					list1.add(dto);// 리스트에 추가하기 전에 방번호에 현재 유저가 DELETE 했는지 확인하고 리스트에 넣어준다.
 				}else {
-					System.out.println("삭제를 했으면 일로 들어와야하는데 !!!!");
-					// 업으면 add안해준다. 
+					// 없으면 add안해준다. 
 				}		
 									
 			}			
@@ -141,7 +138,7 @@ public class InBoxDAO {
 			rs1 = pstmt1.executeQuery();
 			while(rs1.next()) {
 				user_count = rs1.getInt("user_count"); // 처음 select 했을때 user_count값을 가져온다. 
-				members = rs1.getString("chat_member").split(",");				
+				members = rs1.getString("chat_member").split(",");		
 				for(int i = 0; i < members.length; i++) {
 					if(members[i].equals(userID))
 					{
