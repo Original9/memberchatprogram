@@ -83,7 +83,8 @@ $(function() {
 
 		$.ajax(url, {
 			data : param,
-			dataType : 'json'
+			dataType : 'json',
+			type : "POST"
 		}).done(function(result) {
 			if(result.result == true){
 				//document.frm.userEmail.readOnly=true;
@@ -116,7 +117,8 @@ $(function() {
 
 		$.ajax(url, {
 			data : param,
-			dataType : 'json'
+			dataType : 'json',
+			type : "POST"
 		}).done(function(result) {
 			if(result.result == true){
 				document.frm.userEmail.readOnly=true;
