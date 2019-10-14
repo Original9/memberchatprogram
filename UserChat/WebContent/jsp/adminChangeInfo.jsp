@@ -262,7 +262,7 @@
   <form name="frm" action="adminUpdateUser.do">
     <fieldset>
       <label for="id">ID</label>
-      <input type="text" name="userID" id="id" value="" class="text ui-widget-content ui-corner-all">
+      <input type="text" name="userID" id="id" value="" class="text ui-widget-content ui-corner-all" readOnly="readOnly">
       <label for="password">Password</label>
       <input type="password" name="userPassword" id="password" value="xxxxxxx" class="text ui-widget-content ui-corner-all">
       <label for="name">Name</label><!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="gender">Gender</label> -->

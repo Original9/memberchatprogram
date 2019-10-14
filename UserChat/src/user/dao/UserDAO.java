@@ -343,7 +343,7 @@ public class UserDAO {
 	
 	public int adminChangeInfo(UserDTO dto, String id) {
 		int n = 0;
-		String sql = "update c_user set userid=?, userpassword=?, username=?, userage=?, usergender=?, useremail=?, usergrade=? where userid=?";
+		String sql = "update c_user set userpassword=?, username=?, userage=?, usergender=?, useremail=?, usergrade=? where userid=?";
 		
 		try {
 			conn = JDBCutil.connect();
