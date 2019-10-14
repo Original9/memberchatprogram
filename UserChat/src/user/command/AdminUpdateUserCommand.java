@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.beanutils.BeanUtils;
 
+import user.dao.UserDAO;
 import user.dto.UserDTO;
 
 public class AdminUpdateUserCommand implements Command {
@@ -15,9 +16,10 @@ public class AdminUpdateUserCommand implements Command {
 	@Override
 	public String excute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
 		UserDTO dto = new UserDTO();
-		String path = null;
-		
+		String sc = null;
+
 		try {
 			BeanUtils.copyProperties(dto, request.getParameterMap());
 			System.out.println(dto);
@@ -25,8 +27,27 @@ public class AdminUpdateUserCommand implements Command {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		return "adminChangeInfoForm.do";
+
+		int n = UserDAO.getInstance().adminChangeInfo(dto);
+
+		if (n != 0) {
+
+			System.out.println("회원정보 변경 성공");
+			// JOptionPane.showMessageDialog(null, "로그인 성공.");
+			sc = "<script>" + "alert('성공적으로 변경되었습니다');"
+			+ "location='adminChangeInfoForm.do';"
+					+ "</script>";
+			;
+		} else {
+			System.out.println("변경 실패");
+			sc = "<script>" + "alert('정보 변경 실패');"
+			+ "location='adminChangeInfoForm.do';"
+					+ "</script>";
+			;
+		}
+
+		return "script:" + sc;
+
 	}
 
 }

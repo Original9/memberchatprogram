@@ -341,17 +341,40 @@ public class UserDAO {
 		
 	}
 	
-	public int adminChangeInfo(UserDTO dto, String id) {
+	public int adminChangeInfo(UserDTO dto) {
 		int n = 0;
-		String sql = "update c_user set userpassword=?, username=?, userage=?, usergender=?, useremail=?, usergrade=? where userid=?";
+		String sql = "update c_user set userpassword=?, username=?, userage=?, usergender=?, useremail=?, ugrant=? where userid=?";
 		
 		try {
 			conn = JDBCutil.connect();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, dto.getUserName());
-			pstmt.setInt(2, dto.getUserAge());
-			pstmt.setString(3, dto.getUserEmail());
-			pstmt.setString(4, id);
+			pstmt.setString(1, dto.getUserPassword());
+			pstmt.setString(2, dto.getUserName());
+			pstmt.setInt(3, dto.getUserAge());
+			pstmt.setString(4, dto.getUserGender());
+			pstmt.setString(5, dto.getUserEmail());
+			pstmt.setString(6, dto.getUserGrant());
+			
+			pstmt.setString(7, dto.getUserID());
+
+			n=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCutil.disconnect(pstmt, conn);
+		}
+		
+		return n;
+	}
+	
+	public int adminDeleteUser(String id) {
+		int n = 0;
+		String sql = "delete from c_user where userid=?";
+		
+		try {
+			conn = JDBCutil.connect();
+			
+			pstmt.setString(1, id);
 
 			n=pstmt.executeUpdate();
 		} catch (SQLException e) {

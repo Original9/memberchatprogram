@@ -55,7 +55,7 @@ function emailChangeCancel(){
 }
 
 function changeInfo(){
-	if (form.userEmail.readOnly != true) {
+	if (document.frm.userEmail.readOnly != true) {
 		alert("이메일 인증을 통해 본인 인증을 해주세요.");
 		form.id.focus();
 		return false;

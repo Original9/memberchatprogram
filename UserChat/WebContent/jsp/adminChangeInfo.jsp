@@ -157,25 +157,42 @@
  
     $( "body" ).on( "click", "[id^=update-user]",function() {
       dialog.dialog( "open" );
-      var td = $(this).parent().parent();
+      var td = $(this).parent().parent(); //this = 선택된 버튼.
       //console.log($(td).children().eq(0));
       var tdLen = td[0].cells.length;
-      //console.log(tdLen);
-      //var inputID = document.getElementById('id');
-      //console.log(inputID);
-      //$(inputID).val($(td).children().eq(0).text()); //dialog의 id가 id인 input 태그 안의 값을 table의 클릭된 tr 첫번째 값(userID)로 설정.
-      //document.getElementById('id').innerHTML(id);
       
       console.log(td.children().eq(0).text());
       
       var updateForm = document.frm;
-      //console.log(updateForm[tdLen-1]);
       
       for(i=1;i<tdLen-1;i++){
     	  updateForm[i].value = td.children().eq(i-1).text();
       }
       
     });
+    
+    $( "body" ).on( "click", "[id^=delete-user]",function() {
+    	
+    	var confirmStatus = confirm("정말로 삭제 하시겠습니까?");
+    	
+    	if(confirmStatus){
+        
+        var td = $(this).parent().parent(); //this = 선택된 버튼.
+        //console.log($(td).children().eq(0));
+        var tdLen = td[0].cells.length;
+        
+        console.log(td.children().eq(0).text());
+        
+        var updateForm = document.frm;
+        
+        for(i=1;i<tdLen-1;i++){
+      	  updateForm[i].value = td.children().eq(i-1).text();
+        }
+        location.href="adminDeleteUser.do?key="+$('#id').val();
+        
+    	}
+        
+      });
   } );
   </script>
   
@@ -225,7 +242,7 @@
 					<td id="userGender" align="center">${dto.userGender}</td>
 					<td id="userEmail" align="center">${dto.userEmail}</td>
 					<td id="userGrant" align="center">${dto.userGrant}</td>
-					<td align="center"><button id="update-user${status.count}" class="btn btn-primary">수정</button>&nbsp;&nbsp;&nbsp;&nbsp;<button id="deleteMember" class="btn btn-primary">삭제</button></td>
+					<td align="center"><button id="update-user${status.count}" class="btn btn-primary">수정</button>&nbsp;&nbsp;&nbsp;&nbsp;<button id="delete-user${status.count}" class="btn btn-primary">삭제</button></td>
 				</tr>
 			</c:forEach>
 
