@@ -126,13 +126,15 @@ public class ChatDAO {
 		 Connection conn = null;
 		 PreparedStatement pstmt1 = null;
 		 PreparedStatement pstmt2 = null;
+		 PreparedStatement pstmt3 = null;
 		 ResultSet rs = null;
 		 String SQL1 = null;
 		 String SQL2 = null;
+		 String SQL3 = "update chat_room set chat_member = ?  where chat_num = ?";
 		 if(chatNum.equals("null") )
 		 {
 			 SQL1 = "INSERT INTO CHAT_ROOM VALUES(chat_table_increment.nextval,'2',?)";
-			 SQL2 = "INSERT INTO CHAT VALUES(auto_increment.nextval,?,?,?,sysdate,chat_table_increment.currval,0)";// 이부분 DB에서 동시접속할때의 문제점이 있는지 생각해보기 
+			 SQL2 = "INSERT INTO CHAT VALUES(auto_increment.nextval,?,?,?,sysdate,chat_table_increment.currval,0)";// 이부분 DB에서 동시접속할때의 문제점이 있는지 생각해보기  불러오기전에 메세지 보내는 textarea를 disabled시켜 놓음-- 해결
 		 }else {
 			 SQL2 = "INSERT INTO CHAT VALUES(auto_increment.nextval,?,?,?,sysdate,?,0)";			 
 		 }
@@ -152,6 +154,11 @@ public class ChatDAO {
 				 
 			}else {
 				conn = JDBCutil.connect();
+				pstmt3 = conn.prepareStatement(SQL3);
+				pstmt3.setString(1, fromID+","+toID);
+				pstmt3.setString(2, chatNum);
+				pstmt3.executeUpdate();
+				
 				pstmt1 = conn.prepareStatement(SQL2);
 				pstmt1.setString(1, fromID);
 				pstmt1.setString(2, toID);
@@ -169,6 +176,7 @@ public class ChatDAO {
 		} finally {			
 				JDBCutil.disconnect(pstmt1, conn);
 				JDBCutil.disconnect(pstmt2, conn);
+				JDBCutil.disconnect(pstmt3, conn);
 			
 		}
 		return -1; // 오류 발생  
