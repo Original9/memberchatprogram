@@ -113,16 +113,16 @@
       var valid = true;
       allFields.removeClass( "ui-state-error" );
  
-      valid = valid && checkLength( name, "username", 3, 16 );
+      /* valid = valid && checkLength( name, "username", 3, 16 );
       valid = valid && checkLength( email, "email", 6, 80 );
       valid = valid && checkLength( password, "password", 5, 16 );
  
       valid = valid && checkRegexp( name, /^[a-z]([0-9a-z_\s])+$/i, "Username may consist of a-z, 0-9, underscores, spaces and must begin with a letter." );
       valid = valid && checkRegexp( email, emailRegex, "eg. ui@jquery.com" );
-      valid = valid && checkRegexp( password, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9" );
+      valid = valid && checkRegexp( password, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9" ); */
  
       if ( valid ) { //.do 호출
-    	  
+    	document.frm.submit();  
         /* $( "#users tbody" ).append( "<tr>" +
           "<td>" + name.val() + "</td>" +
           "<td>" + email.val() + "</td>" +
@@ -259,22 +259,22 @@
 <div id="dialog-form" title="회원정보수정" >
   <p class="validateTips">All form fields are required.</p>
  
-  <form name="frm">
+  <form name="frm" action="adminUpdateUser.do">
     <fieldset>
       <label for="id">ID</label>
-      <input type="text" name="id" id="id" value="" class="text ui-widget-content ui-corner-all">
+      <input type="text" name="userID" id="id" value="" class="text ui-widget-content ui-corner-all">
       <label for="password">Password</label>
-      <input type="password" name="password" id="password" value="xxxxxxx" class="text ui-widget-content ui-corner-all">
+      <input type="password" name="userPassword" id="password" value="xxxxxxx" class="text ui-widget-content ui-corner-all">
       <label for="name">Name</label><!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="gender">Gender</label> -->
-      <input type="text" name="name" id="name" value="Jane Smith" class="text ui-widget-content ui-corner-all">
+      <input type="text" name="userName" id="name" value="Jane Smith" class="text ui-widget-content ui-corner-all">
       <label for="age">Age</label>
-      <input type="text" name="age" id="age" value="100" class="text ui-widget-content ui-corner-all">
+      <input type="text" name="userAge" id="age" value="100" class="text ui-widget-content ui-corner-all">
       <label for="gender">Gender</label>
-      <input type="text" name="gender" id="gender" value="F" class="text ui-widget-content ui-corner-all">
+      <input type="text" name="userGender" id="gender" value="F" class="text ui-widget-content ui-corner-all">
       <label for="email">Email</label>
-      <input type="text" name="email" id="email" value="jane@smith.com" class="text ui-widget-content ui-corner-all">
+      <input type="text" name="userEmail" id="email" value="jane@smith.com" class="text ui-widget-content ui-corner-all">
       <label for="grade">Grade</label>
-      <input type="text" name="grade" id="grade" value="U" class="text ui-widget-content ui-corner-all">
+      <input type="text" name="userGrant" id="grade" value="U" class="text ui-widget-content ui-corner-all">
  
       <!-- Allow form submission with keyboard without duplicating the dialog button -->
       <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
