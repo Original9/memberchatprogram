@@ -148,7 +148,7 @@
 			$('#chatList').scrollTop($('#chatList')[0].scrollHeight);//스크롤 밑으로 내려주는거			
 			}
 			// 메세지 목록을 다가져오면 readonly를 풀어준다.
-			$("#chatContent").removeAttr("disabled");
+			
 		}
 		function getinfinitechat(){ //새로운 메세지가 있는지 계속해서 확인
 			setInterval(function(){				
@@ -205,6 +205,7 @@
 		$('#messagelModal').modal("show");
 		$(document).ready(function(){
 			chatListFunction('noten');
+			$("#chatContent").removeAttr("disabled");
 			getinfinitechat();
 		});
 	</script>
