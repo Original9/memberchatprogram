@@ -94,34 +94,66 @@
 			});
 		}
 		function addChat(chatName, chatcontent1, chatTime){
-			$('#chatList').append('<div class="row">' +
-							'<div class="col-lg-12">' +
-							'<div class="media">' +
-							'<a class="pull-left" href="#">' +
-							'<img class="media-object img-circle" style="width: 30px; height: 30px" src="images/icon.png" alt="">' +
-							'</a>' +
-							'<div class="media-body">'+
-							'<h4 div class="media-heading">'+
-							chatName +
-							'<span class="small pull-right">' +
-							chatTime +
-							'</span>' +
-							'</h4>' +
-							'<p>' +
-							chatcontent1 +  // 여기서 chatContent 및에 변수랑 이름이 같아서  에러 났었음 
-							'</p>' +
-							'</div>' +
-							'</div>' +
-							'</div>' +
-							'</div>' +
-							'<hr>'); 
-							
-		$('#chatList').scrollTop($('#chatList')[0].scrollHeight);//스크롤 밑으로 내려주는거
+			// 만약 사용자 이름이 ME 이면 오른쪽으로 출력 
+			if(chatName == "ME"){
+				$('#chatList').append('<div class="row">' +
+						'<div class="col-lg-12">' +
+						'<div class="media">' +
+						'<a class="pull-right" href="#">' +
+						'<img class="media-object img-circle" style="width: 30px; height: 30px" src="images/icon.png" alt="">' +
+						'</a>' +
+						'<div class="media-body">'+
+						'<h4 div class="media-heading">'+
+						'<span class="pull-right">'+
+						chatName + 
+						'</span>' +
+						'<span class="small pull-left">' +
+						chatTime +
+						'</span>' +
+						'</h4>' + '<br>'+
+						'<p class="pull-right">' +
+						chatcontent1 +  // 여기서 chatContent 및에 변수랑 이름이 같아서  에러 났었음 
+						'</p>' +
+						'</div>' +
+						'</div>' +
+						'</div>' +
+						'</div>' +
+						'<hr>'); 
+						
+			$('#chatList').scrollTop($('#chatList')[0].scrollHeight);//스크롤 밑으로 내려주는거
+			}
+			else{				
+				$('#chatList').append('<div class="row">' +
+								'<div class="col-lg-12">' +
+								'<div class="media">' +
+								'<a class="pull-left" href="#">' +
+								'<img class="media-object img-circle" style="width: 30px; height: 30px" src="images/icon.png" alt="">' +
+								'</a>' +
+								'<div class="media-body">'+
+								'<h4 div class="media-heading">'+
+								chatName +
+								'<span class="small pull-right">' +
+								chatTime +
+								'</span>' +
+								'</h4>' +
+								'<p>' +
+								chatcontent1 +  // 여기서 chatContent 및에 변수랑 이름이 같아서  에러 났었음 
+								'</p>' +
+								'</div>' +
+								'</div>' +
+								'</div>' +
+								'</div>' +
+								'<hr>'); 
+								
+			$('#chatList').scrollTop($('#chatList')[0].scrollHeight);//스크롤 밑으로 내려주는거			
+			}
+			// 메세지 목록을 다가져오면 readonly를 풀어준다.
+			$("#chatContent").removeAttr("disabled");
 		}
 		function getinfinitechat(){ //새로운 메세지가 있는지 계속해서 확인
 			setInterval(function(){				
 				chatListFunction(lastID);
-			}, 3000);
+			}, 2000);
 		}
 	</script>
 </head>
@@ -145,7 +177,7 @@
 						<div class="portlet-footer">							
 							<div class="row" style="height: 90px;">
 								<div class="form-group col-xs-10">
-									<textarea style="height: 80px;" id="chatContent" name="chatConent" class="form-control" placeholder="메세지를 입력하세요," maxlength="100"></textarea>
+									<textarea style="height: 80px;" id="chatContent" name="chatContent" class="form-control" placeholder="메세지를 입력하세요," maxlength="100" disabled="disabled"></textarea>
 								</div>
 								<div class="form-group col-xs-2">
 									<button type="button" class="btn btn-default pull-right" onclick="submitFunction()">전송</button>
