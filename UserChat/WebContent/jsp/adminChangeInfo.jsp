@@ -173,7 +173,7 @@
     
     $( "body" ).on( "click", "[id^=delete-user]",function() {
     	
-    	var confirmStatus = confirm("정말로 삭제 하시겠습니까?");
+    	var confirmStatus = confirm("정말로 회원을 삭제 하시겠습니까?");
     	
     	if(confirmStatus){
         

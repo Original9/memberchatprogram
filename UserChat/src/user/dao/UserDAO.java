@@ -373,6 +373,7 @@ public class UserDAO {
 		
 		try {
 			conn = JDBCutil.connect();
+			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, id);
 

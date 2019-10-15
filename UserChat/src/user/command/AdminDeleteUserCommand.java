@@ -20,9 +20,9 @@ public class AdminDeleteUserCommand implements Command {
 		
 		if (n != 0) {
 
-			System.out.println("정상적으로 삭제되었습니다.");
+			System.out.println("회원 삭제가 완료되었습니다.");
 			// JOptionPane.showMessageDialog(null, "로그인 성공.");
-			sc = "<script>" + "alert('정상적으로 삭제되었습니다');"
+			sc = "<script>" + "alert('회원 삭제가 완료되었습니다');"
 			+ "location='adminChangeInfoForm.do';"
 					+ "</script>";
 			;
