@@ -14,9 +14,9 @@
 
 </head>
 <body>
-
 	<div align="center">
 		<jsp:include page="menu.jsp"></jsp:include>
+		
 		<div>
 			<h1>글쓰기</h1>
 		</div>
