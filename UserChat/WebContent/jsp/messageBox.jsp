@@ -79,22 +79,24 @@
 					if(data == ""){		
 						if(chat_textarea_state == 1)
 							$("#chatContent").removeAttr("disabled");
-						return "";
-					}					
-					var parsed = JSON.parse(data);
-					var result = parsed.result;
-					chat_num_temp = result[0][4].value; // 채팅방 번호를 하나 따온다.
-					
-					for(var i=0 ; i<result.length; i++){						
-						if(result[i][0].value == fromID) {
-							result[i][0].value = 'ME';
+						//return "";
+					}else{
+						
+						var parsed = JSON.parse(data);
+						var result = parsed.result;
+						chat_num_temp = result[0][4].value; // 채팅방 번호를 하나 따온다.
+						
+						for(var i=0 ; i<result.length; i++){						
+							if(result[i][0].value == fromID) {
+								result[i][0].value = 'ME';
+							}
+							addChat(result[i][0].value, result[i][2].value, result[i][3].value);	
 						}
-						addChat(result[i][0].value, result[i][2].value, result[i][3].value);	
-					}
-					lastID = Number(parsed.last);// 가장 마지막으로 전달 받은 채팅ID
-					chat_textarea_state = 1;
+						lastID = Number(parsed.last);// 가장 마지막으로 전달 받은 채팅ID
+						chat_textarea_state = 1;
+					}					
 					$("#chatContent").removeAttr("disabled");
-					
+					return "";
 				}
 			});
 		}

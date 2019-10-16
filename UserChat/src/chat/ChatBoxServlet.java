@@ -36,7 +36,7 @@ public class ChatBoxServlet extends HttpServlet {
 		StringBuffer result = new StringBuffer("");
 		ArrayList<InBoxDTO> InBoxList = new ArrayList<>();
 		InBoxDAO dao = new InBoxDAO();
-		InBoxList = dao.messagesList(userID);  // 값들이 return 되어 왔다.
+		InBoxList = dao.messagesList(userID);  // 값들이 return 되어 왔다.		
 		if(InBoxList.size() == 0 ) return "";
 		result.append("{\"result\":[");
 		for(int i=0; i<InBoxList.size(); i++) {

@@ -35,7 +35,7 @@
 				if(data=="")return; // 데이터가 없으면 success 구문 실행 하지 않게 하기
 				var parsed = JSON.parse(data);   
 				var result = parsed.result;
-				
+				console.log(result);
 				for(var i=0; i<result.length; i++){				
 					addChat(result[i][0].fromid, result[i][1].name, result[i][2].unreadMeassageCount,result[i][3].chatNum);
 				} 
@@ -45,7 +45,7 @@
 		})
 	});
 	function addChat(fromid, username,unreadMeassageCount,chatNum,userid){
-		
+		console.log(fromid);
 		$tr = $('<tr>').append(
 				$('<td>').text(fromid),
 				$('<td>').text(username),

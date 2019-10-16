@@ -59,7 +59,6 @@ public class InBoxDAO {
 			pstmt2 = conn.prepareStatement(sql2);
 			pstmt1.setString(1, userID);
 			pstmt1.setString(2,userID);
-			
 			rs1 = pstmt1.executeQuery();
 			rs2 = pstmt2.executeQuery();
 			while(rs2.next()) 
