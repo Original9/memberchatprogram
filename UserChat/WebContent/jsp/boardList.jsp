@@ -28,9 +28,7 @@ function searchpage(p){
 		<div>
 			<form id="frm" name="frm" action="boardList.do">
 				<input type="hidden" name="p" id="p" value="1"> 
-				<select name="searchoption">
-					<option value="select">검색 방법</option>
-					<option value="all">전체</option>
+				<select name="searchoption">		
 					<option value="title">제목</option>
 					<option value="writer">작성자</option>
 				</select>

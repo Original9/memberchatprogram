@@ -19,7 +19,8 @@ public class BoardListCommand implements Command {
 		//부서목록 조회
 		//페이징 처리
 		String title = request.getParameter("search");
-		String p = request.getParameter("p");   //페이지번호
+		String p = request.getParameter("p");   //페이지번호		
+		String select = request.getParameter("searchoption");
 		int pageNo = 1;
 		if( p != null && ! p.isEmpty()) {
 			pageNo = Integer.parseInt(p);

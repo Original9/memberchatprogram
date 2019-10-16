@@ -23,7 +23,8 @@ public class FileDownloadAction implements Command {
 	      String folder = request.getServletContext().getRealPath("uploadfile");
 	      // 파일의 절대경로를 만든다.
 	      String filePath = folder + "/" + fileName;
-
+	      System.out.println(filePath);
+	     
 	      try {
 	          File file = new File(filePath);
 	          byte b[] = new byte[(int) file.length()];
