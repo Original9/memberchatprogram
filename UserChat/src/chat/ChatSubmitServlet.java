@@ -31,7 +31,6 @@ public class ChatSubmitServlet extends HttpServlet {
 		String toID = request.getParameter("toID");
 		String chatContent = request.getParameter("chatContent");
 		String chatNum = request.getParameter("chatNum"); // 방번호를 넘겨 받음
-		//////////////////////////////////////////////10/04일 이까지 ~~ 다음주에 방번호 받아온걸로 이어서하자 
 		//int chat_num ="";
 		//System.out.println("fromID:" + fromID + "  toID: " + toID + "  chatContent: " + chatContent);
 		if(fromID == null || fromID.equals("") || toID == null || toID.equals("")

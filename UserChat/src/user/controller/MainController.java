@@ -10,15 +10,50 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import user.controller.BoardDeleteCommand;
-import user.controller.BoardListCommand;
-import user.controller.BoardUpdateCommand;
-import user.controller.BorderReadCommand;
-import user.controller.BorderWriteCommand;
-import user.controller.BorderWriteForm;
-import user.controller.FileDownloadAction;
-import user.controller.boardUpdateForm;
+import user.command.AdminChangeInfoFormCommand;
+import user.command.AdminDeleteUserCommand;
+import user.command.AdminUpdateUserCommand;
+import user.command.BoardDeleteCommand;
+import user.command.BoardListCommand;
+import user.command.BoardUpdateCommand;
+import user.command.BorderReadCommand;
+import user.command.BorderWriteCommand;
+import user.command.BorderWriteForm;
+import user.command.ChangeInfoCommand;
+import user.command.ChangeInfoFormCommand;
+import user.command.ChangePWCommand;
+import user.command.ChangePWFormCommand;
 import user.command.Command;
+import user.command.EmailCheckCommand;
+import user.command.FileDownloadAction;
+import user.command.FindIDCommand;
+import user.command.FindIDFormCommand;
+import user.command.FindPWCommand;
+import user.command.FindPWFormCommand;
+import user.command.IdCheckCommand;
+import user.command.IndexCommand;
+import user.command.InsertMemberCommand;
+import user.command.LoginCheckCommand;
+import user.command.LoginFormCommand;
+import user.command.LogoutCommand;
+import user.command.MainBoardDeleteCommand;
+import user.command.MainBoardListCommand;
+import user.command.MainBoardUpdateCommand;
+import user.command.MainBorderReadCommand;
+import user.command.MainBorderWriteCommand;
+import user.command.MainBorderWriteForm;
+import user.command.MainboardUpdateForm;
+import user.command.RanNumCheckCommand;
+import user.command.ValidCheckAndSendForFindIDCommand;
+import user.command.boardUpdateForm;
+import user.command.deleteFriendCommand;
+import user.command.friendInsertCommand;
+import user.command.friendListCommand;
+import user.command.inBoxCommand;
+import user.command.inBoxListDeleteCommand;
+import user.command.joinCommand;
+import user.command.memberSearchCommand;
+import user.command.messageBoxCommand;
 
 /**
  * Servlet implementation class MainController
@@ -42,7 +77,6 @@ public class MainController extends HttpServlet {
 		map.put("/loginCheck.do", new LoginCheckCommand());
 		map.put("/findIDForm.do", new FindIDFormCommand());
 		map.put("/validCheckAndSendForFindID.do", new ValidCheckAndSendForFindIDCommand());
-		map.put("/validCheckAndSendForFindPW.do", new ValidCheckAndSendForFindPWCommand());
 		map.put("/findID.do", new FindIDCommand());
 		map.put("/findPWForm.do", new FindPWFormCommand());
 		map.put("/findPW.do", new FindPWCommand());
@@ -50,8 +84,9 @@ public class MainController extends HttpServlet {
 		map.put("/changeInfoForm.do", new ChangeInfoFormCommand());
 		map.put("/changeInfo.do", new ChangeInfoCommand());
 		map.put("/changePWForm.do", new ChangePWFormCommand());
-		map.put("/adminChangeInfoForm.do", new AdminChangeInfoFormCommand());
-		map.put("/adminDeleteUserForm.do", new AdminDeleteUserFormCommand());
+		map.put("/adminChangeInfoForm.do", new AdminChangeInfoFormCommand());//delete페이지와 하나로 통합,이름바꾸기
+		map.put("/adminUpdateUser.do", new AdminUpdateUserCommand());
+		map.put("/adminDeleteUser.do", new AdminDeleteUserCommand());
 		map.put("/changePW.do", new ChangePWCommand());
 		map.put("/emailCheck.do", new EmailCheckCommand());
 		map.put("/ranNumCheck.do", new RanNumCheckCommand());
@@ -89,6 +124,7 @@ public class MainController extends HttpServlet {
 		map.put("/friendInsert.do", new friendInsertCommand());
 		map.put("/inBox.do", new inBoxCommand());
 		map.put("/deleteFriend.do", new deleteFriendCommand());
+		map.put("/inBoxListDelete.do", new inBoxListDeleteCommand());
 		
 		
         

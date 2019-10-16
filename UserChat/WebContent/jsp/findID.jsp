@@ -28,7 +28,8 @@ function checkForm(){
 
 			$.ajax(url, {
 				data : param,
-				dataType : 'json'
+				dataType : 'json',
+				type : "POST"
 			}).done(function(result) {
 					$("#idFindResult").css("display","");
 					$("#idFindResultValue").val(result.message);
@@ -56,10 +57,11 @@ $(function() {
 
 		var url = "validCheckAndSendForFindID.do";
 
-		
+		//encodeURLcomponent(param)
 		$.ajax(url, {
 			data : param,
-			dataType : 'json'
+			dataType : 'json',
+			type : "POST"
 		}).done(function(result) {
 			// if(result.result == true){
 			//	document.getElementById("idFindResult").style.color="blue";
@@ -115,7 +117,8 @@ $(function() {
 
 			$.ajax(url, {
 				data : param,
-				dataType : 'json'
+				dataType : 'json',
+				type : "POST"
 			}).done(function(result) {
 				if(result.result == true){
 					document.frm.email.readOnly=true;

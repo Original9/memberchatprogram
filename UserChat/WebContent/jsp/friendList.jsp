@@ -38,7 +38,7 @@
 					<td style="width: 100px"><h5> ID</h5></td>
 					<td style="width: 100px"><h5> NAME</h5></td>
 					<td style="width: 100px"><h5> EMAIL</h5></td>
-					<td style="width: 20px"><h5>SEND MESSAGE</h5></td>
+					<td style="width: 20px"><h5>SEND MESSAGE</h5></td>	
 					<td style="width: 20px"><h5>DELETE</h5></td>						
 				</tr>
 				<c:if test="${list.isEmpty()}">

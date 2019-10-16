@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class ChatUnreadServlet
  */
-@WebServlet("/ChatUnreadServlet")
 public class ChatUnreadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -24,7 +23,7 @@ public class ChatUnreadServlet extends HttpServlet {
 		if(userID == null || userID.equals("")) {
 			response.getWriter().write("0");
 		}else{
-			userID = URLDecoder.decode(userID,"UTF-8");
+			userID = URLDecoder.decode(userID,"UTF-8");			
 			response.getWriter().write(new ChatDAO().getAllUnread(userID)+"");
 		}
 	}

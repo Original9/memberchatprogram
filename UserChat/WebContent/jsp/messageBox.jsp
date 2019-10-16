@@ -23,7 +23,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 	<script type="text/javascript">
-		
+		var chat_textarea_state = 0;
 		var chat_num_temp = null;  // 방번호를 전역변수 설정해서 넘겨 받았다.  나중에 메시지창열고 2초나 3초뒤에 메세지를 보낼수 있게 하자. 처음에 전역변수는 null 값이다.
 	
 		function autoClosingAlert(selector, delay){
@@ -76,54 +76,91 @@
 					listType: type
 				},
 				success: function(data){
-					if(data=="")return;
-					var parsed = JSON.parse(data);
-					var result = parsed.result;
-					chat_num_temp = result[0][4].value; // 채팅방 번호를 하나 따온다.
-					
-					
-					
-					for(var i=0 ; i<result.length; i++){						
-						if(result[i][0].value == fromID) {
-							result[i][0].value = 'ME';
+					if(data == ""){		
+						if(chat_textarea_state == 1)
+							$("#chatContent").removeAttr("disabled");
+						//return "";
+					}else{
+						
+						var parsed = JSON.parse(data);
+						var result = parsed.result;
+						chat_num_temp = result[0][4].value; // 채팅방 번호를 하나 따온다.
+						
+						for(var i=0 ; i<result.length; i++){						
+							if(result[i][0].value == fromID) {
+								result[i][0].value = 'ME';
+							}
+							addChat(result[i][0].value, result[i][2].value, result[i][3].value);	
 						}
-						addChat(result[i][0].value, result[i][2].value, result[i][3].value);	
-					}
-					lastID = Number(parsed.last);// 가장 마지막으로 전달 받은 채팅ID
-					
-					
+						lastID = Number(parsed.last);// 가장 마지막으로 전달 받은 채팅ID
+						chat_textarea_state = 1;
+					}					
+					$("#chatContent").removeAttr("disabled");
+					return "";
 				}
 			});
 		}
 		function addChat(chatName, chatcontent1, chatTime){
-			$('#chatList').append('<div class="row">' +
-							'<div class="col-lg-12">' +
-							'<div class="media">' +
-							'<a class="pull-left" href="#">' +
-							'<img class="media-object img-circle" style="width: 30px; height: 30px" src="images/icon.png" alt="">' +
-							'</a>' +
-							'<div class="media-body">'+
-							'<h4 div class="media-heading">'+
-							chatName +
-							'<span class="small pull-right">' +
-							chatTime +
-							'</span>' +
-							'</h4>' +
-							'<p>' +
-							chatcontent1 +  // 여기서 chatContent 및에 변수랑 이름이 같아서  에러 났었음 
-							'</p>' +
-							'</div>' +
-							'</div>' +
-							'</div>' +
-							'</div>' +
-							'<hr>'); 
-							
-		$('#chatList').scrollTop($('#chatList')[0].scrollHeight);//스크롤 밑으로 내려주는거
+			// 만약 사용자 이름이 ME 이면 오른쪽으로 출력 
+			if(chatName == "ME"){
+				$('#chatList').append('<div class="row">' +
+						'<div class="col-lg-12">' +
+						'<div class="media">' +
+						'<a class="pull-right" href="#">' +
+						'<img class="media-object img-circle" style="width: 30px; height: 30px" src="images/icon.png" alt="">' +
+						'</a>' +
+						'<div class="media-body">'+
+						'<h4 div class="media-heading">'+
+						'<span class="pull-right">'+
+						chatName + 
+						'</span>' +
+						'<span class="small pull-left">' +
+						chatTime +
+						'</span>' +
+						'</h4>' + '<br>'+
+						'<p class="pull-right">' +
+						chatcontent1 +  // 여기서 chatContent 및에 변수랑 이름이 같아서  에러 났었음 
+						'</p>' +
+						'</div>' +
+						'</div>' +
+						'</div>' +
+						'</div>' +
+						'<hr>'); 
+						
+			$('#chatList').scrollTop($('#chatList')[0].scrollHeight);//스크롤 밑으로 내려주는거
+			}
+			else{				
+				$('#chatList').append('<div class="row">' +
+								'<div class="col-lg-12">' +
+								'<div class="media">' +
+								'<a class="pull-left" href="#">' +
+								'<img class="media-object img-circle" style="width: 30px; height: 30px" src="images/icon.png" alt="">' +
+								'</a>' +
+								'<div class="media-body">'+
+								'<h4 div class="media-heading">'+
+								chatName +
+								'<span class="small pull-right">' +
+								chatTime +
+								'</span>' +
+								'</h4>' +
+								'<p>' +
+								chatcontent1 +  // 여기서 chatContent 및에 변수랑 이름이 같아서  에러 났었음 
+								'</p>' +
+								'</div>' +
+								'</div>' +
+								'</div>' +
+								'</div>' +
+								'<hr>'); 
+								
+			$('#chatList').scrollTop($('#chatList')[0].scrollHeight);//스크롤 밑으로 내려주는거			
+			}
+			
+		
 		}
 		function getinfinitechat(){ //새로운 메세지가 있는지 계속해서 확인
 			setInterval(function(){				
 				chatListFunction(lastID);
-			}, 3000);
+			}, 2000);
 		}
 	</script>
 </head>
@@ -147,7 +184,7 @@
 						<div class="portlet-footer">							
 							<div class="row" style="height: 90px;">
 								<div class="form-group col-xs-10">
-									<textarea style="height: 80px;" id="chatContent" name="chatConent" class="form-control" placeholder="메세지를 입력하세요," maxlength="100"></textarea>
+									<textarea style="height: 80px;" id="chatContent" name="chatContent" class="form-control" placeholder="메세지를 입력하세요," maxlength="100" disabled="disabled"></textarea>
 								</div>
 								<div class="form-group col-xs-2">
 									<button type="button" class="btn btn-default pull-right" onclick="submitFunction()">전송</button>
@@ -174,9 +211,10 @@
 	<script type="text/javascript">
 		$('#messagelModal').modal("show");
 		$(document).ready(function(){
-			chatListFunction('noten');
+			chatListFunction('noten');			
 			getinfinitechat();
 		});
+		
 	</script>
 </body>
 

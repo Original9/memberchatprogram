@@ -6,6 +6,12 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
+/* 	//엔터키 입력 시 로그인 클릭 효과
+	function pressEnter(f){
+		if(f.keyCode==13){
+			frm.submit();
+		}
+	} */
 	//로그인 시 입력안한 항목 체크
 	function checkForm() {
 		var form = document.frm;
@@ -43,7 +49,7 @@
 	}
 	
 	//비밀번호찾기 창 여는 function
-	function findID() {
+	function findPW() {
 		
 		//새 창의 크기
 		let cw=500;
@@ -76,18 +82,18 @@
 					</thead>
 					<tr>
 						<td style="width: 60px;">id</td>
-						<td style="width: 100px;"><input class="form-control" type="text" id="id" name="id" size="20"></td>
+						<td style="width: 100px;"><input class="form-control" type="text" onkeydown="javascript: if (event.keyCode == 13) {checkForm();}" id="id" name="id" size="20"></td>
 					</tr>
 					<tr>
 						<td style="width: 60px;">password</td>
-						<td style="width: 100px;"><input class="form-control" type="password" id="pw" name="pw" size="20"></td>
+						<td style="width: 100px;"><input class="form-control" type="password" onkeydown="javascript: if (event.keyCode == 13) {checkForm();}" id="pw" onkeypress="JavaScript:pressEnter(this.form)" name="pw" size="20"></td>
 					</tr>
 				</table>
 				
 				<div align="center">
 					<input class="btn btn-primary" type="button" onclick="checkForm()" value="로그인">&nbsp;&nbsp;&nbsp;
 					<input class="btn btn-primary" type="button" onclick="findID()" value="아이디 찾기">&nbsp;&nbsp;&nbsp;
-					<input class="btn btn-primary" type="button" onclick="location.href='findPWForm.do'" value="비밀번호 찾기">&nbsp;&nbsp;&nbsp;
+					<input class="btn btn-primary" type="button" onclick="findPW()" value="비밀번호 찾기">&nbsp;&nbsp;&nbsp;
 					<input class="btn btn-primary" type="reset" onclick="location.href='login.do'" value="취소">
 				</div>
 			</form>

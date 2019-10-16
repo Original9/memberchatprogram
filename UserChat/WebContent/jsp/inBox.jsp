@@ -21,31 +21,49 @@
 <title>InBox</title>
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript">
-	
-	
+	var $tr,$td;
 	$(document).ready(function(){
 		var id = '<%= userID%>';
 		$.ajax({
 			type: "POST",
 			url:"./chatBox",
+			datatype:"JSON",
 			data: {					 
 				id :  encodeURIComponent(id),
 			},			
 			success: function(data){
-				
-				
+				if(data=="")return; // 데이터가 없으면 success 구문 실행 하지 않게 하기
+				var parsed = JSON.parse(data);   
+				var result = parsed.result;
+				console.log(result);
+				for(var i=0; i<result.length; i++){				
+					addChat(result[i][0].fromid, result[i][1].name, result[i][2].unreadMeassageCount,result[i][3].chatNum);
+				} 
 				
 			}
 			
 		})
 	});
+	function addChat(fromid, username,unreadMeassageCount,chatNum,userid){
+		console.log(fromid);
+		$tr = $('<tr>').append(
+				$('<td>').text(fromid),
+				$('<td>').text(username),
+				$('<td>').text(unreadMeassageCount),
+				$('<td>').html("<button id ='goMessageBox' onclick=location.href='messageBox.do?toID="+fromid+"' >SEND MESSAGE</button>"),
+				$('<td>').html("<button onclick=location.href='inBoxListDelete.do?chatNum="+chatNum+"&userID=<%=userID%>'>DELETE</button>")
+				);
+		$('#messageList').append($tr);
+	}
+	
+	
 	
 </script>
 </head>
 <jsp:include page="menu.jsp"></jsp:include>
 <body>
 <div class="container">
-		<table class="table table-bordered table-bover" style="text-align: center; border: 1px solid #dddddaa">
+		<table id ="messageList"  class="table table-bordered table-bover" style="text-align: center; border: 1px solid #dddddaa">
 			<thead>
 				<tr>
 					<th colspan="5"><h4>메세지 목록</h4></th>
@@ -55,22 +73,16 @@
 				<tr>
 					<td style="width: 100px"><h5> ID</h5></td>
 					<td style="width: 100px"><h5> NAME</h5></td>
-					<td style="width: 100px"><h5> 안읽은 메세지</h5></td>
+					<td style="width: 100px"><h5> UNREADMESSAGES</h5></td>
 					<td style="width: 20px"><h5>SEND MESSAGE</h5></td>
 					<td style="width: 20px"><h5>DELETE</h5></td>						
-				</tr>
-				<c:if test="${list.isEmpty()}">
-				<tr>
-				<td colspan="5"> 추가된 친구가 없습니다. </td>
-				</tr>
-				</c:if>
-							
-				
+				</tr>		
+					
 				
 			</tbody>			
-		</table>	
-	</div>
-
+		</table>
+			
+</div>
 <%
 		String messageContent = null;
 		if(session.getAttribute("messageContent") != null){

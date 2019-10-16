@@ -55,7 +55,7 @@ function emailChangeCancel(){
 }
 
 function changeInfo(){
-	if (form.userEmail.readOnly != true) {
+	if (document.frm.userEmail.readOnly != true) {
 		alert("이메일 인증을 통해 본인 인증을 해주세요.");
 		form.id.focus();
 		return false;
@@ -83,7 +83,8 @@ $(function() {
 
 		$.ajax(url, {
 			data : param,
-			dataType : 'json'
+			dataType : 'json',
+			type : "POST"
 		}).done(function(result) {
 			if(result.result == true){
 				//document.frm.userEmail.readOnly=true;
@@ -116,7 +117,8 @@ $(function() {
 
 		$.ajax(url, {
 			data : param,
-			dataType : 'json'
+			dataType : 'json',
+			type : "POST"
 		}).done(function(result) {
 			if(result.result == true){
 				document.frm.userEmail.readOnly=true;
@@ -136,7 +138,7 @@ $(function() {
 </script>
 
 </head>
-<body>
+
 <body>
 	<jsp:include page="menu.jsp"></jsp:include>
 	<div><br /><br /><br /></div>
