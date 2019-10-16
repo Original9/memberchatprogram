@@ -60,8 +60,9 @@
 	
 </script>
 </head>
-<jsp:include page="menu.jsp"></jsp:include>
 <body>
+<div style="width:100%; height:100%; position:fixed; background:url('images/paperplane2.png') no-repeat;background-size: cover;" align="center">
+<jsp:include page="menu.jsp"></jsp:include>
 <div class="container">
 		<table id ="messageList"  class="table table-bordered table-bover" style="text-align: center; border: 1px solid #dddddaa">
 			<thead>
@@ -118,6 +119,6 @@
 	
 	
 	<%} %>
-
+</div>
 </body>
 </html>

@@ -22,6 +22,10 @@ public class MainBorderWriteCommand implements Command {
         //첨부파일 업로드 루틴
 		String file1 = null;
 		String upfilepath = request.getSession().getServletContext().getRealPath("Uploadfile");
+<<<<<<< HEAD
+=======
+		System.out.println(upfilepath);
+>>>>>>> branch 'master' of https://github.com/Original9/memberchatprogram.git
 		int filesize = 10 * 1024;
 		
 		
