@@ -26,25 +26,25 @@ function searchpage(p){
 			<h1>자유 게시판</h1>
 		</div>
 		<div>
-			<form id="frm" name="frm" action="boardList.do">
+			<form id="frm" name="frm" class="form-inline" action="boardList.do">
 				<input type="hidden" name="p" id="p" value="1"> 
-				<select name="searchoption">		
-					<option value="title">제목</option>
+				<select name="searchoption">
+					<option value="all">글 제목</option>
 					<option value="writer">작성자</option>
 				</select>
 				<input type="text" id="search" name="search"
-					value="${param.search }"> <input type="submit"
-					id="searchbtn" name="searchbtn" value="검색">
+					class="form-control" value="${param.search }"> 
+					<input type="submit" id="searchbtn" name="searchbtn" class="btn" value="검색">
 			</form>
 <!-- 			<table border="1"> -->
-			<table class="table table-bordered table-hover" style="text-align: center; border:1px solid #dddddd">
-				<tr>
-					<th style="width:100">번호</th>
-					<th style="width:350">제목</th>
-					<th style="width:100">작성자</th>
-					<th style="width:100">작성일</th>
-					<th style="width:100">첨부파일</th>
-					<th style="width:80">조회수</th>
+			<table class="table table-bordered table-hover" style="text-align: center; border: 1px solid #dddddd">
+				<tr class="success">
+					<th align="center" align="center" style="width:100">번호</th>
+					<th style="width:350" align="center">제목</th>
+					<th align="center" style="width:100">작성자</th>
+					<th align="center" style="width:100">작성일</th>
+					<th align="center" style="width:100">첨부파일</th>
+					<th style="width:80" align="center">조회수</th>
 				</tr>
 
 				<!-- db의 글목록을 가져와서 뿌려주는 곳~ -->

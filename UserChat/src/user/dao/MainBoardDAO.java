@@ -55,7 +55,7 @@ public class MainBoardDAO {
 		String sql = "select * from ( select a.*, rownum  rnum from ( "
 					+ "select a.USERID userid, a.NOTICEID NOTICEID, a.NTITLE NTITLE , a.NCONTENT NCONTENT, a.NDATE NDATE, a.noticefile nOTICEFILE, a.HIT HIT,"
 					+ "b.username username from notice a, C_user b where a.userid = b.userid  " + where
-					+ " order by NOTICEID asc"
+					+ " order by NOTICEID desc"
 					+ ")a )b where rnum between ? and ?";
 					
 				
