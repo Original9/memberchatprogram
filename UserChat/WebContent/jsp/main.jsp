@@ -25,7 +25,8 @@ function searchpage(p){
 </script>
 </head>
 <body>
-<div style="width:100%; height:100%; position:fixed; background:url('images/paperplane.png') no-repeat;background-size: cover;" align="center">
+<div style="width:100%; height:100%; position:fixed; background:url('images/paperplane2.png') no-repeat;background-size: cover;" align="center">
+
    <jsp:include page="menu.jsp"></jsp:include>
    <%
       String userID = null;
