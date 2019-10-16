@@ -31,19 +31,13 @@ function searchpage(p){
 <div align="center">
 	<div><h1>공 지 사 항</h1></div>
 	<div>
-				<form id="frm" name="frm" action="main.do">
+				<form id="frm" name="frm" class="form-inline" action="main.do">
 				<input type="hidden" name="p" id="p" value="1"> 
-				<select name="searchoption">
-					<option value="select">검색 방법</option>
-					<option value="all">전체</option>
-					<option value="title">제목</option>
-					<option value="writer">작성자</option>
-				</select>
 				<input type="text" id="search" name="search"
-					value="${param.search }"> <input type="submit"
-					id="searchbtn" name="searchbtn" value="검색">
+					class="form-control" value="${param.search }"> <input type="submit"
+					id="searchbtn" name="searchbtn" class="btn" value="검색">
 			</form>
-		<table border="1">
+		<table class="table table-bordered table-hover" style="text-align: center; border: 1px solid #dddddd">
 			<tr>
 				<th width="100">번호</th>
 				<th width="350">제목</th>

@@ -58,7 +58,7 @@ public class BoarderDAO {
 		String sql = "select * from ( select a.*, rownum  rnum from ( "
 				+ "select a.USERID userid, a.BOARDID BOARDID, a.BTITLE BTITLE , a.BCONTENT BCONTENT, a.BDATE BDATE, a.BOARDFILE BOARDFILE, a.HIT HIT,"
 				+ "b.username username from c_board a, C_user b  where a.userid = b.userid  " + where
-				+ " order by BOARDID asc" 
+				+ " order by BOARDID desc" 
 				+ ")a )b where rnum between ? and ?";
 		// "select USERID, BOARDID, BTITLE, BCONTENT, BDATE, BOARDFILE, HIT from
 		// c_board";

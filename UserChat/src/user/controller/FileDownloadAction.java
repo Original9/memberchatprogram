@@ -29,7 +29,7 @@ public class FileDownloadAction implements Command {
 	      try {
 	          File file = new File(filePath);
 	          byte b[] = new byte[(int) file.length()];
-	          
+	       	          
 	          // page의 ContentType등을 동적으로 바꾸기 위해 초기화시킴
 	          response.reset();
 	          response.setContentType("application/octet-stream");
@@ -39,7 +39,7 @@ public class FileDownloadAction implements Command {
 	          
 	          // 파일 링크를 클릭했을 때 다운로드 저장 화면이 출력되게 처리하는 부분
 	          response.setHeader("Content-Disposition", "attachment;filename="+ encoding);
-	          response.setHeader("Content-Length", String.valueOf(file.length()));
+//	          response.setHeader("Content-Length", String.valueOf(file.length()));
 	          
 	          if (file.isFile()) // 파일이 있을경우
 	          {
@@ -59,7 +59,7 @@ public class FileDownloadAction implements Command {
 	      } catch (Exception e) {
 	          System.out.println("Download Exception : " + e.getMessage());
 	      }
-		return filePath;
+		return null;
 	}
 
 }
