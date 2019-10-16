@@ -23,7 +23,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 	<script type="text/javascript">
-		
+		var chat_textarea_state = 0;
 		var chat_num_temp = null;  // 방번호를 전역변수 설정해서 넘겨 받았다.  나중에 메시지창열고 2초나 3초뒤에 메세지를 보낼수 있게 하자. 처음에 전역변수는 null 값이다.
 	
 		function autoClosingAlert(selector, delay){
@@ -76,7 +76,11 @@
 					listType: type
 				},
 				success: function(data){
-					if(data=="")return;
+					if(data == ""){		
+						if(chat_textarea_state == 1)
+							$("#chatContent").removeAttr("disabled");
+						return "";
+					}					
 					var parsed = JSON.parse(data);
 					var result = parsed.result;
 					chat_num_temp = result[0][4].value; // 채팅방 번호를 하나 따온다.
@@ -88,7 +92,8 @@
 						addChat(result[i][0].value, result[i][2].value, result[i][3].value);	
 					}
 					lastID = Number(parsed.last);// 가장 마지막으로 전달 받은 채팅ID
-					
+					chat_textarea_state = 1;
+					$("#chatContent").removeAttr("disabled");
 					
 				}
 			});
@@ -147,8 +152,8 @@
 								
 			$('#chatList').scrollTop($('#chatList')[0].scrollHeight);//스크롤 밑으로 내려주는거			
 			}
-			// 메세지 목록을 다가져오면 readonly를 풀어준다.
 			
+		
 		}
 		function getinfinitechat(){ //새로운 메세지가 있는지 계속해서 확인
 			setInterval(function(){				
@@ -204,10 +209,10 @@
 	<script type="text/javascript">
 		$('#messagelModal').modal("show");
 		$(document).ready(function(){
-			chatListFunction('noten');
-			$("#chatContent").removeAttr("disabled");
+			chatListFunction('noten');			
 			getinfinitechat();
 		});
+		
 	</script>
 </body>
 

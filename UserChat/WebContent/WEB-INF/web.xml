@@ -52,7 +52,7 @@
   
    <servlet>
   	<servlet-name>UserFindServlet</servlet-name>
-  	<servlet-class>user.controller.UserFindServlet</servlet-class>  	
+  	<servlet-class>user.command.UserFindServlet</servlet-class>  	
   </servlet>
   
   <servlet-mapping>

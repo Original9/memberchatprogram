@@ -12,7 +12,7 @@ import user.dao.UserDAO;
 /**
  * Servlet implementation class UserCheckServlet
  */
-@WebServlet("/UserCheckServlet")
+//@WebServlet("/UserCheckServlet")
 public class UserFindServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
