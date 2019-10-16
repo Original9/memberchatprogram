@@ -72,8 +72,8 @@
 					<th width="100">梅何颇老</th>
 					<td colspan="5" align="center"><a
 						href='FileDownloadAction.do?file_name=${list.bfileName}'>${list.bfileName}</a>
-					<button type="button" class="btn"
-							onclick="location.href='FileDownloadAction.do?file_name=${list.bfileName}'">颇老促款</button>
+<!-- 					<button type="button" class="btn" -->
+<%-- 							onclick="location.href='FileDownloadAction.do?file_name=${list.bfileName}'">颇老促款</button> --%>
 					</td>
 				</tr>
 			</table>

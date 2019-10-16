@@ -48,6 +48,53 @@ public class BoarderDAO {
 		super();
 	}
 
+	public ArrayList<BoarderDTO> select_writer(String title, int first, int last) { // 전체리스트라서 arraylist
+		ArrayList<BoarderDTO> list = new ArrayList<BoarderDTO>();
+		BoarderDTO dto;
+		String where = "";
+		if (title != null) {
+			where += "and a.userid like '%' || ? || '%' ";
+		}
+		String sql = "select * from ( select a.*, rownum  rnum from ( "
+				+ "select a.USERID userid, a.BOARDID BOARDID, a.BTITLE BTITLE , a.BCONTENT BCONTENT, a.BDATE BDATE, a.BOARDFILE BOARDFILE, a.HIT HIT,"
+				+ "b.username username from c_board a, C_user b  where a.userid = b.userid  " + where
+				+ " order by BOARDID desc" 
+				+ ")a )b where rnum between ? and ?";
+		// "select USERID, BOARDID, BTITLE, BCONTENT, BDATE, BOARDFILE, HIT from
+		// c_board";
+
+		try {
+			int i = 0;
+			conn = JDBCutil.connect();
+			pstmt = conn.prepareStatement(sql);
+
+			if (title != null) {
+				pstmt.setString(++i, title);
+			}
+			pstmt.setInt(++i, first);
+			pstmt.setInt(++i, last);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				dto = new BoarderDTO();
+				dto.setbId(rs.getString("USERID"));
+				dto.setbNum(rs.getInt("BOARDID"));
+				dto.setbTitle(rs.getString("BTITLE"));
+				dto.setbContent(rs.getString("BCONTENT"));
+				dto.setbWriteDate(rs.getDate("BDATE"));
+				dto.setBfileName(rs.getString("BOARDFILE"));
+				dto.setbHit(rs.getInt("HIT"));
+				dto.setbName(rs.getString("username"));
+				list.add(dto);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCutil.disconnect(pstmt, conn);
+		}
+		return list;
+	}
+	
 	public ArrayList<BoarderDTO> select(String title, int first, int last) { // 전체리스트라서 arraylist
 		ArrayList<BoarderDTO> list = new ArrayList<BoarderDTO>();
 		BoarderDTO dto;

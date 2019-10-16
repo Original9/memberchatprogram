@@ -18,8 +18,11 @@ public class BoardListCommand implements Command {
 		BoarderDAO dao = new BoarderDAO();
 		//부서목록 조회
 		//페이징 처리
-		String title = request.getParameter("search");
+		String title = request.getParameter("search");		
 		String p = request.getParameter("p");   //페이지번호
+		String select = request.getParameter("searchoption");
+		System.out.println(select);
+		
 		int pageNo = 1;
 		if( p != null && ! p.isEmpty()) {
 			pageNo = Integer.parseInt(p);
@@ -34,11 +37,30 @@ public class BoardListCommand implements Command {
 		pageCnt =  recordTotal/pagePerRecord 
 				 + (recordTotal%pagePerRecord>0 ? 1 : 0);//마지막페이지번호 
 		
-		
-		list = dao.select(title, first, last);
+		if(title != null) {			
+			
+			
+			if(select.equals("all")) {
+				list = dao.select(title, first, last);
+				request.setAttribute("list", list); //db에서 넘어온 값을  request객체 속성으로 삽입
+				request.setAttribute("pageCnt", pageCnt);
+				return "jsp/boardList.jsp";	
+			}
+			else if(select.equals("writer")){
+				list = dao.select_writer(title, first, last);
+				request.setAttribute("list", list); //db에서 넘어온 값을  request객체 속성으로 삽입
+				request.setAttribute("pageCnt", pageCnt);
+				return "jsp/boardList.jsp";
+			}
+			else {
+				
+			}
+		}
+		list = dao.select_writer(title, first, last);
 		request.setAttribute("list", list); //db에서 넘어온 값을  request객체 속성으로 삽입
 		request.setAttribute("pageCnt", pageCnt);
 		return "jsp/boardList.jsp";
+		
 	}
 
 }

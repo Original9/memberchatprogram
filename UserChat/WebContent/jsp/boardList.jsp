@@ -28,6 +28,10 @@ function searchpage(p){
 		<div>
 			<form id="frm" name="frm" class="form-inline" action="boardList.do">
 				<input type="hidden" name="p" id="p" value="1"> 
+				<select name="searchoption">
+					<option value="all">글 제목</option>
+					<option value="writer">작성자</option>
+				</select>
 				<input type="text" id="search" name="search"
 					class="form-control" value="${param.search }"> 
 					<input type="submit" id="searchbtn" name="searchbtn" class="btn" value="검색">
