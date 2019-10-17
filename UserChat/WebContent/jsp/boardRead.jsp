@@ -35,6 +35,10 @@
 %>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
+<style>
+@import url('https://fonts.googleapis.com/css?family=Nanum+Brush+Script&display=swap&subset=korean');
+@import url('https://fonts.googleapis.com/css?family=Sunflower:300&display=swap');
+</style>
 </head>
 <body>
 
@@ -42,35 +46,34 @@
 
 
 	<jsp:include page="menu.jsp"></jsp:include>
-	
-	<div class="col-md-8  col-md-offset-6">
-<!-- 		<div> -->
-<!-- 			<h1>글 내용 보기</h1> -->
-<!-- 		</div> -->
-	</div>
-	<div class="row align-items-center">	
-
-		<div class="col-md-8  col-md-offset-2">
-			<table class="table table-bordered table-hover">
+	<div><br /><br /><br /></div>
+	<div align="center">
+		<div>
+			<h1 style="font-family: 'Nanum Brush Script', cursive;">글 내용</h1>
+		</div>
+		<br />
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
+			<table class="table table-striped">
 				<tr>
-					<th width="100">작성자</th>
-					<td width="100" align="center">${list.bId }</td>
-					<th width="100">작성일</th>
-					<td width="100" align="center">${list.bWriteDate }</td>
-					<th width="100">조회수</th>
-					<td width="100" align="center">${list.bHit }</td>
+					<th style="font-family: 'Sunflower', sans-serif;" class="text-center" width="100">작성자</th>
+					<td width="100">${list.bId }</td>
+					<th style="font-family: 'Sunflower', sans-serif;" class="text-center" width="100">작성일</th>
+					<td width="100">${list.bWriteDate }</td>
+					<th style="font-family: 'Sunflower', sans-serif;" class="text-center" width="100" width="100">조회수</th>
+					<td width="100">${list.bHit }</td>
 				</tr>
 				<tr>
-					<th width="100">제목</th>
-					<td colspan="5" align="center">${list.bTitle }</td>
+					<th style="font-family: 'Sunflower', sans-serif;" class="text-center" width="100">제목</th>
+					<td colspan="5">${list.bTitle }</td>
 				</tr>
 				<tr>
-					<th width="100" height="300">내용</th>
-					<td colspan="5" align="center">${list.bContent }</td>
+					<th style="font-family: 'Sunflower', sans-serif;" class="text-center" width="100" height="300">내용</th>
+					<td colspan="5">${list.bContent }</td>
 				</tr>
 				<tr>
-					<th width="100">첨부파일</th>
-					<td colspan="5" align="center"><a
+					<th style="font-family: 'Sunflower', sans-serif;" class="text-center" width="100">첨부파일</th>
+					<td colspan="5"><a
 						href='FileDownloadAction.do?file_name=${list.bfileName}'>${list.bfileName}</a>
 <!-- 					<button type="button" class="btn" -->
 <%-- 							onclick="location.href='FileDownloadAction.do?file_name=${list.bfileName}'">파일다운</button> --%>
@@ -79,21 +82,20 @@
 			</table>
 			</div>
 		
-		</div>
-<div class="col-md-8  col-md-offset-6">
-		<div style="align-items: center;">
+		<div class="col-md-3"></div>
+		<div style="width:400px">
 			<!-- 조건 넣어서 세션값이 있으면 보이고 아니면 안보이게 하면된다. -->
 <%-- 			   <% String id = (String) session.getAttribute("id"); %> --%>
 			<c:if test="${sessionScope.userID != list.bId }">
-				<button type="button"  class="btn" onclick="location.href='boardList.do'">
+				<button type="button"  class="btn btn-primary" onclick="location.href='boardList.do'">
 					글 목록보기</button> &nbsp;&nbsp;      
      		 </c:if>
 <%-- 			<c:if test="${not empty sessionScope.userID }"> --%>
 				<c:if test = "${sessionScope.userID == list.bId}">
-				<button type="button" class="btn"
+				<button type="button" class="btn btn-primary"
 					onclick="location.href='boardUpdateForm.do?key=${list.bNum}'">글수정</button> &nbsp;&nbsp;      
-      <button type="button"  class="btn" onclick="location.href='boardDelete.do?key=${list.bNum}'">글 삭제</button> &nbsp;&nbsp;
-      <button type="button" class="btn" onclick="location.href='boardList.do'">
+      <button type="button"  class="btn btn-primary" onclick="location.href='boardDelete.do?key=${list.bNum}'">글 삭제</button> &nbsp;&nbsp;
+      <button type="button" class="btn btn-primary" onclick="location.href='boardList.do'">
 					글 목록보기</button> &nbsp;&nbsp;
       </c:if>
 		</div>

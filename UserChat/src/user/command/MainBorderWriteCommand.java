@@ -21,7 +21,9 @@ public class MainBorderWriteCommand implements Command {
 		MainBoardDAO dao = new MainBoardDAO();
         //첨부파일 업로드 루틴
 		String file1 = null;
+
 		String upfilepath = request.getSession().getServletContext().getRealPath("Uploadfile");
+
 		int filesize = 10 * 1024;
 		
 		MultipartRequest mul = new MultipartRequest(request, upfilepath, filesize, "utf-8", new DefaultFileRenamePolicy());
