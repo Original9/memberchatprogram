@@ -33,6 +33,7 @@ public class MainBoardListCommand implements Command {
 		recordTotal = dao.recordTotal(title);   //전체레코드 수
 		pageCnt =  recordTotal/pagePerRecord 
 				 + (recordTotal%pagePerRecord>0 ? 1 : 0);//마지막페이지번호 
+
 		
 		
 		list = dao.select(title, first, last);
@@ -42,4 +43,4 @@ public class MainBoardListCommand implements Command {
 		return "jsp/main.jsp";
 	}
 
-}
+	}

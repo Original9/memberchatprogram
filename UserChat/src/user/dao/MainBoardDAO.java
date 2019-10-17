@@ -15,6 +15,8 @@ public class MainBoardDAO {
 	PreparedStatement pstmt;
 	ResultSet rs;
 	
+	
+	
 	public int recordTotal(String NTITLE) {
 		int count = 0;
 		String where = "";
@@ -57,13 +59,6 @@ public class MainBoardDAO {
 					+ "b.username username from notice a, C_user b where a.userid = b.userid  " + where
 					+ " order by NOTICEID desc"
 					+ ")a )b where rnum between ? and ?";
-					
-				
-				
-//				"select a.USERID userid, a.NOTICEID NOTICEID, a.NTITLE NTITLE , a.NCONTENT NCONTENT, a.NDATE NDATE, a.noticefile nOTICEFILE, a.HIT HIT,\r\n" + 
-//				"b.username username from notice a, C_user b\r\n" + 
-//				"where a.userid = b.userid order by NOTICEID asc";
-		//"select USERID, BOARDID, BTITLE, BCONTENT, BDATE, BOARDFILE, HIT from c_board";
 		
 		try {
 			int i = 0;

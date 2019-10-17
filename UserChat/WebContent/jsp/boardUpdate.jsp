@@ -29,7 +29,7 @@
 	// 			return;
 	// 		}
 %>
-<script type="text/javascript">
+<script>
 function(){
 	$(button).click(function(){
         $("form")[0].reset();
