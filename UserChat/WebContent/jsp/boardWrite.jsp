@@ -14,6 +14,22 @@
 	alert(new date).toTSOString();
 	document.getElementByID('wdate').value = new Date().toISOString().substring(0, 10);
 
+	function checkBoard() {
+		var form = document.frm;
+		if (form.content.value == "") {
+			alert("내용을 입력 하세요.");
+			form.content.focus();
+			return false;
+		}
+
+		if (form.title.value == "") {
+			alert("제목을 입력하세요.");
+			form.title.focus();
+			return false;
+		}
+
+		form.submit();
+	}
 </script>
 
 </head>
@@ -60,7 +76,7 @@
 				</div>
 				<br />
 				<div style="width:400px">
-					<input class="btn btn-primary" type="submit" value="등록"> &nbsp;&nbsp; 
+					<input class="btn btn-primary" type="button" value="등록" onclick="checkBoard()"> &nbsp;&nbsp; 
 					<input class="btn btn-primary" type="reset" value="초기화"> &nbsp;&nbsp; 
 					<input class="btn btn-primary" type="button" value="목록보기" onclick="location.href='boardList.do'">
 				</div>

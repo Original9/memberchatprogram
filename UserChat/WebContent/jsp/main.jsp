@@ -52,12 +52,7 @@ function searchpage(p){
             <input type="hidden" name="p" id="p" value="1">
 
             <table width="400px" height="100px">
-               <td><select class="form-control inputstl" name="searchoption">
-                     <option value="select">검색 방법</option>
-                     <option value="all">전체</option>
-                     <option value="title">제목</option>
-                     <option value="writer">작성자</option>
-               </select></td>
+
                <td>&nbsp;&nbsp;&nbsp;</td>
                <td><input class="form-control" type="text" id="search"
                   name="search" value="${param.search }"></td>

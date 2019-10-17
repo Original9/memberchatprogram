@@ -41,6 +41,23 @@ function reset1(){
 	$('#content').empty();
 	 document.getElementById('title').value='';
   }
+  
+function checkBoard() {
+	var form = document.frm;
+	if (form.content.value == "") {
+		alert("내용을 입력 하세요.");
+		form.content.focus();
+		return false;
+	}
+
+	if (form.title.value == "") {
+		alert("제목을 입력하세요.");
+		form.title.focus();
+		return false;
+	}
+
+	form.submit();
+}
 
 </script>
 <meta charset="UTF-8">
@@ -102,7 +119,7 @@ function reset1(){
 				</div>
 				<br />
 				<div style="width:400px">
-					<input class="btn btn-primary" type="submit" value="수정"> &nbsp;&nbsp; 
+					<input class="btn btn-primary" type="button" value="수정" onclick="checkBoard()"> &nbsp;&nbsp; 
 <!-- 					<input class="btn btn-primary" type="reset" value="초기화" onclick="resetAll()"> &nbsp;&nbsp;  -->
 					<input class="btn btn-primary" type="button" value="초기화" onclick="reset1()"> &nbsp;&nbsp; 
 					<input class="btn btn-primary" type="button" value="목록보기" onclick="location.href='main.do'">
