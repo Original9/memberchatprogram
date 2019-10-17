@@ -36,9 +36,11 @@
 %>
 
 <script>
-function resetAll(){
-	document.selection.clear();
-}
+
+function reset1(){ 
+	$('#content').empty();
+	 document.getElementById('title').value='';
+  }
 
 </script>
 <meta charset="UTF-8">
@@ -101,14 +103,12 @@ function resetAll(){
 				<br />
 				<div style="width:400px">
 					<input class="btn btn-primary" type="submit" value="수정"> &nbsp;&nbsp; 
-					<input class="btn btn-primary" type="reset" value="초기화" onclick="resetAll()"> &nbsp;&nbsp; 
+<!-- 					<input class="btn btn-primary" type="reset" value="초기화" onclick="resetAll()"> &nbsp;&nbsp;  -->
+					<input class="btn btn-primary" type="button" value="초기화" onclick="reset1()"> &nbsp;&nbsp; 
 					<input class="btn btn-primary" type="button" value="목록보기" onclick="location.href='main.do'">
 				</div>
 			</form>
 			</div>
-			<script>
-				document.getElementById('wdate').value = new Date().toISOString().substring(0, 10);
-			</script>
 		<jsp:include page="footer.jsp"></jsp:include>
 </div>
 </c:when>

@@ -35,12 +35,11 @@
 
 %>
 <script>
-function(){
-	$(button).click(function(){
-        $("form")[0].reset();
-   });
+function reset1(){ 
+	$('#content').empty();
+	 document.getElementById('title').value='';
+  }
 
-}
 
 </script>
 <meta charset="UTF-8">
@@ -56,7 +55,7 @@ function(){
 			<h1>글수정</h1>
 		</div>
 		<br />
-		<div>
+		<div class="a">
 			<form id="frm" name="frm" action="boardUpdate.do" method="post" enctype="multipart/form-data">
 				<!-- .do걸어야됨 -->
 				<input type="hidden" id="bnum" name="bnum" value="${list.bNum }">
@@ -69,10 +68,10 @@ function(){
 							<th width="100">작성일자</th>
 							<td width="200">${list.bWriteDate }</td>
 						</tr>
-						<tr>
+						<tr class="title">
 							<th width="100">제목</th>
 							<td colspan="3"><input type="text" id="title" name="title"
-								size="100" value="${list.bTitle }"></td>
+								 size="100" value="${list.bTitle }" ></td>
 						</tr>
 						<tr>
 							<th width="100">내용</th>
@@ -84,7 +83,6 @@ function(){
 							<c:if test = "${list.bfileName != null }">
 							<td><input type="button" value="삭제" onclick="frm.filedelete.value='yes'"></td>
 							</c:if>
-							
 						</tr>
 						
 						
@@ -93,15 +91,13 @@ function(){
 				<br />
 				<div>
 					<input type="submit" value="수정"> &nbsp;&nbsp;
-					<input type="button"  id="btn_reset" name="btn_reset" value="  Reset ">
 <!-- 					<input type="reset" value="초기화"> &nbsp;&nbsp;  -->
+					<input type="button" value="초기화" onclick="reset1()"> &nbsp;&nbsp; 
 					<input type="button" value="목록보기" onclick="location.href='boardList.do'">
 				</div>
 			</form>
 			</div>
-			<script>
-				document.getElementById('wdate').value = new Date().toISOString().substring(0, 10);
-			</script>
+
 		<jsp:include page="footer.jsp"></jsp:include>
 </div>
 </c:when>

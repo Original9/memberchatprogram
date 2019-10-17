@@ -23,8 +23,8 @@ public class BoardUpdateCommand implements Command {
 		BoarderDTO dto = new BoarderDTO();
 		// 업데이트 수정
 		String file1 = null;
-		String upfilepath = request.getSession().getServletContext().getRealPath("uploadfile");
-		System.out.println("=========================="+upfilepath);
+		String upfilepath = request.getSession().getServletContext().getRealPath("Uploadfile");
+		//System.out.println("=========================="+upfilepath);
 		int filesize = 10 * 1024;
 		MultipartRequest mul = new MultipartRequest(request, upfilepath, filesize, "utf-8", new DefaultFileRenamePolicy());
 		
@@ -47,7 +47,7 @@ public class BoardUpdateCommand implements Command {
 
 			if( file.exists() ){
 				if(file.delete()){
-					System.out.println("파일삭제 성공"); 
+					//System.out.println("파일삭제 성공"); 
 					}else{ System.out.println("파일삭제 실패"); }
 			}
 			dto.setBfileName("");

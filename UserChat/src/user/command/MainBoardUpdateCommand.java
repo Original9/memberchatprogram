@@ -25,7 +25,7 @@ public class MainBoardUpdateCommand implements Command {
 		MainBoardDTO dto = new MainBoardDTO();
 		// 업데이트 수정
 		String file1 = null;
-		String upfilepath = request.getSession().getServletContext().getRealPath("uploadfile");
+		String upfilepath = request.getSession().getServletContext().getRealPath("Uploadfile");
 		System.out.println("=========================="+upfilepath);
 		int filesize = 10 * 1024;
 		MultipartRequest mul = new MultipartRequest(request, upfilepath, filesize, "utf-8", new DefaultFileRenamePolicy());
