@@ -2249,7 +2249,7 @@ pre code {
   }
 }
 table {
-  background-color: transparent;
+  background-color: #ffffff; /* 원래는 transparent; 였음. */
 }
 caption {
   padding-top: 8px;
@@ -4758,7 +4758,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
   z-index: 3;
   color: #fff;
   cursor: default;
-  background-color: #337ab7;
+  background-color: #337ab7; 
   border-color: #337ab7;
 }
 .pagination > .disabled > span,

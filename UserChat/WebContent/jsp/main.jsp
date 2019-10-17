@@ -14,6 +14,9 @@
 @import
    url('https://fonts.googleapis.com/css?family=Nanum+Brush+Script&display=swap&subset=korean')
    ;
+@import
+	url('https://fonts.googleapis.com/css?family=Sunflower:300&display=swap')
+	;
 </style>
 <script>
 
@@ -25,7 +28,7 @@ function searchpage(p){
 </script>
 </head>
 <body>
-<div style="width:100%; height:100%; position:fixed; background:url('images/paperplane2.png') no-repeat;background-size: cover;" align="center">
+<div style="width:100%; height:100%; position:fixed; background:url('images/paperplane4.jpg') no-repeat;background-size: cover;" align="center">
 
    <jsp:include page="menu.jsp"></jsp:include>
    <%
@@ -42,7 +45,7 @@ function searchpage(p){
    </div>
    <div>
       <div>
-         <h1 style="font-family: 'Nanum Brush Script', cursive;">공 지 사 항</h1>
+         <h1 style="font-size: 50px; font-family: 'Nanum Brush Script', cursive;">공 지 사 항</h1>
       </div>
       <div>
          <form id="frm" name="frm" action="main.do">
@@ -67,14 +70,14 @@ function searchpage(p){
          <div class="row">
             <div class="col-md-2"></div>
             <div class="col-md-8" align="center">
-               <table class="table table-striped" align="center">
+               <table class="table table-striped" style="background-color:#a4eded;" align="center">
                   <tr>
-                     <th class="text-center" width="100">번호</th>
-                     <th class="text-center" width="350">제목</th>
-                     <th class="text-center" width="100">작성자</th>
-                     <th class="text-center" width="100">작성일</th>
-                     <th class="text-center" width="100">첨부파일</th>
-                     <th class="text-center" width="80">조회수</th>
+                     <th style="font-family: 'Sunflower', sans-serif;" class="text-center">번호</th>
+                     <th style="font-family: 'Sunflower', sans-serif; width:500px" class="text-center">제목</th>
+                     <th style="font-family: 'Sunflower', sans-serif;" class="text-center">작성자</th>
+                     <th style="font-family: 'Sunflower', sans-serif;" class="text-center">작성일</th>
+                     <th style="font-family: 'Sunflower', sans-serif; width:300px" class="text-center">첨부파일</th>
+                     <th style="font-family: 'Sunflower', sans-serif;" class="text-center">조회수</th>
                   </tr>
 
                   <!-- db의 글목록을 가져와서 뿌려주는 곳~ -->

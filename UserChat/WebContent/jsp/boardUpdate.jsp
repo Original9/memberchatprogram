@@ -36,6 +36,10 @@
 %>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+@import url('https://fonts.googleapis.com/css?family=Nanum+Brush+Script&display=swap&subset=korean');
+@import url('https://fonts.googleapis.com/css?family=Sunflower:300&display=swap');
+</style>
 <jsp:include page="menu.jsp"></jsp:include>
 </head>
 <body>

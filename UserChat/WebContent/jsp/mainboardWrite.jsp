@@ -18,8 +18,8 @@
 
 </head>
 <body>
-	<div align="center">
 		<jsp:include page="menu.jsp"></jsp:include>
+	<div align="center">
 		<div><br /><br /><br /></div>
 		<div>
 			<h1 style="font-family: 'Nanum Brush Script', cursive;">글쓰기</h1>
@@ -50,7 +50,7 @@
 							placeholder="내용을 입력 하세요.">></textarea>
 						</tr>
 						<tr>
-							<th style="font-family: 'Sunflower', sans-serif;" class="text-center" width="100" width="100">첨부파일</th>
+							<th style="font-family: 'Sunflower', sans-serif;" class="text-center" width="100">첨부파일</th>
 							<td colspan="3"><input style="border:none" class="form-control" type="file" id="filename" name="filename" size="100"></td>
 						</tr>
 					
@@ -74,5 +74,6 @@
 
 		</div>
 	</div>
+
 </body>
 </html>
