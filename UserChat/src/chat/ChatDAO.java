@@ -202,6 +202,7 @@ public class ChatDAO {
 				if(rs != null) rs.close();
 				if(pstmt != null)pstmt.close();
 				if(conn != null)conn.close();
+				JDBCutil.disconnect(pstmt, conn);
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
