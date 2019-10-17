@@ -16,7 +16,6 @@ public class IdCheckCommand implements Command {
 	@Override
 	public String excute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("userID");
-//		System.out.println(request.getParameter("userID"));
 		boolean chk = UserDAO.getInstance().isIdCheck(id);
 		boolean chkReg = false; //정규표현식 체크 변수
 		String path = null;

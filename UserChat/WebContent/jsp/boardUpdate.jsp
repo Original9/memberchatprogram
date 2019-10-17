@@ -94,12 +94,14 @@ function(){
 									</tr>
 									<tr>
 										<th style="font-family: 'Sunflower', sans-serif;" class="text-center" width="100">첨부파일</th>
-										<td colspan="3"><input style="border:none" class="form-control" type="file" id="filename"
-											name="filename" size="100"></td>
+										<td colspan="2"><input style="max-width:400px;border:none" class="form-control" type="file" id="filename"
+											name="filename"></td>
+										<td align="left">
 										<c:if test="${list.bfileName != null }">
-											<td><input class="btn btn-primary" type="button" value="삭제"
-												onclick="frm.filedelete.value='yes'"></td>
+											<input class="btn btn-default" type="button" value="삭제"
+												onclick="frm.filedelete.value='yes'">
 										</c:if>
+										<td>
 
 									</tr>
 

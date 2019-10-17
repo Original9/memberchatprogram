@@ -50,8 +50,8 @@
 				$('<td>').text(fromid),
 				$('<td>').text(username),
 				$('<td>').text(unreadMeassageCount),
-				$('<td>').html("<button id ='goMessageBox' onclick=location.href='messageBox.do?toID="+fromid+"' >SEND MESSAGE</button>"),
-				$('<td>').html("<button onclick=location.href='inBoxListDelete.do?chatNum="+chatNum+"&userID=<%=userID%>'>DELETE</button>")
+				$('<td>').html("<button class='btn btn-primary' id ='goMessageBox' onclick=location.href='messageBox.do?toID="+fromid+"' >SEND MESSAGE</button>"),
+				$('<td>').html("<button class='btn btn-primary' onclick=location.href='inBoxListDelete.do?chatNum="+chatNum+"&userID=<%=userID%>'>DELETE</button>")
 				);
 		$('#messageList').append($tr);
 	}

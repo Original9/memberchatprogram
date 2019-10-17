@@ -22,6 +22,7 @@ window.onload = function(){
 	userEmail.onblur=emailChangeCancel;
 }
 
+
 //비밀번호 변경 창 여는 function
 function changePW() {
 	
@@ -46,6 +47,7 @@ function clickToChangeEmail(){
 	
 	document.frm.userEmail.readOnly=false;
 }
+
 
 //이메일 변경하려고 클릭했는데 변경 안했거나 이전 이메일과 똑같을 때.
 function emailChangeCancel(){
@@ -203,7 +205,7 @@ $(function() {
 			<p>&nbsp;&nbsp; *아이디는 변경할 수 없습니다.</p>
 				<div align="center">
 					<input type="button" class="btn btn-primary" onclick="changeInfo()" value="변경">&nbsp;&nbsp;&nbsp;
-					<input type="reset" class="btn btn-primary" onclick="location.href='changeInfoForm.do'" value="취소">
+					<input type="reset" class="btn btn-primary" onclick="location.href='index.do'" value="취소">
 				</div>
 		</form>
 		</div>
