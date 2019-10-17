@@ -34,6 +34,15 @@
 		
 
 %>
+<script>
+function(){
+	$(button).click(function(){
+        $("form")[0].reset();
+   });
+
+}
+
+</script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
@@ -87,8 +96,9 @@
 				</div>
 				<br />
 				<div>
-					<input type="submit" value="수정"> &nbsp;&nbsp; 
-					<input type="reset" value="초기화"> &nbsp;&nbsp; 
+					<input type="submit" value="수정"> &nbsp;&nbsp;
+					<input type="button"  id="btn_reset" name="btn_reset" value="  Reset ">
+<!-- 					<input type="reset" value="초기화"> &nbsp;&nbsp;  -->
 					<input type="button" value="목록보기" onclick="location.href='boardList.do'">
 				</div>
 			</form>
