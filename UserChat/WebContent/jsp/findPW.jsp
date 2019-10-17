@@ -79,15 +79,15 @@ window.onload = function(){
 						</tr>
 					</thead>
 					<tr>
-						<td valign="middle" style="width: 100px; height: 30px;">아이디</td>
-						<td align="left" style="width: 100px"><input
+						<td valign="middle" style="width: 100px;">아이디</td>
+						<td align="left" valign="middle" style="width: 100px"><input
 							type="text" style="width: 150px" id="id" name="id" size="20"></td>
 						
 					</tr>
 					<tr>
-						<td valign="middle" style="width: 100px; height: 30px;">이메일</td>
-						<td align="left" style="width: 100px"><input
-							type="text" style="width: 350px" id="email" name="email" size="20"></td>
+						<td style="width: 100px">이메일 입력</td>
+						<td colspan="2" align="left" style="width: 100px"><input
+							type="text" style="width: 100%" id="email" name="email" size="20"></td>
 					</tr>
 					
 				</table>

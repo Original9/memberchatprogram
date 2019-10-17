@@ -69,10 +69,11 @@
 </head>
 <body>
 	<jsp:include page="menu.jsp"></jsp:include>
-		<div><br /><br /><br /></div>
+		<div><br /><br /><br /><br /><br /><br /><br /><br /><br /></div>
+		
 		<div class="container">
-		<div class="col-md-2"></div>
-		<div class="col-md-8">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
 			<form id="frm" name="frm" action="loginCheck.do" method="post">
 				<table class="table table-bordered table-hover" style="text-align: center; border:1px solid #dddddd">
 					<thead>
@@ -94,11 +95,11 @@
 					<input class="btn btn-primary" type="button" onclick="checkForm()" value="로그인">&nbsp;&nbsp;&nbsp;
 					<input class="btn btn-primary" type="button" onclick="findID()" value="아이디 찾기">&nbsp;&nbsp;&nbsp;
 					<input class="btn btn-primary" type="button" onclick="findPW()" value="비밀번호 찾기">&nbsp;&nbsp;&nbsp;
-					<input class="btn btn-primary" type="reset" onclick="location.href='login.do'" value="취소">
+					<input class="btn btn-primary" type="reset" onclick="location.href='index.do'" value="취소">
 				</div>
 			</form>
 		</div>
-		<div class="col-md-2"></div>
+		<div class="col-md-3"></div>
 	</div>
 	
 </body>

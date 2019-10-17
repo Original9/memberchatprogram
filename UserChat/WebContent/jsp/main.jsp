@@ -28,7 +28,7 @@ function searchpage(p){
 </script>
 </head>
 <body>
-<div style="width:100%; height:100%; position:fixed; background:url('images/paperplane4.jpg') no-repeat;background-size: cover;" align="center">
+<div style="width:100%; height:100%; position:fixed; background:url('images/paperplane5.jpg') no-repeat;background-size: cover;" align="center">
 
    <jsp:include page="menu.jsp"></jsp:include>
    <%
@@ -99,7 +99,7 @@ function searchpage(p){
       <br />
       <div>
          <c:if test="${grant == 'M' }">
-            <button class="btn btn-info" type="button"
+            <button class="btn btn-primary" type="button"
                onclick="location.href='MainBorderWriteForm.do'">새글쓰기</button>
          </c:if>
       </div>

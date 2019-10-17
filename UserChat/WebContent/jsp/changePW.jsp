@@ -9,10 +9,20 @@
 	<link rel="stylesheet" href="css/custom.css">
 <script>
 
+	function pwChangeCancel(){
+		self.close()
+	}
 	function pwEqualCheck() {
 		var form=document.frm;
 		var pw1 = document.frm.changePW1;
 		var pw2 = document.frm.changePW2;
+		var pwRegExp = /^[A-Za-z0-9]{6,12}$/;
+		var check = pwRegExp.test(pw1.value);
+		
+		if (check == false){
+			alert("비밀번호는 영문과 숫자를 포함하여 6~12자 이내로 작성하세요.");
+			return false;
+		}
 		if (pw1.value != pw2.value) {
 			alert("비밀번호가 일치하지 않습니다.");
 			document.frm.changePW1.value = "";
@@ -20,6 +30,7 @@
 			pw1.focus();
 			return false;
 		}
+		
 		
 		form.submit();
 	}
@@ -31,7 +42,7 @@
 <br />
 </div>
 <div class="container">
-		
+		<br />
 		<div>
 			<form id="frm" name="frm" action="changePW.do" method="post">
 				<table class="table table-bordered table-hover" style="text-align: center; border:1px solid #dddddd">
@@ -56,7 +67,7 @@
 				
 				<div align="center">
 					<input class="btn btn-primary" type="button" onclick="pwEqualCheck()" value="변경">&nbsp;&nbsp;&nbsp;
-					<input class="btn btn-primary" type="reset" onclick="location.href='changePWForm.do'" value="취소">
+					<input class="btn btn-primary" type="reset" onclick="pwChangeCancel()" value="취소">
 				</div>
 			</form>
 		</div>

@@ -33,6 +33,8 @@ public class FriendDAO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			JDBCutil.disconnect(pstmt, conn);
 		}
 		
 	}
@@ -59,6 +61,8 @@ public class FriendDAO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			JDBCutil.disconnect(pstmt, conn);
 		}
 		return list;
 	}
@@ -76,6 +80,8 @@ public class FriendDAO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			JDBCutil.disconnect(pstmt, conn);
 		}
 	}
 

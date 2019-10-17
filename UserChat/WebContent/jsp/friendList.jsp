@@ -25,7 +25,7 @@
 		}
 %>
 <body>
-<div style="width:100%; height:100%; position:fixed; background:url('images/paperplane4.jpg') no-repeat;background-size: cover;" align="center">
+<div style="width:100%; height:100%; position:fixed; background:url('images/paperplane5.jpg') no-repeat;background-size: cover;" align="center">
 <jsp:include page="menu.jsp"></jsp:include>
 <div class="container">
 <div><br /><br /><br /></div>

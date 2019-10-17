@@ -11,6 +11,9 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 //
+function findIDCancel(){
+	self.close();
+}
 function checkForm(){
 	var form = document.frm;
 	
@@ -197,12 +200,10 @@ $(function() {
 						</tr>
 					</thead>
 					<tr>
-						<td valign="middle" style="width: 100px; height: 30px;">이름</td>
-						<td align="left" valign="middle" style="width: 100px; border-right: 0px;"><input
+						<td valign="middle" style="width: 100px;">이름</td>
+						<td align="left" valign="middle" style="width: 100px"><input
 							type="text" style="width: 150px;" id="name" name="name" size="20"></td>
-						<td align="right" style="border-left: 0px"><button
-								class="btn btn-primary" id="btnEmailCheck" type="button">이메일
-								인증</button></td>
+						
 					</tr>
 					<tr>
 						<td style="width: 100px;">이메일 입력</td>
@@ -224,8 +225,10 @@ $(function() {
 				</table>
 
 				<div align="center">
+					<button	class="btn btn-primary" id="btnEmailCheck" type="button">이메일
+								인증</button>
 					<input class="btn btn-primary" type="reset"
-						onclick="location.href='findIDForm.do'" value="취소">
+						onclick="findIDCancel()" value="취소">
 				</div>
 			</form>
 		</div>

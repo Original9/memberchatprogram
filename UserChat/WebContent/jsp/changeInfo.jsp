@@ -55,10 +55,19 @@ function emailChangeCancel(){
 }
 
 function changeInfo(){
+	var emailRegExp = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+	
 	if (document.frm.userEmail.readOnly != true) {
 		alert("이메일 인증을 통해 본인 인증을 해주세요.");
 		form.id.focus();
 		return false;
+	}else{
+		var check = emailRegExp.test(document.frm.userEmail.value);
+		if(check == false){
+			alert("이메일 형식에 맞게 입력하세요.");
+			return false;
+		}
+		
 	}
 	document.frm.submit();
 }
@@ -86,14 +95,17 @@ $(function() {
 			dataType : 'json',
 			type : "POST"
 		}).done(function(result) {
+			if(result.result == false){
+				alert("이메일 형식에 맞게 입력해 주세요.");
+			}
 			if(result.result == true){
 				//document.frm.userEmail.readOnly=true;
 				document.getElementById("EmailCheckResult").style.color="blue";
 				$("#ranNumInputTitle").css("display","");
 				$("#ranNum").val(result.checkNum);
 				//$("#checkRanNum").css("visibility","visible");
+				$("#EmailCheckResult").html(result.message);
 			}
-			$("#EmailCheckResult").html(result.message);
 		}).fail(function(xhr, status) {
 			$("#EmailCheckResult").html(status);
 		});
@@ -188,7 +200,7 @@ $(function() {
 					</tr>
 				</tbody>
 			</table>
-			<p>&nbsp;&nbsp; *아이디는 수정할 수 없습니다.</p>
+			<p>&nbsp;&nbsp; *아이디는 변경할 수 없습니다.</p>
 				<div align="center">
 					<input type="button" class="btn btn-primary" onclick="changeInfo()" value="변경">&nbsp;&nbsp;&nbsp;
 					<input type="reset" class="btn btn-primary" onclick="location.href='changeInfoForm.do'" value="취소">
