@@ -21,7 +21,6 @@ public class BoardListCommand implements Command {
 		String title = request.getParameter("search");		
 		String p = request.getParameter("p");   //페이지번호
 		String select = request.getParameter("searchoption");
-		System.out.println(select);
 		
 		int pageNo = 1;
 		if( p != null && ! p.isEmpty()) {
