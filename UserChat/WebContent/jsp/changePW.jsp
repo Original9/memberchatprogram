@@ -53,7 +53,7 @@
 					</thead>
 					<tr>
 						<td style="width: 60px;">현재 비밀번호</td>
-						<td style="width: 100px;"><input class="form-control" type="text" id="currentPW" name="currentPW" size="20"></td>
+						<td style="width: 100px;"><input class="form-control" type="password" id="currentPW" name="currentPW" size="20"></td>
 					</tr>
 					<tr>
 						<td style="width: 60px;">변경할 비밀번호</td>
