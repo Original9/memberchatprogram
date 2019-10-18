@@ -36,10 +36,13 @@
 					console.log(result1+"!!!");	
 					$('#checkMessage').html('친구찾기에 성공했습니다.')
 					$('#checkType').attr('class', 'modal-content panel-success' );
+					<%session.setAttribute("messageContent","success");%>
+					
 					getFriend(userID);
 				}else{
+					console.log("친구를 찾을 수 없습니다.")
 					$('#checkMessage').html('친구를 찾을수 없습니다.');
-					$('#checkType').attr('class','modal-content panel-warning');					
+					$('#checkType').attr('class','modal-content panel-warning');				
 					failFriend();
 				}
 				$('#checkModal').modal("show");
@@ -78,7 +81,7 @@
 			</thead>
 			<tbody>
 				<tr>
-					<td style="width: 100px"><h5>친구 아이디</h5></td>
+					<td style="width: 100px"><h5>친구 아이디 </h5></td>
 					<td><input class="form-control" type="text" id="findID" name="findID" maxlength="20" placeholder="찾을 아이디를 입력하시오"></td>
 				</tr>
 				<tr>
@@ -101,29 +104,31 @@
 		if(session.getAttribute("messageType") != null){
 			messageType = (String) session.getAttribute("messageType");			
 		}
-		if(messageContent !=null){
+		if(messageContent =="abcdefghijklmnopqrstuvwxyz"){
 	%>
-	<div class="modal fade" id="checkModal" tabindex="-1" role="dialog" aria-hidden="true">
-		<div class="vertical-alignment-helper">
-			<div class="modal-dialog vertical-align-center">
-				<div id="checkType" class="modal-content panel-info">
-					<div class="modal-header panel-heading">
-						<button type="button" class="close" data-dismiss="modal"></button>							
-							<span class="sr-only">Close</span>
-							<h4 class="modal-title">확인메세지
-							</h4>
-					</div> 
-					<div id="checkMessage" class="modal-body">
-					</div>
-					<div id="modal-fotter">
-						<button type="button" class="btn btn-primary-right" data-dismiss="modal"  >확인</button>						
+	<script type="text/javascript">
+		console.log("here");
+	</script>
+	<!-- Modal -->
+		<div class="modal fade" id="checkModal"  >
+				<div class="vertical-alignment-helper">
+					<div class="modal-dialog vertical-align-center">
+						<div id="checkType" class="modal-content panel-info">
+							<div class="modal-header panel-heading">
+								<button type="button" class="close" data-dismiss="modal"></button>							
+									<span class="sr-only">Close</span>
+									<h4 class="modal-title">확인메세지
+									</h4>
+							</div> 
+							<div id="checkMessage" class="modal-body">
+							</div>
+							<div id="modal-fotter">
+								<button type="button" class="btn btn-primary-right" data-dismiss="modal"  >확인</button>						
+							</div>
+						</div>
 					</div>
 				</div>
-			</div>
-		</div>
-	</div>
-	
-	
+		</div>	
 	
 	<%} %>
 </div>

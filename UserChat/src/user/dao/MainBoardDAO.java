@@ -73,7 +73,6 @@ public class MainBoardDAO {
 			rs= pstmt.executeQuery();
 			while(rs.next()) {
 				dto = new MainBoardDTO();
-				System.out.println(dto);
 				dto.setMbId(rs.getString("USERID"));
 				dto.setMbNum(rs.getInt("NOTICEID"));
 				dto.setMbTitle(rs.getString("NTITLE"));
