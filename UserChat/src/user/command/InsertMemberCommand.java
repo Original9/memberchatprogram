@@ -27,6 +27,7 @@ public class InsertMemberCommand implements Command {
 		 * dto.setUserAge(Integer.parseInt(request.getParameter("userAge")));
 		 * dto.setUserGender(ConvertGender(request.getParameter("userGender")));
 		 * dto.setUserEmail(request.getParameter("userEmail"));
+		          ->BeanUtils로 한방에 해결.
 		 */
 		
 		try {
@@ -37,12 +38,6 @@ public class InsertMemberCommand implements Command {
 			e.printStackTrace();
 		}
 		
-		/*System.out.println(dto.getUserID());
-		System.out.println(dto.getUserPassword());
-		System.out.println(dto.getUserName());
-		System.out.println(dto.getUserAge());
-		System.out.println(dto.getUserGender());
-		System.out.println(dto.getUserEmail());*/
 		int r = UserDAO.getInstance().insertMember(dto);
 		
 		if(r != 0) {

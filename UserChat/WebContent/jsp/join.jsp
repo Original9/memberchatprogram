@@ -15,7 +15,10 @@
 <script type="text/javascript">
 	function checkForm() {
 		var form = document.frm;
-
+		var idRegExp = /^[A-Za-z0-9]{5,16}$/;
+		var pwRegExp = /^[A-Za-z0-9]{6,12}$/;
+		var emailRegExp = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
+		
 		/*---------------------------
 		입력 안한 항목 체크
 		------------------------------*/
@@ -23,9 +26,15 @@
 			alert("아이디를 입력하세요.");
 			form.userID.focus();
 			return false;
+		}else{
+			var check = idRegExp.test(form.userID.value);
+			if(check == false){
+				alert("아이디는 영문과 숫자를 포함하여 5~16자 이내로 작성하세요.");
+				return false;
+			}
+			
 		}
 		
-		//정규표현식에 맞는지 체크하는 항목 추가.(아이디,비밀번호,이메일-이메일은 필요없을라나? ㄴㄴ . 때문에 필요할듯.-)
 
 		if (form.userID.readOnly != true) {
 			alert("중복체크를 해주세요.");
@@ -37,6 +46,13 @@
 			alert("비밀번호를 입력하세요.");
 			form.userPassword.focus();
 			return false;
+		}else{
+			var check = pwRegExp.test(form.userPassword.value);
+			if(check == false){
+				alert("비밀번호는 영문과 숫자를 포함하여 6~12자 이내로 작성하세요.");
+				return false;
+			}
+			
 		}
 
 		if (form.name.value == "") {
@@ -55,6 +71,13 @@
 			alert("이메일 인증을 통해 본인 인증을 해주세요.");
 			form.id.focus();
 			return false;
+		}else{
+			var check = emailRegExp.test(form.userEmail.value);
+			if(check == false){
+				alert("이메일 형식에 맞게 입력하세요.");
+				return false;
+			}
+			
 		}
 
 
@@ -96,6 +119,9 @@
 				dataType : 'json',
 				type : "POST"
 			}).done(function(result) {
+				if(result.chkReg==false){
+					alert("아이디는 영문과 숫자를 포함하여 5~16자 이내로 작성하세요.");
+				}
 				if(result.result == true){
 					document.frm.userID.readOnly=true;
 					document.getElementById("checkResult").style.color="blue";
@@ -126,14 +152,17 @@
 				dataType : 'json',
 				type : "POST"
 			}).done(function(result) {
+				if(result.result == false){
+					alert("이메일 형식에 맞게 입력해 주세요.");
+				}
 				if(result.result == true){
 					//document.frm.userEmail.readOnly=true;
 					document.getElementById("EmailCheckResult").style.color="blue";
 					$("#ranNumInputTitle").css("display","");
 					$("#ranNum").val(result.checkNum);
 					//$("#checkRanNum").css("visibility","visible");
+					$("#EmailCheckResult").html(result.message);
 				}
-				$("#EmailCheckResult").html(result.message);
 			}).fail(function(xhr, status) {
 				$("#EmailCheckResult").html(status);
 			});
@@ -185,7 +214,7 @@
 </head>
 <body>
 	<jsp:include page="menu.jsp"></jsp:include>
-	<div><br /><br /><br /></div>
+	<div><br /><br /><br /><br /><br /><br /></div>
 	<div class="container">
 	<div class="col-md-2"></div>
 		<div class="row">

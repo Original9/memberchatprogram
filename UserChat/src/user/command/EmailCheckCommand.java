@@ -2,6 +2,8 @@ package user.command;
 
 import java.io.IOException;
 import java.util.Properties;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -24,8 +26,16 @@ public class EmailCheckCommand implements Command {
 			throws ServletException, IOException {
 		String Email = request.getParameter("userEmail");
 		String Subject = "[ChatProgram]인증번호입니다.";
-		String Contents = null;
 		String path = null;
+		
+		boolean chkReg = false; //정규표현식 체크 변수
+		Pattern p = Pattern.compile("^[A-Za-z0-9_\\.\\-]+@[A-Za-z0-9\\-]+\\.[A-Za-z0-9\\-]+");
+		
+		Matcher m = p.matcher(Email);
+		
+		if(m.find()) {
+			chkReg = true;
+		}
 		
 		try {
 			int ranNum = MailSend.sendWithRanNum(Email, Subject);
@@ -49,9 +59,12 @@ public class EmailCheckCommand implements Command {
 			path = "{\"result\":false, \"message\":\"인증할 수 없습니다..\"}";
 			e.printStackTrace();
 		}
-
-		if (path==null) { //이메일이 발송되었는지 확인하는 조건 알아보기.
-*/			path = "{\"result\":true, \"message\":\"메일이 전송되었습니다.\"}";
+*/
+		if (chkReg == false) { //이메일 형식 체크
+			path = "{\"result\":false, \"message\":\"이메일 형식에 맞게 입력해 주세요.\"}";
+		}else {
+			path = "{\"result\":true, \"message\":\"메일이 전송되었습니다.\"}";
+		}
 		/*
 		 * }
 		 */

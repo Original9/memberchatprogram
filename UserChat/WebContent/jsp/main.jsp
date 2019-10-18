@@ -28,7 +28,7 @@ function searchpage(p){
 </script>
 </head>
 <body>
-<div style="width:100%; height:100%; position:fixed; background:url('images/paperplane4.jpg') no-repeat;background-size: cover;" align="center">
+<div style="width:100%; height:100%; position:fixed; background:url('images/paperplane5.jpg') no-repeat;background-size: cover;" align="center">
 
    <jsp:include page="menu.jsp"></jsp:include>
    <%
@@ -51,7 +51,7 @@ function searchpage(p){
          <form id="frm" name="frm" action="main.do">
             <input type="hidden" name="p" id="p" value="1">
 
-            <table width="400px" height="100px">
+            <table style="width:400px; height:100px; background:transparent">
 
                <td>&nbsp;&nbsp;&nbsp;</td>
                <td><input class="form-control" type="text" id="search"
@@ -99,7 +99,7 @@ function searchpage(p){
       <br />
       <div>
          <c:if test="${grant == 'M' }">
-            <button class="btn btn-info" type="button"
+            <button class="btn btn-primary" type="button"
                onclick="location.href='MainBorderWriteForm.do'">새글쓰기</button>
          </c:if>
       </div>

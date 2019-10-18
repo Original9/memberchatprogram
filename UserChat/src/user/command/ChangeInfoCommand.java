@@ -24,7 +24,6 @@ public class ChangeInfoCommand implements Command {
 			BeanUtils.copyProperties(dto, request.getParameterMap());
 			System.out.println(dto);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -33,7 +32,6 @@ public class ChangeInfoCommand implements Command {
 		if(n!=0) {
 			
 			System.out.println("회원정보 변경 성공");
-			//JOptionPane.showMessageDialog(null, "로그인 성공.");
 			sc="<script>"
 					+ "alert('성공적으로 변경되었습니다');"
 					+ "location='changeInfoForm.do';"
