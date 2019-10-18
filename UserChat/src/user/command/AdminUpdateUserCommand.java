@@ -22,7 +22,6 @@ public class AdminUpdateUserCommand implements Command {
 
 		try {
 			BeanUtils.copyProperties(dto, request.getParameterMap());
-			System.out.println(dto);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

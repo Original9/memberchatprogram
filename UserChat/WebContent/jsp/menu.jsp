@@ -108,7 +108,6 @@
 							</a>
 							<ul class="dropdown-menu">
 								<li><a href = "adminChangeInfoForm.do">회원정보관리</a></li>
-								<li><a href = "adminDeleteUserForm.do">회원계정관리</a></li>
 								<li><a href = "logout.do">로그아웃</a></li>							
 							</ul>
 						</li>

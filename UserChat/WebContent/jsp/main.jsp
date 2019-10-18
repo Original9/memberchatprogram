@@ -51,7 +51,7 @@ function searchpage(p){
          <form id="frm" name="frm" action="main.do">
             <input type="hidden" name="p" id="p" value="1">
 
-            <table width="400px" height="100px">
+            <table style="width:400px; height:100px; background:transparent">
 
                <td>&nbsp;&nbsp;&nbsp;</td>
                <td><input class="form-control" type="text" id="search"

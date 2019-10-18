@@ -45,7 +45,7 @@ function searchpage(p){
 				<form id="frm" name="frm" class="form-inline" action="boardList.do">
 					<input type="hidden" name="p" id="p" value="1">
 					
-					<table width="400px" height="100px">
+					<table style="width:400px; height:100px; background:transparent">
 						<td><select class="form-control inputstl" name="searchoption">
 								<option value="all">글 제목</option>
 								<option value="writer">작성자</option>
