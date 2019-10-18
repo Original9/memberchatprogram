@@ -226,8 +226,6 @@ h1 {
 					}
 					location.href = "adminDeleteUser.do?key=" + $('#id').val();
 
-				} else {
-					alert("삭제 취소.");
 				}
 
 			});
